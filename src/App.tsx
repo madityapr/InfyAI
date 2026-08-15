@@ -155,10 +155,10 @@ export default function App() {
         ref={bgLogoRef}
         className="infy-bg-logo fixed left-1/2 pointer-events-none select-none z-0 flex items-center justify-center"
         style={{
-          top: "3%",
+          top: "2%",
           transform: "translateX(-50%) scale(1)",
-          opacity: 0.35,
-          width: "clamp(280px, 46vw, 600px)",
+          opacity: 0.32,
+          width: "clamp(300px, 48vw, 620px)",
           willChange: "top, opacity, transform",
         }}
       >
@@ -166,7 +166,11 @@ export default function App() {
           src={infinityLogo}
           alt="infyAI Infinity"
           aria-hidden="true"
-          className="w-full h-auto object-contain infinity-hero-glow drop-shadow-2xl"
+          className="w-full h-auto object-contain infinity-hero-glow"
+          style={{
+            maskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, black 50%, transparent 100%)",
+            WebkitMaskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, black 50%, transparent 100%)",
+          }}
         />
       </div>
 
