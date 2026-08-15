@@ -1,0 +1,11 @@
+{
+  "title": "infyai.app",
+  "description": "Discover and filter a curated directory of free and freemium AI tools by category, helping users easily find the best resources for their needs.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

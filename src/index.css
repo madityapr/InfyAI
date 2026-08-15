@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+  --color-infy-cyan: #00e5ff;
+  --color-infy-blue: #0ea5e9;
+  --color-infy-indigo: #6366f1;
+  --color-infy-purple: #a78bfa;
+  --color-infy-glow: #22d3ee;
+  --color-infy-surface: #060b18;
+  --color-infy-card: #0a1628;
+}
+
+body {
+  background-color: #030712;
+  color: #eeeef5;
+  font-family: 'Outfit', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Background video ── */
+@keyframes infyFloat {
+  0%   { translate: 0px 0px;   rotate: 0deg;   }
+  20%  { translate: 6px -18px; rotate: 0.8deg; }
+  45%  { translate: -4px -28px; rotate: -0.5deg; }
+  65%  { translate: 8px -14px;  rotate: 1.2deg; }
+  80%  { translate: -6px -22px; rotate: -0.3deg; }
+  100% { translate: 0px 0px;   rotate: 0deg;   }
+}
+
+@keyframes infyGlow {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 32px rgba(14,165,233,0.12)); }
+  50%       { filter: brightness(1.08) drop-shadow(0 0 64px rgba(34,211,238,0.2)); }
+}
+
+.infy-bg-logo {
+  animation: infyFloat 9s ease-in-out infinite, infyGlow 6s ease-in-out infinite;
+}
+
+/* ── Ticker marquee ── */
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 30s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── Glow border utilities ── */
+.glow-border-blue {
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.08), inset 0 0 12px rgba(14, 165, 233, 0.03);
+}
+
+.glow-border-cyan {
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.1), inset 0 0 16px rgba(34, 211, 238, 0.04);
+}
+
+/* ── Subscribe input glow ── */
+.subscribe-input:focus {
+  border-color: rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 20px rgba(34, 211, 238, 0.15), 0 0 40px rgba(14, 165, 233, 0.08);
+}
+
+/* ── Subscribe button ── */
+.subscribe-btn {
+  background: linear-gradient(135deg, #0ea5e9 0%, #22d3ee 50%, #6366f1 100%);
+  background-size: 200% 200%;
+  animation: btn-shimmer 3s ease infinite;
+  transition: all 0.3s ease;
+}
+
+.subscribe-btn:hover {
+  background-size: 300% 300%;
+  box-shadow: 0 0 24px rgba(34, 211, 238, 0.35), 0 4px 16px rgba(14, 165, 233, 0.2);
+  transform: translateY(-1px);
+}
+
+@keyframes btn-shimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Nav glow line ── */
+.nav-glow {
+  border-bottom: 1px solid rgba(14, 165, 233, 0.08);
+  background: linear-gradient(180deg, rgba(6, 11, 24, 0.95) 0%, rgba(3, 7, 18, 0.9) 100%);
+  backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* ── Filter pill active state ── */
+.pill-active {
+  background: linear-gradient(135deg, #0ea5e9, #22d3ee);
+  color: #030712;
+  border: 1px solid rgba(34, 211, 238, 0.5);
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.2);
+}
+
+/* ── Pulse dot ── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(34, 211, 238, 0.6); }
+  50%      { opacity: 0.5; box-shadow: 0 0 8px rgba(34, 211, 238, 0.3); }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
