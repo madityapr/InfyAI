@@ -4,7 +4,8 @@ import type { Tool, Category, PricingFilter } from "@/data/tools"
 import FilterPill from "@/components/FilterPill"
 import ToolRow from "@/components/ToolRow"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
-import infinityLogo from "@/imports/infinity-logo.png"
+import navLogo from "@/imports/nav-logo.png"
+import heroVideo from "@/imports/hero-video.mp4"
 
 const TICKER_ITEMS = [
   "✦ Subscribe to infyAI",
@@ -32,7 +33,7 @@ export default function App() {
   const [subscribing, setSubscribing] = useState(false)
   const [subscribeMessage, setSubscribeMessage] = useState("")
   const [tools, setTools] = useState<Tool[]>(fallbackTools)
-  const bgLogoRef = useRef<HTMLDivElement>(null)
+  const bgVideoRef = useRef<HTMLDivElement>(null)
 
   // Fetch tools from Supabase (falls back to hardcoded data)
   useEffect(() => {
@@ -46,22 +47,16 @@ export default function App() {
       })
   }, [])
 
-  // Scroll-driven: logo drifts from top → center, opacity fades gracefully
+  // Smooth scroll-driven fade (no wiggling / stable top anchor)
   useEffect(() => {
-    const el = bgLogoRef.current
+    const el = bgVideoRef.current
     if (!el) return
 
     const update = () => {
-      const progress = Math.min(window.scrollY / 560, 1)
-      const eased = progress < 0.5
-        ? 2 * progress * progress
-        : 1 - Math.pow(-2 * progress + 2, 2) / 2
+      const progress = Math.min(window.scrollY / 450, 1)
+      const opacity = Math.max(0.65 - progress * 0.58, 0.05)
+      const scale = 1 - progress * 0.08
 
-      const top = 3 + eased * 35
-      const opacity = 0.35 - eased * 0.22
-      const scale = 1 - eased * 0.15
-
-      el.style.top = `${top}%`
       el.style.opacity = String(opacity)
       el.style.transform = `translateX(-50%) scale(${scale})`
     }
@@ -150,45 +145,59 @@ export default function App() {
         backgroundSize: "24px 24px",
       }}
     >
-      {/* ── Background Infinity Logo ── */}
+      {/* ── Seamless Blended Background Video ── */}
       <div
-        ref={bgLogoRef}
-        className="infy-bg-logo fixed left-1/2 pointer-events-none select-none z-0 flex items-center justify-center"
+        ref={bgVideoRef}
+        className="fixed left-1/2 pointer-events-none select-none z-0 flex items-center justify-center"
         style={{
-          top: "2%",
+          top: "0%",
           transform: "translateX(-50%) scale(1)",
-          opacity: 0.32,
-          width: "clamp(300px, 48vw, 620px)",
-          willChange: "top, opacity, transform",
+          opacity: 0.65,
+          width: "clamp(380px, 75vw, 920px)",
+          maxHeight: "720px",
+          willChange: "opacity, transform",
         }}
       >
-        <img
-          src={infinityLogo}
-          alt="infyAI Infinity"
+        <video
+          src={heroVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
           aria-hidden="true"
-          className="w-full h-auto object-contain infinity-hero-glow"
+          className="w-full h-auto object-contain"
           style={{
-            maskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, black 50%, transparent 100%)",
-            WebkitMaskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, black 50%, transparent 100%)",
+            mixBlendMode: "screen",
+            maskImage:
+              "radial-gradient(ellipse 70% 65% at 50% 45%, black 25%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.3) 70%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 70% 65% at 50% 45%, black 25%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.3) 70%, transparent 100%)",
           }}
         />
       </div>
 
-      {/* ── Nav bar ── */}
+      {/* ── Nav bar with Logo ── */}
       <nav className="nav-glow sticky top-0 z-20">
-        <div className="max-w-4xl mx-auto px-5 md:px-8 h-12 flex items-center justify-between gap-4">
+        <div className="max-w-4xl mx-auto px-5 md:px-8 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
-            <span
-              className="text-sm font-bold tracking-tight flex-shrink-0"
-              style={{
-                fontFamily: "'Bricolage Grotesque', sans-serif",
-                background: "linear-gradient(135deg, #0ea5e9, #22d3ee)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              infyAI
-            </span>
+            <a href="/" className="flex items-center gap-2.5 group">
+              <img
+                src={navLogo}
+                alt="infyAI"
+                className="h-8 w-auto object-contain drop-shadow-[0_0_12px_rgba(34,211,238,0.45)] group-hover:scale-105 transition-transform"
+              />
+              <span
+                className="text-base font-extrabold tracking-tight"
+                style={{
+                  fontFamily: "'Bricolage Grotesque', sans-serif",
+                  background: "linear-gradient(135deg, #ffffff 0%, #22d3ee 50%, #0ea5e9 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                infyAI
+              </span>
+            </a>
             <span className="hidden sm:block text-cyan-400/20 text-xs">·</span>
             <span className="hidden sm:block text-cyan-300/30 text-xs tracking-wide truncate">
               Free AI tools, curated for builders.
