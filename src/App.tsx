@@ -4,7 +4,7 @@ import type { Tool, Category, PricingFilter } from "@/data/tools"
 import FilterPill from "@/components/FilterPill"
 import ToolRow from "@/components/ToolRow"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
-import heroVideo from "@/imports/hero-video.mp4"
+import infinityLogo from "@/imports/infinity-logo.png"
 
 const TICKER_ITEMS = [
   "✦ Subscribe to infyAI",
@@ -32,7 +32,7 @@ export default function App() {
   const [subscribing, setSubscribing] = useState(false)
   const [subscribeMessage, setSubscribeMessage] = useState("")
   const [tools, setTools] = useState<Tool[]>(fallbackTools)
-  const bgVideoRef = useRef<HTMLDivElement>(null)
+  const bgLogoRef = useRef<HTMLDivElement>(null)
 
   // Fetch tools from Supabase (falls back to hardcoded data)
   useEffect(() => {
@@ -46,9 +46,9 @@ export default function App() {
       })
   }, [])
 
-  // Scroll-driven: video drifts from top → center, opacity fades out
+  // Scroll-driven: logo drifts from top → center, opacity fades gracefully
   useEffect(() => {
-    const el = bgVideoRef.current
+    const el = bgLogoRef.current
     if (!el) return
 
     const update = () => {
@@ -57,9 +57,9 @@ export default function App() {
         ? 2 * progress * progress
         : 1 - Math.pow(-2 * progress + 2, 2) / 2
 
-      const top = 4 + eased * 40
-      const opacity = 0.18 - eased * 0.14
-      const scale = 1 - eased * 0.18
+      const top = 3 + eased * 35
+      const opacity = 0.35 - eased * 0.22
+      const scale = 1 - eased * 0.15
 
       el.style.top = `${top}%`
       el.style.opacity = String(opacity)
@@ -150,27 +150,23 @@ export default function App() {
         backgroundSize: "24px 24px",
       }}
     >
-      {/* ── Background video ── */}
+      {/* ── Background Infinity Logo ── */}
       <div
-        ref={bgVideoRef}
-        className="infy-bg-logo fixed left-1/2 pointer-events-none select-none z-0"
+        ref={bgLogoRef}
+        className="infy-bg-logo fixed left-1/2 pointer-events-none select-none z-0 flex items-center justify-center"
         style={{
-          top: "4%",
+          top: "3%",
           transform: "translateX(-50%) scale(1)",
-          opacity: 0.18,
-          width: "clamp(320px, 52vw, 680px)",
+          opacity: 0.35,
+          width: "clamp(280px, 46vw, 600px)",
           willChange: "top, opacity, transform",
         }}
       >
-        <video
-          src={heroVideo}
-          autoPlay
-          loop
-          muted
-          playsInline
+        <img
+          src={infinityLogo}
+          alt="infyAI Infinity"
           aria-hidden="true"
-          className="w-full h-auto object-contain"
-          style={{ mixBlendMode: "screen" }}
+          className="w-full h-auto object-contain infinity-hero-glow drop-shadow-2xl"
         />
       </div>
 

@@ -118,9 +118,23 @@ body {
 /* ── Pulse dot ── */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; box-shadow: 0 0 4px rgba(34, 211, 238, 0.6); }
-  50%      { opacity: 0.5; box-shadow: 0 0 8px rgba(34, 211, 238, 0.3); }
+  50%      { opacity: 0.4; box-shadow: none; }
 }
 
 .pulse-dot {
   animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* ── Infinity Logo Glow ── */
+@keyframes infinity-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 35px rgba(34, 211, 238, 0.28)) drop-shadow(0 0 70px rgba(14, 165, 233, 0.15));
+  }
+  50% {
+    filter: drop-shadow(0 0 55px rgba(34, 211, 238, 0.45)) drop-shadow(0 0 90px rgba(99, 102, 241, 0.25));
+  }
+}
+
+.infinity-hero-glow {
+  animation: infinity-glow 5s ease-in-out infinite;
 }
