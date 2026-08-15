@@ -54,8 +54,8 @@ export default function App() {
 
     const update = () => {
       const progress = Math.min(window.scrollY / 450, 1)
-      const opacity = Math.max(0.65 - progress * 0.58, 0.05)
-      const scale = 1 - progress * 0.08
+      const opacity = Math.max(0.7 - progress * 0.62, 0.04)
+      const scale = 1 - progress * 0.06
 
       el.style.opacity = String(opacity)
       el.style.transform = `translateX(-50%) scale(${scale})`
@@ -137,11 +137,11 @@ export default function App() {
 
   return (
     <div
-      className="min-h-screen relative"
+      className="min-h-screen relative selection:bg-white selection:text-black"
       style={{
-        backgroundColor: "#030712",
+        backgroundColor: "#000000",
         backgroundImage:
-          "radial-gradient(circle at center, rgba(14,165,233,0.03) 1px, transparent 1.2px)",
+          "radial-gradient(circle at center, rgba(255,255,255,0.03) 1px, transparent 1.2px)",
         backgroundSize: "24px 24px",
       }}
     >
@@ -152,8 +152,8 @@ export default function App() {
         style={{
           top: "0%",
           transform: "translateX(-50%) scale(1)",
-          opacity: 0.65,
-          width: "clamp(380px, 75vw, 920px)",
+          opacity: 0.7,
+          width: "clamp(380px, 78vw, 960px)",
           maxHeight: "720px",
           willChange: "opacity, transform",
         }}
@@ -169,9 +169,9 @@ export default function App() {
           style={{
             mixBlendMode: "screen",
             maskImage:
-              "radial-gradient(ellipse 70% 65% at 50% 45%, black 25%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.3) 70%, transparent 100%)",
+              "radial-gradient(ellipse 70% 65% at 50% 45%, black 25%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.2) 75%, transparent 100%)",
             WebkitMaskImage:
-              "radial-gradient(ellipse 70% 65% at 50% 45%, black 25%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.3) 70%, transparent 100%)",
+              "radial-gradient(ellipse 70% 65% at 50% 45%, black 25%, rgba(0,0,0,0.85) 45%, rgba(0,0,0,0.2) 75%, transparent 100%)",
           }}
         />
       </div>
@@ -184,28 +184,23 @@ export default function App() {
               <img
                 src={navLogo}
                 alt="infyAI"
-                className="h-8 w-auto object-contain drop-shadow-[0_0_12px_rgba(34,211,238,0.45)] group-hover:scale-105 transition-transform"
+                className="h-8 w-auto object-contain drop-shadow-[0_0_10px_rgba(255,255,255,0.2)] group-hover:scale-105 transition-transform"
               />
               <span
-                className="text-base font-extrabold tracking-tight"
-                style={{
-                  fontFamily: "'Bricolage Grotesque', sans-serif",
-                  background: "linear-gradient(135deg, #ffffff 0%, #22d3ee 50%, #0ea5e9 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
+                className="text-base font-extrabold tracking-tight text-white"
+                style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
               >
                 infyAI
               </span>
             </a>
-            <span className="hidden sm:block text-cyan-400/20 text-xs">·</span>
-            <span className="hidden sm:block text-cyan-300/30 text-xs tracking-wide truncate">
+            <span className="hidden sm:block text-zinc-700 text-xs">·</span>
+            <span className="hidden sm:block text-zinc-400 text-xs tracking-wide truncate">
               Free AI tools, curated for builders.
             </span>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
-            <span className="pulse-dot w-1.5 h-1.5 rounded-full bg-cyan-400 inline-block" />
-            <span className="text-cyan-400/40 text-xs tabular-nums">
+            <span className="pulse-dot w-1.5 h-1.5 rounded-full bg-white inline-block" />
+            <span className="text-zinc-400 text-xs tabular-nums font-medium">
               {tools.length} tools
             </span>
           </div>
@@ -216,20 +211,20 @@ export default function App() {
         {/* ── Hero header ── */}
         <header className="pt-16 pb-12 md:pt-24 md:pb-16">
           <div className="flex flex-col items-start gap-5">
-            {/* Wordmark */}
+            {/* Monochrome High-End Wordmark */}
             <h1
               className="text-[clamp(52px,11vw,104px)] font-extrabold leading-none tracking-[-0.04em] bg-clip-text text-transparent"
               style={{
                 fontFamily: "'Bricolage Grotesque', sans-serif",
                 backgroundImage:
-                  "linear-gradient(135deg, #ffffff 0%, #22d3ee 30%, #0ea5e9 55%, #6366f1 80%, #a78bfa 100%)",
+                  "linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 50%, #94A3B8 100%)",
               }}
             >
               infyAI
             </h1>
 
             {/* Tagline */}
-            <p className="text-white/40 text-base md:text-lg font-light tracking-wide max-w-sm">
+            <p className="text-zinc-400 text-base md:text-lg font-light tracking-wide max-w-sm">
               Free AI tools, all in one place — curated and updated weekly.
             </p>
 
@@ -241,10 +236,10 @@ export default function App() {
                   height="16"
                   viewBox="0 0 16 16"
                   fill="none"
-                  className="text-cyan-400/30"
+                  className="text-zinc-500"
                 >
-                  <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.3" />
-                  <path d="M10.5 10.5L13.5 13.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+                  <circle cx="7" cy="7" r="4.5" stroke="currentColor" strokeWidth="1.4" />
+                  <path d="M10.5 10.5L13.5 13.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
                 </svg>
               </span>
               <input
@@ -252,12 +247,12 @@ export default function App() {
                 placeholder="Search tools…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full bg-white/[0.03] rounded-xl pl-10 pr-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none transition-all glow-border-blue subscribe-input"
+                className="w-full bg-white/[0.03] rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none transition-all border border-white/10 subscribe-input"
               />
               {search && (
                 <button
                   onClick={() => setSearch("")}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/25 hover:text-cyan-300/80 transition-colors"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors"
                   aria-label="Clear search"
                 >
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -303,8 +298,8 @@ export default function App() {
 
         {/* ── Tool list ── */}
         <section className="pb-24">
-          <div className="flex items-center justify-between mb-1 pb-2 border-b border-cyan-400/[0.08]">
-            <span className="text-xs text-cyan-400/30 tabular-nums">
+          <div className="flex items-center justify-between mb-1 pb-2 border-b border-white/[0.08]">
+            <span className="text-xs text-zinc-500 tabular-nums">
               {filtered.length === tools.length
                 ? `${tools.length} tools`
                 : `${filtered.length} of ${tools.length} tools`}
@@ -316,7 +311,7 @@ export default function App() {
                   setActivePricing("All")
                   setSearch("")
                 }}
-                className="text-xs text-cyan-400/30 hover:text-cyan-300/80 transition-colors"
+                className="text-xs text-zinc-400 hover:text-white transition-colors"
               >
                 Clear filters
               </button>
@@ -331,15 +326,15 @@ export default function App() {
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-24 gap-3">
-              <span className="text-4xl opacity-20">∞</span>
-              <p className="text-white/25 text-sm">No tools match your filters.</p>
+              <span className="text-4xl text-zinc-700">∞</span>
+              <p className="text-zinc-500 text-sm">No tools match your filters.</p>
               <button
                 onClick={() => {
                   setActiveCategory("All")
                   setActivePricing("All")
                   setSearch("")
                 }}
-                className="text-cyan-400/70 text-xs hover:text-cyan-300 transition-colors mt-1"
+                className="text-white text-xs underline underline-offset-4 hover:text-zinc-300 transition-colors mt-1"
               >
                 Reset filters
               </button>
@@ -352,21 +347,18 @@ export default function App() {
       <section className="relative z-10 py-16 px-5 md:px-8">
         <div className="max-w-4xl mx-auto">
           <div
-            className="rounded-2xl p-8 md:p-12 text-center glow-border-cyan"
+            className="rounded-2xl p-8 md:p-12 text-center glow-border-card"
             style={{
-              background: "linear-gradient(135deg, rgba(14,165,233,0.06) 0%, rgba(6,11,24,0.8) 50%, rgba(99,102,241,0.04) 100%)",
+              background: "rgba(255, 255, 255, 0.02)",
             }}
           >
             <h2
-              className="text-2xl md:text-3xl font-bold mb-3 bg-clip-text text-transparent"
-              style={{
-                fontFamily: "'Bricolage Grotesque', sans-serif",
-                backgroundImage: "linear-gradient(135deg, #22d3ee, #0ea5e9, #6366f1)",
-              }}
+              className="text-2xl md:text-3xl font-bold mb-3 text-white"
+              style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
             >
               Subscribe to infyAI
             </h2>
-            <p className="text-white/35 text-sm md:text-base mb-6 max-w-md mx-auto">
+            <p className="text-zinc-400 text-sm md:text-base mb-6 max-w-md mx-auto">
               Free forever. Get the latest AI tools, updates, and weekly curated picks delivered to your inbox.
             </p>
 
@@ -378,12 +370,12 @@ export default function App() {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={subscribing}
                 required
-                className="w-full sm:flex-1 bg-white/[0.04] rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none transition-all glow-border-blue subscribe-input disabled:opacity-60"
+                className="w-full sm:flex-1 bg-white/[0.04] rounded-xl px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none transition-all border border-white/10 subscribe-input disabled:opacity-60"
               />
               <button
                 type="submit"
                 disabled={subscribing}
-                className="subscribe-btn w-full sm:w-auto px-6 py-3 rounded-xl text-sm font-semibold text-white cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2"
+                className="subscribe-btn w-full sm:w-auto px-7 py-3 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2"
               >
                 {subscribing ? (
                   <span>Subscribing...</span>
@@ -396,47 +388,41 @@ export default function App() {
             </form>
 
             {subscribeMessage && (
-              <div className="mt-4 inline-block px-4 py-2 rounded-xl text-xs font-medium bg-cyan-400/10 text-cyan-300 border border-cyan-400/25 animate-fade-in">
+              <div className="mt-4 inline-block px-4 py-2 rounded-xl text-xs font-medium bg-white/10 text-white border border-white/20 animate-fade-in">
                 {subscribeMessage}
               </div>
             )}
 
             {/* Stats row */}
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-8 pt-6 border-t border-cyan-400/[0.08]">
+            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-8 pt-6 border-t border-white/[0.08]">
               <div className="text-center">
-                <span className="text-xl md:text-2xl font-bold text-cyan-400">{tools.length}+</span>
-                <span className="block text-[11px] text-white/30 uppercase tracking-widest mt-0.5">Tools</span>
+                <span className="text-xl md:text-2xl font-bold text-white">{tools.length}+</span>
+                <span className="block text-[11px] text-zinc-500 uppercase tracking-widest mt-0.5 font-medium">Tools</span>
               </div>
               <div className="text-center">
-                <span className="text-xl md:text-2xl font-bold text-cyan-400">{CATEGORIES.length}+</span>
-                <span className="block text-[11px] text-white/30 uppercase tracking-widest mt-0.5">Categories</span>
+                <span className="text-xl md:text-2xl font-bold text-white">{CATEGORIES.length}+</span>
+                <span className="block text-[11px] text-zinc-500 uppercase tracking-widest mt-0.5 font-medium">Categories</span>
               </div>
               <div className="text-center">
-                <span className="text-xl md:text-2xl font-bold text-cyan-400">Weekly</span>
-                <span className="block text-[11px] text-white/30 uppercase tracking-widest mt-0.5">Updates</span>
+                <span className="text-xl md:text-2xl font-bold text-white">Weekly</span>
+                <span className="block text-[11px] text-zinc-500 uppercase tracking-widest mt-0.5 font-medium">Updates</span>
               </div>
               <div className="text-center">
-                <span className="text-xl md:text-2xl font-bold text-cyan-400">Free</span>
-                <span className="block text-[11px] text-white/30 uppercase tracking-widest mt-0.5">To Browse</span>
+                <span className="text-xl md:text-2xl font-bold text-white">Free</span>
+                <span className="block text-[11px] text-zinc-500 uppercase tracking-widest mt-0.5 font-medium">To Browse</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Ticker bar ── */}
-      <div
-        className="relative z-10 overflow-hidden py-2.5"
-        style={{
-          background: "linear-gradient(90deg, #0ea5e9, #22d3ee, #6366f1, #0ea5e9)",
-          backgroundSize: "300% 100%",
-        }}
-      >
+      {/* ── Ticker bar (Monochrome Glass) ── */}
+      <div className="relative z-10 overflow-hidden py-3 bg-white/[0.02] border-y border-white/[0.08]">
         <div className="ticker-track">
           {TICKER_ITEMS.map((item, i) => (
             <span
               key={i}
-              className="text-sm font-medium text-white/90 whitespace-nowrap px-6"
+              className="text-xs tracking-wider uppercase font-medium text-zinc-400 whitespace-nowrap px-8"
               style={{ fontFamily: "'Outfit', sans-serif" }}
             >
               {item}
@@ -446,13 +432,13 @@ export default function App() {
       </div>
 
       {/* ── Footer ── */}
-      <footer className="border-t border-cyan-400/[0.06] py-8 relative z-10">
+      <footer className="border-t border-white/[0.06] py-8 relative z-10">
         <div className="max-w-4xl mx-auto px-5 md:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-          <p className="text-white/20 text-xs">
+          <p className="text-zinc-500 text-xs">
             © {new Date().getFullYear()} infyAI. All rights reserved.
           </p>
-          <p className="text-cyan-400/20 text-xs">
-            Updated weekly · Subscribe for full access →
+          <p className="text-zinc-500 text-xs">
+            Updated weekly · Curated for builders
           </p>
         </div>
       </footer>

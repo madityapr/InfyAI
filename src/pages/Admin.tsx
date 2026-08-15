@@ -283,20 +283,17 @@ export default function Admin() {
     return (
       <div
         className="min-h-screen flex items-center justify-center px-4"
-        style={{ backgroundColor: "#030712" }}
+        style={{ backgroundColor: "#000000" }}
       >
         <div className="w-full max-w-sm">
-          <div className="glow-border-cyan rounded-2xl p-8" style={{ background: "rgba(6,11,24,0.9)" }}>
+          <div className="border border-white/10 rounded-2xl p-8 bg-white/[0.02] shadow-2xl">
             <h1
-              className="text-2xl font-bold text-center mb-1 bg-clip-text text-transparent"
-              style={{
-                fontFamily: "'Bricolage Grotesque', sans-serif",
-                backgroundImage: "linear-gradient(135deg, #22d3ee, #0ea5e9, #6366f1)",
-              }}
+              className="text-2xl font-bold text-center mb-1 text-white"
+              style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
             >
               infyAI Admin
             </h1>
-            <p className="text-white/30 text-sm text-center mb-6">Enter your admin password</p>
+            <p className="text-zinc-500 text-sm text-center mb-6">Enter your admin password</p>
 
             <form onSubmit={handleLogin} className="space-y-4">
               <input
@@ -304,18 +301,18 @@ export default function Admin() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-white/[0.04] rounded-xl px-4 py-3 text-sm text-white/80 placeholder:text-white/25 focus:outline-none transition-all glow-border-blue subscribe-input"
+                className="w-full bg-white/[0.04] rounded-xl px-4 py-3 text-sm text-white placeholder:text-zinc-500 focus:outline-none transition-all border border-white/10 subscribe-input"
               />
               {authError && <p className="text-red-400 text-xs">{authError}</p>}
               <button
                 type="submit"
-                className="subscribe-btn w-full px-6 py-3 rounded-xl text-sm font-semibold text-white cursor-pointer"
+                className="subscribe-btn w-full px-6 py-3 rounded-xl text-sm font-bold cursor-pointer"
               >
                 Login →
               </button>
             </form>
 
-            <a href="/" className="block text-center text-cyan-400/40 text-xs mt-4 hover:text-cyan-300 transition-colors">
+            <a href="/" className="block text-center text-zinc-500 text-xs mt-4 hover:text-white transition-colors">
               ← Back to site
             </a>
           </div>
@@ -326,29 +323,24 @@ export default function Admin() {
 
   // ── Admin dashboard ──
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#030712" }}>
+    <div className="min-h-screen" style={{ backgroundColor: "#000000" }}>
       {/* Nav */}
       <nav className="nav-glow sticky top-0 z-20">
-        <div className="max-w-5xl mx-auto px-5 md:px-8 h-12 flex items-center justify-between">
+        <div className="max-w-5xl mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <a
               href="/"
-              className="text-sm font-bold tracking-tight"
-              style={{
-                fontFamily: "'Bricolage Grotesque', sans-serif",
-                background: "linear-gradient(135deg, #0ea5e9, #22d3ee)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
+              className="text-base font-extrabold tracking-tight text-white"
+              style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
             >
               infyAI
             </a>
-            <span className="text-cyan-400/20 text-xs">·</span>
-            <span className="text-cyan-300/30 text-xs">Admin Panel</span>
+            <span className="text-zinc-700 text-xs">·</span>
+            <span className="text-zinc-400 text-xs font-medium">Admin Panel</span>
           </div>
           <button
             onClick={() => setIsAuthenticated(false)}
-            className="text-xs text-white/30 hover:text-cyan-300 transition-colors"
+            className="text-xs text-zinc-400 hover:text-white transition-colors"
           >
             Logout
           </button>
@@ -361,7 +353,7 @@ export default function Admin() {
           <div
             className={`mb-6 px-4 py-3 rounded-xl text-sm font-medium ${
               message.type === "success"
-                ? "bg-cyan-400/10 text-cyan-300 border border-cyan-400/20"
+                ? "bg-white/10 text-white border border-white/20"
                 : "bg-red-400/10 text-red-300 border border-red-400/20"
             }`}
           >
@@ -374,20 +366,19 @@ export default function Admin() {
           <div className="mb-6 px-4 py-3 rounded-xl text-sm bg-amber-400/10 text-amber-300 border border-amber-400/20">
             ⚠️ Supabase is not configured. Add <code className="bg-white/10 px-1 rounded">VITE_SUPABASE_URL</code> and{" "}
             <code className="bg-white/10 px-1 rounded">VITE_SUPABASE_ANON_KEY</code> to your <code className="bg-white/10 px-1 rounded">.env</code> file.
-            See <code className="bg-white/10 px-1 rounded">.env.example</code> for details.
           </div>
         )}
 
         {/* Tabs */}
-        <div className="flex gap-1 mb-8 border-b border-cyan-400/10 pb-0">
+        <div className="flex gap-1 mb-8 border-b border-white/10 pb-0">
           {(["tools", "subscribers", "send-update"] as Tab[]).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-4 py-2.5 text-sm font-medium transition-all border-b-2 -mb-px cursor-pointer ${
                 activeTab === tab
-                  ? "text-cyan-300 border-cyan-400"
-                  : "text-white/30 border-transparent hover:text-white/60"
+                  ? "text-white border-white font-semibold"
+                  : "text-zinc-500 border-transparent hover:text-zinc-300"
               }`}
             >
               {tab === "tools" && `🛠 Tools (${tools.length})`}
@@ -402,8 +393,8 @@ export default function Admin() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Form */}
             <div className="lg:col-span-1">
-              <div className="glow-border-blue rounded-2xl p-6 sticky top-20" style={{ background: "rgba(6,11,24,0.8)" }}>
-                <h3 className="text-sm font-semibold text-cyan-300 mb-4">
+              <div className="border border-white/10 rounded-2xl p-6 sticky top-20 bg-white/[0.02]">
+                <h3 className="text-sm font-semibold text-white mb-4">
                   {editingTool ? `Edit: ${editingTool.name}` : "Add New Tool"}
                 </h3>
                 <form onSubmit={handleSaveTool} className="space-y-3">
@@ -413,7 +404,7 @@ export default function Admin() {
                     value={toolForm.name}
                     onChange={(e) => setToolForm({ ...toolForm, name: e.target.value })}
                     required
-                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white/80 placeholder:text-white/25 focus:outline-none glow-border-blue subscribe-input"
+                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input"
                   />
                   <textarea
                     placeholder="Short description"
@@ -421,12 +412,12 @@ export default function Admin() {
                     onChange={(e) => setToolForm({ ...toolForm, description: e.target.value })}
                     required
                     rows={3}
-                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white/80 placeholder:text-white/25 focus:outline-none glow-border-blue subscribe-input resize-none"
+                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input resize-none"
                   />
                   <select
                     value={toolForm.category}
                     onChange={(e) => setToolForm({ ...toolForm, category: e.target.value as Category })}
-                    className="w-full bg-[#0a1628] rounded-lg px-3 py-2.5 text-sm text-white/80 focus:outline-none glow-border-blue"
+                    className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none"
                   >
                     {CATEGORIES.map((cat) => (
                       <option key={cat} value={cat}>{cat}</option>
@@ -435,7 +426,7 @@ export default function Admin() {
                   <select
                     value={toolForm.pricing}
                     onChange={(e) => setToolForm({ ...toolForm, pricing: e.target.value as Pricing })}
-                    className="w-full bg-[#0a1628] rounded-lg px-3 py-2.5 text-sm text-white/80 focus:outline-none glow-border-blue"
+                    className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none"
                   >
                     <option value="Free">Free</option>
                     <option value="Freemium">Freemium</option>
@@ -450,7 +441,7 @@ export default function Admin() {
                       min="0"
                       max="5"
                       step="0.1"
-                      className="w-24 bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white/80 focus:outline-none glow-border-blue subscribe-input"
+                      className="w-24 bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none subscribe-input"
                     />
                     <input
                       type="url"
@@ -458,7 +449,7 @@ export default function Admin() {
                       value={toolForm.url}
                       onChange={(e) => setToolForm({ ...toolForm, url: e.target.value })}
                       required
-                      className="flex-1 bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white/80 placeholder:text-white/25 focus:outline-none glow-border-blue subscribe-input"
+                      className="flex-1 bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none subscribe-input"
                     />
                   </div>
 
@@ -466,7 +457,7 @@ export default function Admin() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="subscribe-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold text-white cursor-pointer disabled:opacity-50"
+                      className="subscribe-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50"
                     >
                       {loading ? "Saving..." : editingTool ? "Update Tool" : "Add Tool"}
                     </button>
@@ -477,7 +468,7 @@ export default function Admin() {
                           setEditingTool(null)
                           setToolForm(EMPTY_TOOL)
                         }}
-                        className="px-4 py-2.5 rounded-xl text-sm text-white/40 border border-white/10 hover:text-white/70 transition-colors cursor-pointer"
+                        className="px-4 py-2.5 rounded-xl text-sm text-zinc-400 border border-white/10 hover:text-white transition-colors cursor-pointer"
                       >
                         Cancel
                       </button>
@@ -490,7 +481,7 @@ export default function Admin() {
             {/* Tools list */}
             <div className="lg:col-span-2">
               {tools.length === 0 && !loading ? (
-                <div className="text-center py-16 text-white/20 text-sm">
+                <div className="text-center py-16 text-zinc-600 text-sm">
                   {isSupabaseConfigured
                     ? "No tools yet. Add your first tool using the form."
                     : "Connect Supabase to manage tools."}
@@ -500,32 +491,32 @@ export default function Admin() {
                   {tools.map((tool) => (
                     <div
                       key={tool.id}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl border border-cyan-400/[0.06] hover:border-cyan-400/15 bg-white/[0.01] hover:bg-white/[0.02] transition-all"
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/[0.06] hover:border-white/15 bg-white/[0.01] hover:bg-white/[0.02] transition-all"
                     >
                       <div className="flex-1 min-w-0">
                         <div className="flex items-baseline gap-2">
-                          <span className="text-sm font-semibold text-white/85" style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}>
+                          <span className="text-sm font-semibold text-white" style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}>
                             {tool.name}
                           </span>
-                          <span className="text-[11px] text-cyan-400/40">{tool.category}</span>
-                          <span className={`text-[11px] px-1.5 py-0.5 rounded-full ${
-                            tool.pricing === "Free" ? "text-cyan-400 bg-cyan-400/10" :
-                            tool.pricing === "Freemium" ? "text-sky-300 bg-sky-300/10" :
-                            "text-indigo-300 bg-indigo-300/10"
+                          <span className="text-[11px] text-zinc-500">{tool.category}</span>
+                          <span className={`text-[11px] px-2 py-0.5 rounded-full ${
+                            tool.pricing === "Free" ? "text-white bg-white/10 border border-white/20" :
+                            tool.pricing === "Freemium" ? "text-zinc-300 bg-white/5 border border-white/10" :
+                            "text-zinc-400 bg-white/[0.02] border border-white/[0.08]"
                           }`}>{tool.pricing}</span>
                         </div>
-                        <p className="text-xs text-white/30 truncate mt-0.5">{tool.description}</p>
+                        <p className="text-xs text-zinc-400 truncate mt-0.5">{tool.description}</p>
                       </div>
                       <div className="flex gap-1 flex-shrink-0">
                         <button
                           onClick={() => handleEditTool(tool)}
-                          className="px-2.5 py-1.5 rounded-lg text-xs text-cyan-400/60 hover:text-cyan-300 hover:bg-cyan-400/10 transition-all cursor-pointer"
+                          className="px-2.5 py-1.5 rounded-lg text-xs text-zinc-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => handleDeleteTool(tool)}
-                          className="px-2.5 py-1.5 rounded-lg text-xs text-red-400/60 hover:text-red-300 hover:bg-red-400/10 transition-all cursor-pointer"
+                          className="px-2.5 py-1.5 rounded-lg text-xs text-red-400/70 hover:text-red-300 hover:bg-red-400/10 transition-all cursor-pointer"
                         >
                           Delete
                         </button>
@@ -542,20 +533,20 @@ export default function Admin() {
         {activeTab === "subscribers" && (
           <div>
             <div className="flex items-center gap-4 mb-6">
-              <div className="glow-border-cyan rounded-xl px-5 py-3 inline-flex items-center gap-3" style={{ background: "rgba(6,11,24,0.8)" }}>
-                <span className="text-2xl font-bold text-cyan-400">{subscribers.filter((s) => s.is_active).length}</span>
-                <span className="text-xs text-white/30">active subscribers</span>
+              <div className="border border-white/10 rounded-xl px-5 py-3 inline-flex items-center gap-3 bg-white/[0.02]">
+                <span className="text-2xl font-bold text-white">{subscribers.filter((s) => s.is_active).length}</span>
+                <span className="text-xs text-zinc-400">active subscribers</span>
               </div>
               <button
                 onClick={fetchSubscribers}
-                className="text-xs text-cyan-400/40 hover:text-cyan-300 transition-colors cursor-pointer"
+                className="text-xs text-zinc-400 hover:text-white transition-colors cursor-pointer"
               >
                 ↻ Refresh
               </button>
             </div>
 
             {subscribers.length === 0 ? (
-              <div className="text-center py-16 text-white/20 text-sm">
+              <div className="text-center py-16 text-zinc-600 text-sm">
                 {isSupabaseConfigured
                   ? "No subscribers yet. Share your site to get signups!"
                   : "Connect Supabase to view subscribers."}
@@ -565,12 +556,12 @@ export default function Admin() {
                 {subscribers.map((sub) => (
                   <div
                     key={sub.id}
-                    className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3 rounded-xl border border-cyan-400/[0.06] hover:border-cyan-400/15 bg-white/[0.01] hover:bg-white/[0.02] transition-all"
+                    className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-4 py-3 rounded-xl border border-white/[0.06] hover:border-white/15 bg-white/[0.01] hover:bg-white/[0.02] transition-all"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${sub.is_active ? "bg-cyan-400 pulse-dot" : "bg-white/15"}`} />
-                      <span className="text-sm font-medium text-white/80 truncate">{sub.email}</span>
-                      <span className="hidden md:inline-block text-[11px] text-white/25">
+                      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${sub.is_active ? "bg-white pulse-dot" : "bg-white/15"}`} />
+                      <span className="text-sm font-medium text-white truncate">{sub.email}</span>
+                      <span className="hidden md:inline-block text-[11px] text-zinc-500">
                         {new Date(sub.subscribed_at).toLocaleDateString("en-IN", {
                           day: "numeric",
                           month: "short",
@@ -582,14 +573,14 @@ export default function Admin() {
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <button
                         onClick={() => handleSendWelcomeToSubscriber(sub.email)}
-                        className="px-2.5 py-1 rounded-lg text-xs font-medium text-cyan-400/80 hover:text-cyan-200 bg-cyan-400/[0.08] hover:bg-cyan-400/20 border border-cyan-400/20 transition-all cursor-pointer flex items-center gap-1"
+                        className="px-2.5 py-1 rounded-lg text-xs font-medium text-zinc-300 hover:text-white bg-white/[0.06] hover:bg-white/15 border border-white/10 transition-all cursor-pointer flex items-center gap-1"
                         title="Send welcome email via Resend"
                       >
                         <span>✉</span> Send Welcome
                       </button>
                       <button
                         onClick={() => handleDeleteSubscriber(sub)}
-                        className="px-2 py-1 rounded-lg text-xs text-red-400/60 hover:text-red-300 hover:bg-red-400/10 transition-all cursor-pointer"
+                        className="px-2 py-1 rounded-lg text-xs text-zinc-500 hover:text-red-400 hover:bg-red-400/10 transition-all cursor-pointer"
                         title="Remove subscriber"
                       >
                         ✕
@@ -605,27 +596,27 @@ export default function Admin() {
         {/* ── Send Update Tab ── */}
         {activeTab === "send-update" && (
           <div className="max-w-2xl">
-            <div className="glow-border-blue rounded-2xl p-6 md:p-8" style={{ background: "rgba(6,11,24,0.8)" }}>
-              <h3 className="text-sm font-semibold text-cyan-300 mb-1">Compose Email Update</h3>
-              <p className="text-xs text-white/25 mb-6">
+            <div className="border border-white/10 rounded-2xl p-6 md:p-8 bg-white/[0.02]">
+              <h3 className="text-sm font-semibold text-white mb-1">Compose Email Update</h3>
+              <p className="text-xs text-zinc-500 mb-6">
                 This will be sent to {subscribers.filter((s) => s.is_active).length} active subscriber(s) via Resend.
               </p>
 
               <form onSubmit={handleSendUpdate} className="space-y-4">
                 <div>
-                  <label className="block text-xs text-white/40 mb-1.5">Subject</label>
+                  <label className="block text-xs text-zinc-400 mb-1.5">Subject</label>
                   <input
                     type="text"
                     placeholder="🚀 New AI Tools This Week"
                     value={emailSubject}
                     onChange={(e) => setEmailSubject(e.target.value)}
                     required
-                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white/80 placeholder:text-white/25 focus:outline-none glow-border-blue subscribe-input"
+                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs text-white/40 mb-1.5">
+                  <label className="block text-xs text-zinc-400 mb-1.5">
                     Email Content (HTML supported)
                   </label>
                   <textarea
@@ -634,14 +625,14 @@ export default function Admin() {
                     onChange={(e) => setEmailContent(e.target.value)}
                     required
                     rows={12}
-                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white/80 placeholder:text-white/25 focus:outline-none glow-border-blue subscribe-input resize-none font-mono"
+                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input resize-none font-mono"
                   />
                 </div>
 
                 {/* Preview */}
                 {emailContent && (
                   <div>
-                    <label className="block text-xs text-white/40 mb-1.5">Preview</label>
+                    <label className="block text-xs text-zinc-400 mb-1.5">Preview</label>
                     <div
                       className="rounded-lg p-4 bg-white text-black text-sm"
                       dangerouslySetInnerHTML={{ __html: emailContent }}
@@ -652,7 +643,7 @@ export default function Admin() {
                 <button
                   type="submit"
                   disabled={sending}
-                  className="subscribe-btn w-full px-6 py-3 rounded-xl text-sm font-semibold text-white cursor-pointer disabled:opacity-50"
+                  className="subscribe-btn w-full px-6 py-3 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50"
                 >
                   {sending ? "Sending..." : `Send to ${subscribers.filter((s) => s.is_active).length} Subscriber(s) →`}
                 </button>
