@@ -9,13 +9,9 @@ export default function FilterPill({ label, active, onClick }: FilterPillProps) 
     <button
       onClick={onClick}
       className={`
-        inline-flex items-center px-4 py-1.5 rounded-full text-xs font-medium
+        inline-flex items-center px-4 py-2 rounded-full text-xs font-semibold
         whitespace-nowrap transition-all duration-200 cursor-pointer
-        ${
-          active
-            ? "pill-active"
-            : "text-zinc-400 bg-white/[0.03] border border-white/[0.08] hover:text-white hover:border-white/25 hover:bg-white/[0.08]"
-        }
+        ${active ? "liquid-pill-active scale-[1.02]" : "liquid-pill-inactive"}
       `}
     >
       {label}

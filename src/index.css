@@ -37,59 +37,93 @@ body {
   animation-play-state: paused;
 }
 
-/* ── Monochrome Border & Glass Utilities ── */
-.glow-border-white {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 0 24px rgba(255, 255, 255, 0.02), inset 0 0 20px rgba(255, 255, 255, 0.02);
+/* ── Apple Liquid Glass Utilities ── */
+.liquid-glass-card {
+  background: rgba(12, 14, 20, 0.75);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16), 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-.glow-border-card {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.02);
+.liquid-glass-panel {
+  background: rgba(15, 17, 24, 0.65);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.12), 0 12px 36px rgba(0, 0, 0, 0.5);
 }
 
-/* ── Subscribe Input ── */
-.subscribe-input:focus {
-  border-color: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.08), 0 0 50px rgba(255, 255, 255, 0.03);
+.liquid-glass-input {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
 }
 
-/* ── High-Contrast Monochrome Button ── */
-.subscribe-btn {
-  background: #ffffff;
-  color: #000000;
-  font-weight: 600;
+.liquid-glass-input:focus {
+  border-color: rgba(34, 211, 238, 0.55);
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* ── Apple Liquid Glass Glowing Cyan CTA Button ── */
+.liquid-btn-cyan {
+  background: linear-gradient(135deg, #22d3ee 0%, #0ea5e9 100%);
+  color: #030712;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 22px rgba(34, 211, 238, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
   transition: all 0.25s ease;
 }
 
-.subscribe-btn:hover {
-  background: #e4e4e7;
-  box-shadow: 0 0 24px rgba(255, 255, 255, 0.35);
+.liquid-btn-cyan:hover {
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+  box-shadow: 0 0 32px rgba(34, 211, 238, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.65);
   transform: translateY(-1px);
 }
 
-/* ── Nav glow line ── */
-.nav-glow {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(20px) saturate(180%);
+/* ── Liquid Pill States ── */
+.liquid-pill-active {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.95), rgba(14, 165, 233, 0.95));
+  color: #030712;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 
-/* ── Filter pill active state (Crisp White on Black) ── */
-.pill-active {
-  background: #ffffff;
-  color: #000000;
-  font-weight: 600;
-  border: 1px solid #ffffff;
-  box-shadow: 0 0 16px rgba(255, 255, 255, 0.3);
+.liquid-pill-inactive {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.liquid-pill-inactive:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* ── Nav Liquid Glass ── */
+.nav-glow {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 10, 15, 0.78);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  box-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0.05);
 }
 
 /* ── Pulse dot ── */
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(255, 255, 255, 0.8); }
-  50%      { opacity: 0.3; box-shadow: none; }
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(34, 211, 238, 0.8); }
+  50%      { opacity: 0.35; box-shadow: none; }
 }
 
-.pulse-dot {
+.pulse-dot-cyan {
+  background: #22d3ee;
   animation: pulse-dot 2s ease-in-out infinite;
 }
