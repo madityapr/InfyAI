@@ -64,7 +64,7 @@ export async function POST(req: Request) {
     )
   }
 
-  const emails = subscribers.map((s) => s.email)
+  const emails = (subscribers as Array<{ email: string }>).map((s: { email: string }) => s.email)
   let sentCount = 0
   const errors: string[] = []
 
