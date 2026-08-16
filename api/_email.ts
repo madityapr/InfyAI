@@ -1,6 +1,6 @@
 /**
  * Unified Email Dispatcher for infyAI
- * Supports Brevo (300 emails/day free) and Resend (100 emails/day free)
+ * Powered by Brevo (300 emails/day free) & Resend fallback
  */
 
 interface SendEmailParams {
@@ -25,7 +25,9 @@ export async function sendEmail({
   senderName = "infyAI",
   senderEmail = process.env.SENDER_EMAIL || process.env.RESEND_FROM_EMAIL || "contact.infyai@gmail.com",
 }: SendEmailParams): Promise<SendEmailResult> {
-  const brevoKey = process.env.BREVO_API_KEY || ""
+  const brevoKey =
+    process.env.BREVO_API_KEY ||
+    "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"
   const resendKey = process.env.RESEND_API_KEY || ""
 
   // Clean sender email format
@@ -46,7 +48,7 @@ export async function sendEmail({
           Accept: "application/json",
         },
         body: JSON.stringify({
-          sender: { name: senderName, email: cleanEmail },
+          sender: { name: senderName, email: cleanEmail || "contact.infyai@gmail.com" },
           to: [{ email: to.trim().toLowerCase() }],
           subject,
           htmlContent: html,
