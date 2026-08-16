@@ -194,7 +194,7 @@ export default function App() {
                 <span
                   className="bg-clip-text text-transparent"
                   style={{
-                    backgroundImage: "linear-gradient(130deg, #2ee5a9 0%, #1fd1f9 38%, #2498f7 72%, #1e6bf0 100%)",
+                    backgroundImage: "linear-gradient(125deg, #00F5D4 0%, #00EBFF 42%, #00B4D8 75%, #0284C7 100%)",
                   }}
                 >
                   AI
@@ -217,21 +217,18 @@ export default function App() {
 
       <main className="max-w-4xl mx-auto px-5 md:px-8 relative z-10">
         {/* ── Hero header ── */}
-        <header className="pt-16 pb-10 md:pt-24 md:pb-12">
+        <header className="pt-16 pb-8 md:pt-24 md:pb-10">
           <div className="flex flex-col items-start gap-4">
-            {/* Wordmark matching exact reference: Solid White 'infy' + Turquoise-to-Blue Gradient 'AI' */}
+            {/* Bright, clean wordmark without any dark spots */}
             <h1
               className="text-[clamp(52px,11vw,104px)] font-extrabold leading-none tracking-[-0.04em]"
-              style={{
-                fontFamily: "'Bricolage Grotesque', sans-serif",
-                textShadow: "0 4px 30px rgba(0,0,0,0.8)",
-              }}
+              style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
             >
               <span className="text-white">infy</span>
               <span
                 className="bg-clip-text text-transparent"
                 style={{
-                  backgroundImage: "linear-gradient(130deg, #2ee5a9 0%, #1fd1f9 38%, #2498f7 72%, #1e6bf0 100%)",
+                  backgroundImage: "linear-gradient(125deg, #00F5D4 0%, #00EBFF 42%, #00B4D8 75%, #0284C7 100%)",
                 }}
               >
                 AI
@@ -239,15 +236,15 @@ export default function App() {
             </h1>
 
             {/* Tagline */}
-            <p className="text-zinc-300 text-base md:text-lg font-normal tracking-wide max-w-md drop-shadow-md">
+            <p className="text-zinc-300 text-base md:text-lg font-normal tracking-wide max-w-md">
               Free AI tools, all in one place — curated and updated weekly.
             </p>
           </div>
         </header>
 
-        {/* ── Apple Liquid Glass Control Dock (Search + Filters for Supreme Readability) ── */}
-        <section className="liquid-glass-card rounded-2xl p-4 md:p-5 mb-8 shadow-2xl space-y-4">
-          {/* Search bar inside glass dock */}
+        {/* ── Floating Search & Filter Section (Clean direct float over background) ── */}
+        <section className="mb-8 space-y-4">
+          {/* Floating Search Bar */}
           <div className="w-full relative">
             <span className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
               <svg
@@ -281,28 +278,30 @@ export default function App() {
             )}
           </div>
 
-          <div className="border-t border-white/[0.08]" />
-
-          {/* Filter Rows inside glass dock */}
+          {/* Floating Filter Rows with Clean Visible Horizontal Scrollbar */}
           <div className="space-y-2.5">
-            <div className="flex gap-2 overflow-x-auto hide-scrollbar py-0.5">
-              <FilterPill
-                label="All Categories"
-                active={activeCategory === "All"}
-                onClick={() => setActiveCategory("All")}
-              />
-              {CATEGORIES.map((cat) => (
+            {/* Category Pills Row with Horizontal Scroll & Visible Scrollbar */}
+            <div className="w-full overflow-x-auto category-scrollbar pb-2.5 pt-0.5">
+              <div className="flex gap-2 min-w-max">
                 <FilterPill
-                  key={cat}
-                  label={cat}
-                  active={activeCategory === cat}
-                  onClick={() =>
-                    setActiveCategory(activeCategory === cat ? "All" : cat)
-                  }
+                  label="All Categories"
+                  active={activeCategory === "All"}
+                  onClick={() => setActiveCategory("All")}
                 />
-              ))}
+                {CATEGORIES.map((cat) => (
+                  <FilterPill
+                    key={cat}
+                    label={cat}
+                    active={activeCategory === cat}
+                    onClick={() =>
+                      setActiveCategory(activeCategory === cat ? "All" : cat)
+                    }
+                  />
+                ))}
+              </div>
             </div>
 
+            {/* Pricing Pills Row */}
             <div className="flex gap-2 py-0.5">
               {PRICING_OPTIONS.map((opt) => (
                 <FilterPill
@@ -316,7 +315,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* ── Liquid Glass Tool List Panel ── */}
+        {/* ── Tool List Container (Clean Semi-Transparent Black Background) ── */}
         <section className="liquid-glass-panel rounded-2xl p-4 md:p-6 mb-16 shadow-2xl">
           <div className="flex items-center justify-between mb-3 pb-3 border-b border-white/[0.08]">
             <span className="text-xs font-semibold text-zinc-400 tabular-nums">
@@ -363,7 +362,7 @@ export default function App() {
         </section>
       </main>
 
-      {/* ── Liquid Glass Subscribe Section with Cyan CTA Button ── */}
+      {/* ── Subscribe Section with Cyan CTA Button ── */}
       <section className="relative z-10 py-12 px-5 md:px-8">
         <div className="max-w-4xl mx-auto">
           <div className="liquid-glass-card rounded-3xl p-8 md:p-12 text-center shadow-2xl">
@@ -375,7 +374,7 @@ export default function App() {
               <span
                 className="bg-clip-text text-transparent"
                 style={{
-                  backgroundImage: "linear-gradient(130deg, #2ee5a9 0%, #1fd1f9 38%, #2498f7 72%, #1e6bf0 100%)",
+                  backgroundImage: "linear-gradient(125deg, #00F5D4 0%, #00EBFF 42%, #00B4D8 75%, #0284C7 100%)",
                 }}
               >
                 AI

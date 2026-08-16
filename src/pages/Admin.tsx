@@ -295,7 +295,7 @@ export default function Admin() {
               <span
                 className="bg-clip-text text-transparent"
                 style={{
-                  backgroundImage: "linear-gradient(130deg, #2ee5a9 0%, #1fd1f9 38%, #2498f7 72%, #1e6bf0 100%)",
+                  backgroundImage: "linear-gradient(125deg, #00F5D4 0%, #00EBFF 42%, #00B4D8 75%, #0284C7 100%)",
                 }}
               >
                 AI
@@ -346,7 +346,7 @@ export default function Admin() {
               <span
                 className="bg-clip-text text-transparent"
                 style={{
-                  backgroundImage: "linear-gradient(130deg, #2ee5a9 0%, #1fd1f9 38%, #2498f7 72%, #1e6bf0 100%)",
+                  backgroundImage: "linear-gradient(125deg, #00F5D4 0%, #00EBFF 42%, #00B4D8 75%, #0284C7 100%)",
                 }}
               >
                 AI
