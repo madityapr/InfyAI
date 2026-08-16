@@ -410,71 +410,94 @@ export default function Admin() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Form */}
             <div className="lg:col-span-1">
-              <div className="border border-white/10 rounded-2xl p-6 sticky top-20 bg-white/[0.02]">
+              <div className="border border-white/10 rounded-2xl p-5 md:p-6 sticky top-20 bg-white/[0.02] overflow-hidden">
                 <h3 className="text-sm font-semibold text-white mb-4">
                   {editingTool ? `Edit: ${editingTool.name}` : "Add New Tool"}
                 </h3>
-                <form onSubmit={handleSaveTool} className="space-y-3">
-                  <input
-                    type="text"
-                    placeholder="Tool name"
-                    value={toolForm.name}
-                    onChange={(e) => setToolForm({ ...toolForm, name: e.target.value })}
-                    required
-                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input"
-                  />
-                  <textarea
-                    placeholder="Short description"
-                    value={toolForm.description}
-                    onChange={(e) => setToolForm({ ...toolForm, description: e.target.value })}
-                    required
-                    rows={3}
-                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input resize-none"
-                  />
-                  <select
-                    value={toolForm.category}
-                    onChange={(e) => setToolForm({ ...toolForm, category: e.target.value as Category })}
-                    className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none"
-                  >
-                    {CATEGORIES.map((cat) => (
-                      <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                  </select>
-                  <select
-                    value={toolForm.pricing}
-                    onChange={(e) => setToolForm({ ...toolForm, pricing: e.target.value as Pricing })}
-                    className="w-full bg-zinc-900 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none"
-                  >
-                    <option value="Free">Free</option>
-                    <option value="Freemium">Freemium</option>
-                    <option value="Paid">Paid</option>
-                  </select>
-                  <div className="flex gap-3">
+                <form onSubmit={handleSaveTool} className="space-y-3.5">
+                  <div>
+                    <label className="block text-[11px] font-medium text-zinc-400 mb-1">Tool Name</label>
                     <input
-                      type="number"
-                      placeholder="Rating"
-                      value={toolForm.rating}
-                      onChange={(e) => setToolForm({ ...toolForm, rating: parseFloat(e.target.value) || 0 })}
-                      min="0"
-                      max="5"
-                      step="0.1"
-                      className="w-24 bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none subscribe-input"
-                    />
-                    <input
-                      type="url"
-                      placeholder="https://tool-url.com"
-                      value={toolForm.url}
-                      onChange={(e) => setToolForm({ ...toolForm, url: e.target.value })}
+                      type="text"
+                      placeholder="e.g. ChatGPT"
+                      value={toolForm.name}
+                      onChange={(e) => setToolForm({ ...toolForm, name: e.target.value })}
                       required
-                      className="flex-1 bg-white/[0.04] border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none subscribe-input"
+                      className="w-full min-w-0 bg-white/[0.04] rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input"
                     />
                   </div>
 
-                  <div className="flex gap-2 pt-1">
+                  <div>
+                    <label className="block text-[11px] font-medium text-zinc-400 mb-1">Description</label>
+                    <textarea
+                      placeholder="Short summary of what it does..."
+                      value={toolForm.description}
+                      onChange={(e) => setToolForm({ ...toolForm, description: e.target.value })}
+                      required
+                      rows={2}
+                      className="w-full min-w-0 bg-white/[0.04] rounded-lg px-3 py-2 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input resize-none"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <div>
+                      <label className="block text-[11px] font-medium text-zinc-400 mb-1">Category</label>
+                      <select
+                        value={toolForm.category}
+                        onChange={(e) => setToolForm({ ...toolForm, category: e.target.value as Category })}
+                        className="w-full min-w-0 bg-zinc-900 border border-white/10 rounded-lg px-2.5 py-2 text-sm text-white focus:outline-none cursor-pointer"
+                      >
+                        {CATEGORIES.map((cat) => (
+                          <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-medium text-zinc-400 mb-1">Pricing</label>
+                      <select
+                        value={toolForm.pricing}
+                        onChange={(e) => setToolForm({ ...toolForm, pricing: e.target.value as Pricing })}
+                        className="w-full min-w-0 bg-zinc-900 border border-white/10 rounded-lg px-2.5 py-2 text-sm text-white focus:outline-none cursor-pointer"
+                      >
+                        <option value="Free">Free</option>
+                        <option value="Freemium">Freemium</option>
+                        <option value="Paid">Paid</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-2.5">
+                    <div className="col-span-1">
+                      <label className="block text-[11px] font-medium text-zinc-400 mb-1">Rating</label>
+                      <input
+                        type="number"
+                        placeholder="4.8"
+                        value={toolForm.rating}
+                        onChange={(e) => setToolForm({ ...toolForm, rating: parseFloat(e.target.value) || 0 })}
+                        min="0"
+                        max="5"
+                        step="0.1"
+                        className="w-full min-w-0 bg-white/[0.04] border border-white/10 rounded-lg px-2.5 py-2 text-sm text-white focus:outline-none subscribe-input"
+                      />
+                    </div>
+                    <div className="col-span-2">
+                      <label className="block text-[11px] font-medium text-zinc-400 mb-1">Website URL</label>
+                      <input
+                        type="url"
+                        placeholder="https://..."
+                        value={toolForm.url}
+                        onChange={(e) => setToolForm({ ...toolForm, url: e.target.value })}
+                        required
+                        className="w-full min-w-0 bg-white/[0.04] border border-white/10 rounded-lg px-2.5 py-2 text-sm text-white placeholder:text-zinc-500 focus:outline-none subscribe-input"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 pt-2">
                     <button
                       type="submit"
                       disabled={loading}
-                      className="subscribe-btn flex-1 px-4 py-2.5 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50"
+                      className="liquid-btn-cyan flex-1 px-4 py-2.5 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50"
                     >
                       {loading ? "Saving..." : editingTool ? "Update Tool" : "Add Tool"}
                     </button>

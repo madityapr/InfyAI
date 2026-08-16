@@ -459,9 +459,13 @@ export default function App() {
           <p className="text-zinc-500 text-xs">
             © {new Date().getFullYear()} infyAI. All rights reserved.
           </p>
-          <p className="text-zinc-500 text-xs">
-            Updated weekly · Curated for builders
-          </p>
+          <div className="flex items-center gap-3 text-xs text-zinc-500">
+            <span>Updated weekly · Curated for builders</span>
+            <span className="text-zinc-700">·</span>
+            <a href="/admin" className="hover:text-cyan-400 transition-colors">
+              Admin Portal
+            </a>
+          </div>
         </div>
       </footer>
     </div>
