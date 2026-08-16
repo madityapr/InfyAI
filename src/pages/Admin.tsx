@@ -145,10 +145,18 @@ export default function Admin() {
     if (isSupabaseConfigured && supabase) {
       // Supabase mode
       if (editingTool) {
-        const { error } = await supabase
+        let { error } = await supabase
           .from("tools")
           .update(toolForm)
           .eq("id", editingTool.id)
+
+        // If is_infy_pick column is missing in Supabase DB, retry without it
+        if (error && error.message.includes("is_infy_pick")) {
+          const { is_infy_pick, ...cleanForm } = toolForm
+          const retry = await supabase.from("tools").update(cleanForm).eq("id", editingTool.id)
+          error = retry.error
+        }
+
         if (error) {
           showMessage(`Error updating tool: ${error.message}`, "error")
         } else {
@@ -158,7 +166,15 @@ export default function Admin() {
           fetchTools()
         }
       } else {
-        const { error } = await supabase.from("tools").insert([toolForm])
+        let { error } = await supabase.from("tools").insert([toolForm])
+
+        // If is_infy_pick column is missing in Supabase DB, retry without it
+        if (error && error.message.includes("is_infy_pick")) {
+          const { is_infy_pick, ...cleanForm } = toolForm
+          const retry = await supabase.from("tools").insert([cleanForm])
+          error = retry.error
+        }
+
         if (error) {
           showMessage(`Error adding tool: ${error.message}`, "error")
         } else {
@@ -227,7 +243,7 @@ export default function Admin() {
         .from("tools")
         .update({ is_infy_pick: updated })
         .eq("id", tool.id)
-      if (error) {
+      if (error && !error.message.includes("is_infy_pick")) {
         showMessage(`Error updating: ${error.message}`, "error")
         return
       }

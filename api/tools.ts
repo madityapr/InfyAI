@@ -38,7 +38,7 @@ export async function POST(req: Request) {
   }
 
   const body = await req.json()
-  const { name, description, category, pricing, rating, url } = body
+  const { name, description, category, pricing, rating, url, is_infy_pick } = body
 
   if (!name || !description || !category || !pricing || !url) {
     return new Response(JSON.stringify({ error: "Missing required fields" }), {
@@ -47,11 +47,21 @@ export async function POST(req: Request) {
     })
   }
 
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from("tools")
-    .insert([{ name, description, category, pricing, rating: rating || 4.0, url }])
+    .insert([{ name, description, category, pricing, rating: rating || 4.0, url, is_infy_pick: Boolean(is_infy_pick) }])
     .select()
     .single()
+
+  if (error && error.message.includes("is_infy_pick")) {
+    const retry = await supabase
+      .from("tools")
+      .insert([{ name, description, category, pricing, rating: rating || 4.0, url }])
+      .select()
+      .single()
+    data = retry.data
+    error = retry.error
+  }
 
   if (error) {
     return new Response(JSON.stringify({ error: error.message }), {
