@@ -370,11 +370,11 @@ export default function Admin() {
     <div className="min-h-screen" style={{ backgroundColor: "#000000" }}>
       {/* Nav */}
       <nav className="nav-glow sticky top-0 z-20">
-        <div className="max-w-5xl mx-auto px-5 md:px-8 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+        <div className="max-w-5xl mx-auto px-5 md:px-8 h-16 md:h-18 flex items-center justify-between">
+          <div className="flex items-center gap-3.5">
             <a
               href="/"
-              className="text-base font-extrabold tracking-tight"
+              className="text-lg md:text-xl font-extrabold tracking-tight"
               style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
             >
               <span className="text-white">infy</span>
@@ -387,12 +387,12 @@ export default function Admin() {
                 AI
               </span>
             </a>
-            <span className="text-zinc-700 text-xs">·</span>
-            <span className="text-zinc-400 text-xs font-medium">Admin Panel</span>
+            <span className="text-zinc-700 text-sm">·</span>
+            <span className="text-zinc-400 text-xs md:text-sm font-medium">Admin Panel</span>
           </div>
           <button
             onClick={() => setIsAuthenticated(false)}
-            className="text-xs text-zinc-400 hover:text-white transition-colors"
+            className="text-xs md:text-sm text-zinc-400 hover:text-white transition-colors cursor-pointer"
           >
             Logout
           </button>

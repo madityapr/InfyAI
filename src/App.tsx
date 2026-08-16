@@ -192,16 +192,16 @@ export default function App() {
 
       {/* ── Liquid Glass Nav Bar ── */}
       <nav className="nav-glow sticky top-0 z-20">
-        <div className="max-w-4xl mx-auto px-5 md:px-8 h-14 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 min-w-0">
-            <a href="/" className="flex items-center gap-2.5 group">
+        <div className="max-w-4xl mx-auto px-5 md:px-8 h-16 md:h-18 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5 min-w-0">
+            <a href="/" className="flex items-center gap-3 group">
               <img
                 src={navLogo}
                 alt="infyAI"
-                className="h-8 w-auto object-contain drop-shadow-[0_0_12px_rgba(34,211,238,0.45)] group-hover:scale-105 transition-transform"
+                className="h-9 md:h-10 w-auto object-contain drop-shadow-[0_0_14px_rgba(34,211,238,0.5)] group-hover:scale-105 transition-transform"
               />
               <span
-                className="text-base font-extrabold tracking-tight"
+                className="text-lg md:text-xl font-extrabold tracking-tight"
                 style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
               >
                 <span className="text-white">infy</span>
@@ -215,14 +215,14 @@ export default function App() {
                 </span>
               </span>
             </a>
-            <span className="hidden sm:block text-zinc-700 text-xs">·</span>
-            <span className="hidden sm:block text-zinc-400 text-xs tracking-wide truncate">
+            <span className="hidden sm:block text-zinc-700 text-sm">·</span>
+            <span className="hidden sm:block text-zinc-400 text-xs md:text-sm tracking-wide truncate">
               Free AI tools, curated for builders.
             </span>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
-            <span className="pulse-dot-cyan w-1.5 h-1.5 rounded-full inline-block" />
-            <span className="text-zinc-300 text-xs tabular-nums font-semibold">
+            <span className="pulse-dot-cyan w-2 h-2 rounded-full inline-block" />
+            <span className="text-zinc-300 text-xs md:text-sm tabular-nums font-semibold">
               {tools.length} tools
             </span>
           </div>
