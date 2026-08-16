@@ -36,6 +36,14 @@ export type PricingFilter = (typeof PRICING_OPTIONS)[number]
 
 export const tools: Tool[] = [
   {
+    name: "IdeaHunter",
+    description: "AI startup idea research for validating demand, buyer pain, MVP scope, and monetization paths",
+    category: "Research",
+    pricing: "Freemium",
+    rating: 4.6,
+    url: "https://ideahunter.today",
+  },
+  {
     name: "Perplexity AI",
     description: "AI-powered search with real-time web access and cited sources",
     category: "Research",
