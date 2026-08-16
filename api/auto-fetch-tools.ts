@@ -192,6 +192,17 @@ function extractWithHeuristics(items: Array<{ title: string; link: string; descr
   for (const item of items) {
     // Look for Show HN or Product launch patterns
     const cleanTitle = item.title.replace(/^Show HN:\s*/i, "").replace(/–.*$/, "").replace(/-.*$/, "").trim()
+    
+    // Skip questions, discussion threads, and error posts
+    if (
+      cleanTitle.includes("?") ||
+      /^(help|issue|problem|broken|why|how|anyone|error|what|my|is it|can someone|local vram)/i.test(cleanTitle) ||
+      cleanTitle.length < 3 ||
+      cleanTitle.length > 35
+    ) {
+      continue
+    }
+
     const words = cleanTitle.split(" ")
     if (words.length > 0 && words.length <= 4) {
       const name = words.join(" ")
