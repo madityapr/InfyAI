@@ -1,5 +1,8 @@
 import { createClient } from "@supabase/supabase-js"
-import { sendEmail } from "./_email"
+
+export const config = {
+  runtime: "edge",
+}
 
 interface SubscriberRecord {
   email: string
@@ -11,53 +14,47 @@ const SUPABASE_KEY =
   process.env.VITE_SUPABASE_ANON_KEY ||
   "sb_publishable_BNP5lzHiffMGrib-0kkZug_JSWUYMCH"
 
-function isAdmin(req: any): boolean {
-  const auth =
-    req.headers?.authorization ||
-    (typeof req.headers?.get === "function" ? req.headers.get("authorization") : null) ||
-    ""
+const BREVO_KEY =
+  process.env.BREVO_API_KEY ||
+  "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"
+
+function isAdmin(req: Request): boolean {
+  const auth = req.headers.get("authorization") || ""
   const adminPassword = process.env.VITE_ADMIN_PASSWORD || "admin123"
   return auth === `Bearer ${adminPassword}`
 }
 
-export default async function handler(req: any, res?: any) {
+export default async function handler(req: Request) {
   // CORS Headers
-  if (res && typeof res.setHeader === "function") {
-    res.setHeader("Access-Control-Allow-Origin", "*")
-    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS")
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization")
-  }
-
   if (req.method === "OPTIONS") {
-    if (res && typeof res.status === "function") return res.status(200).end()
-    return new Response(null, { status: 200 })
+    return new Response(null, {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      },
+    })
   }
 
   if (!isAdmin(req)) {
-    const resp = { error: "Unauthorized" }
-    if (res && typeof res.status === "function") return res.status(401).json(resp)
-    return new Response(JSON.stringify(resp), { status: 401, headers: { "Content-Type": "application/json" } })
+    return new Response(JSON.stringify({ error: "Unauthorized" }), {
+      status: 401,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+    })
   }
 
   try {
-    let body = req.body
-    if (typeof body === "string") {
-      try {
-        body = JSON.parse(body)
-      } catch {}
-    } else if (!body && typeof req.json === "function") {
-      body = await req.json().catch(() => ({}))
-    }
-
+    const body = await req.json().catch(() => ({}))
     const { subject, htmlContent } = body || {}
 
     if (!subject || !htmlContent) {
-      const resp = { error: "Subject and content are required" }
-      if (res && typeof res.status === "function") return res.status(400).json(resp)
-      return new Response(JSON.stringify(resp), { status: 400, headers: { "Content-Type": "application/json" } })
+      return new Response(JSON.stringify({ error: "Subject and content are required" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      })
     }
 
-    // Fetch all active subscribers
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
     const { data, error: fetchError } = await supabase
       .from("subscribers")
@@ -65,60 +62,65 @@ export default async function handler(req: any, res?: any) {
       .eq("is_active", true)
 
     if (fetchError) {
-      const resp = { error: fetchError.message }
-      if (res && typeof res.status === "function") return res.status(500).json(resp)
-      return new Response(JSON.stringify(resp), { status: 500, headers: { "Content-Type": "application/json" } })
+      return new Response(JSON.stringify({ error: fetchError.message }), {
+        status: 500,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      })
     }
 
     const subscribers = (data || []) as SubscriberRecord[]
-
     if (subscribers.length === 0) {
-      const resp = { error: "No active subscribers found" }
-      if (res && typeof res.status === "function") return res.status(400).json(resp)
-      return new Response(JSON.stringify(resp), { status: 400, headers: { "Content-Type": "application/json" } })
-    }
-
-    const emails: string[] = []
-    for (let i = 0; i < subscribers.length; i++) {
-      const record = subscribers[i]
-      if (record && record.email) {
-        emails.push(record.email)
-      }
+      return new Response(JSON.stringify({ error: "No active subscribers found" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      })
     }
 
     let sentCount = 0
     const errors: string[] = []
 
-    for (const email of emails) {
+    for (const sub of subscribers) {
       try {
-        const sendRes = await sendEmail({
-          to: email,
-          subject,
-          html: htmlContent,
+        const brevoRes = await fetch("https://api.brevo.com/v3/smtp/email", {
+          method: "POST",
+          headers: {
+            "api-key": BREVO_KEY,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            sender: { name: "infyAI", email: "contact.infyai@gmail.com" },
+            to: [{ email: sub.email }],
+            subject,
+            htmlContent,
+          }),
         })
 
-        if (sendRes.success) {
+        if (brevoRes.ok) {
           sentCount++
         } else {
-          errors.push(`${email}: ${sendRes.error || "Failed"}`)
+          const errData = await brevoRes.json().catch(() => ({}))
+          errors.push(`${sub.email}: ${errData.message || "Brevo failed"}`)
         }
       } catch (err: any) {
-        errors.push(`${email}: ${err.message}`)
+        errors.push(`${sub.email}: ${err.message}`)
       }
     }
 
-    const result = {
-      message: `Update processed: delivered to ${sentCount} of ${emails.length} subscriber(s).`,
-      errors: errors.length > 0 ? errors : undefined,
-    }
-
-    if (res && typeof res.status === "function") return res.status(200).json(result)
-    return new Response(JSON.stringify(result), { status: 200, headers: { "Content-Type": "application/json" } })
+    return new Response(
+      JSON.stringify({
+        message: `Update processed: delivered to ${sentCount} of ${subscribers.length} subscriber(s).`,
+        errors: errors.length > 0 ? errors : undefined,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      }
+    )
   } catch (err: any) {
-    const resp = { error: err.message || "Internal server error" }
-    if (res && typeof res.status === "function") return res.status(500).json(resp)
-    return new Response(JSON.stringify(resp), { status: 500, headers: { "Content-Type": "application/json" } })
+    return new Response(JSON.stringify({ error: err.message || "Internal server error" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+    })
   }
 }
-
-export { handler as POST }
