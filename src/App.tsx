@@ -33,7 +33,9 @@ export default function App() {
   const [subscribing, setSubscribing] = useState(false)
   const [subscribeMessage, setSubscribeMessage] = useState("")
   const [tools, setTools] = useState<Tool[]>(fallbackTools)
+  const [showNavBrand, setShowNavBrand] = useState(false)
   const bgVideoRef = useRef<HTMLDivElement>(null)
+  const heroTitleRef = useRef<HTMLHeadingElement>(null)
 
   // Fetch tools from Supabase and deduplicate
   useEffect(() => {
@@ -78,6 +80,27 @@ export default function App() {
     update()
     window.addEventListener("scroll", update, { passive: true })
     return () => window.removeEventListener("scroll", update)
+  }, [])
+
+  // Scroll-based reveal for infyAI text in sticky header
+  useEffect(() => {
+    const el = heroTitleRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // When hero title is intersecting (visible), keep header text hidden
+        // When hero title is scrolled out of view, smoothly reveal header text
+        setShowNavBrand(!entry.isIntersecting)
+      },
+      {
+        threshold: 0,
+        rootMargin: "-64px 0px 0px 0px", // triggers when hero title scrolls past the sticky header
+      }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [])
 
   const filtered = useMemo(() => {
@@ -194,12 +217,34 @@ export default function App() {
       <nav className="nav-glow sticky top-0 z-20">
         <div className="max-w-4xl mx-auto px-5 md:px-8 h-16 md:h-18 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3.5 min-w-0">
-            <a href="/" className="flex items-center group">
+            <a href="/" className="flex items-center gap-2.5 group">
               <img
                 src={navLogo}
                 alt="infyAI"
-                className="h-9 md:h-10 w-auto object-contain drop-shadow-[0_0_14px_rgba(34,211,238,0.5)] group-hover:scale-105 transition-transform"
+                className="h-9 md:h-10 w-auto object-contain drop-shadow-[0_0_14px_rgba(34,211,238,0.5)] group-hover:scale-105 transition-transform flex-shrink-0"
               />
+              <div
+                className={`overflow-hidden transition-all duration-300 ease-out flex items-center ${
+                  showNavBrand
+                    ? "opacity-100 max-w-[120px] translate-x-0 scale-100 pointer-events-auto"
+                    : "opacity-0 max-w-0 -translate-x-2 scale-95 pointer-events-none"
+                }`}
+              >
+                <span
+                  className="text-lg md:text-xl font-extrabold tracking-tight whitespace-nowrap"
+                  style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
+                >
+                  <span className="text-white">infy</span>
+                  <span
+                    className="bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage: "linear-gradient(125deg, #00F5D4 0%, #00EBFF 42%, #00B4D8 75%, #0284C7 100%)",
+                    }}
+                  >
+                    AI
+                  </span>
+                </span>
+              </div>
             </a>
             <span className="hidden sm:block text-zinc-700 text-sm">·</span>
             <span className="hidden sm:block text-zinc-400 text-xs md:text-sm tracking-wide truncate">
@@ -221,6 +266,7 @@ export default function App() {
           <div className="flex flex-col items-start gap-4">
             {/* Bright, clean wordmark without any dark spots */}
             <h1
+              ref={heroTitleRef}
               className="text-[clamp(52px,11vw,104px)] font-extrabold leading-none tracking-[-0.04em]"
               style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
             >
