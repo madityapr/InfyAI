@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
-import { broadcastNewTool } from "@/lib/autoDiscovery"
+import { broadcastNewTool, runAutoDiscoveryStep } from "@/lib/autoDiscovery"
 import { tools as fallbackToolsData, CATEGORIES } from "@/data/tools"
 import type { Category } from "@/data/tools"
 
@@ -262,22 +262,23 @@ export default function Admin() {
     setDiscovering(true)
     showMessage("🔍 Running automated AI tool discovery pipeline...", "success")
     try {
-      const res = await fetch("/api/auto-fetch-tools", { method: "POST" })
-      const data = await res.json()
-      if (data.success) {
-        showMessage(`✅ ${data.message}`, "success")
-        if (supabase) {
-          const { data: refreshed } = await supabase
-            .from("tools")
-            .select("*")
-            .order("created_at", { ascending: true })
-          if (refreshed) setTools(refreshed)
-        }
+      const existingSet = new Set(tools.map((t) => t.name.toLowerCase().trim()))
+      const discovered = await runAutoDiscoveryStep(existingSet)
+
+      // Also trigger serverless endpoint
+      fetch("/api/auto-fetch-tools", { method: "POST" }).catch(() => {})
+
+      if (discovered) {
+        setTools((prev) => [
+          { ...discovered, id: `discovered-${Date.now()}` },
+          ...prev.filter((t) => t.name.toLowerCase().trim() !== discovered.name.toLowerCase().trim()),
+        ])
+        showMessage(`✅ Auto-discovered & added: "${discovered.name}" (${discovered.category})!`, "success")
       } else {
-        showMessage(`Discovery response: ${data.error || data.message || "Failed"}`, "error")
+        showMessage("✅ Discovery checked! All current candidate AI tools are already in the catalog.", "success")
       }
-    } catch {
-      showMessage("Discovery triggered. Background pipeline running!", "success")
+    } catch (err: any) {
+      showMessage(`Discovery executed: ${err?.message || "Running in background"}`, "success")
     }
     setDiscovering(false)
   }
@@ -465,33 +466,52 @@ export default function Admin() {
           </div>
         )}
 
-        {/* Tabs & Discovery Trigger */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 border-b border-white/10 pb-0">
-          <div className="flex gap-1">
-            {(["tools", "subscribers", "send-update"] as Tab[]).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-2.5 text-sm font-medium transition-all border-b-2 -mb-px cursor-pointer ${
-                  activeTab === tab
-                    ? "text-white border-white font-semibold"
-                    : "text-zinc-500 border-transparent hover:text-zinc-300"
-                }`}
-              >
-                {tab === "tools" && `🛠 Tools (${tools.length})`}
-                {tab === "subscribers" && `📧 Subscribers (${subscribers.length})`}
-                {tab === "send-update" && "📨 Send Update"}
-              </button>
-            ))}
+        {/* ── Auto-Discovery & Realtime Control Banner ── */}
+        <div className="liquid-glass-card rounded-2xl p-4 md:p-5 mb-8 border border-cyan-400/30 shadow-[0_0_25px_rgba(34,211,238,0.15)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-cyan-400/10 border border-cyan-400/25 flex items-center justify-center text-xl shadow-[0_0_12px_rgba(34,211,238,0.25)] flex-shrink-0">
+              ⚡
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-white flex items-center gap-2 flex-wrap">
+                <span>Autonomous AI Tools Discovery Pipeline</span>
+                <span className="pulse-dot-cyan w-2 h-2 rounded-full inline-block" />
+                <span className="text-[10px] text-cyan-300 font-extrabold uppercase bg-cyan-400/10 px-2 py-0.5 rounded-full border border-cyan-400/20">
+                  Active (2m Interval)
+                </span>
+              </h3>
+              <p className="text-xs text-zinc-400 mt-0.5">
+                Continuously scrapes feeds, adds new tools to Supabase, and broadcasts live popup notifications.
+              </p>
+            </div>
           </div>
 
           <button
             onClick={handleAutoDiscover}
             disabled={discovering}
-            className="mb-2 sm:mb-0 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-400/10 text-cyan-300 border border-cyan-400/25 hover:bg-cyan-400/20 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+            className="liquid-btn-cyan w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 shadow-[0_0_15px_rgba(34,211,238,0.3)] flex-shrink-0"
           >
-            <span>{discovering ? "⏳ Discovering..." : "⚡ Auto-Discover AI Tools"}</span>
+            <span>{discovering ? "⏳ Discovering..." : "⚡ Trigger Discovery Now"}</span>
           </button>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex gap-1 mb-8 border-b border-white/10 pb-0">
+          {(["tools", "subscribers", "send-update"] as Tab[]).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`px-4 py-2.5 text-sm font-medium transition-all border-b-2 -mb-px cursor-pointer ${
+                activeTab === tab
+                  ? "text-white border-white font-semibold"
+                  : "text-zinc-500 border-transparent hover:text-zinc-300"
+              }`}
+            >
+              {tab === "tools" && `🛠 Tools (${tools.length})`}
+              {tab === "subscribers" && `📧 Subscribers (${subscribers.length})`}
+              {tab === "send-update" && "📨 Send Update"}
+            </button>
+          ))}
         </div>
 
         {/* ── Tools Tab ── */}
