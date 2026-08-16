@@ -5,6 +5,7 @@ import FilterPill from "@/components/FilterPill"
 import ToolRow from "@/components/ToolRow"
 import RealtimeToast from "@/components/RealtimeToast"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
+import { initRealtimeFeed, startAutoDiscoveryDaemon } from "@/lib/autoDiscovery"
 import navLogo from "@/imports/nav-logo.png"
 import heroVideo from "@/imports/hero-video.mp4"
 
@@ -69,34 +70,36 @@ export default function App() {
         }
       })
 
-    // Supabase Realtime channel listener for instant INSERT notifications
-    const channel = supabase
-      .channel("tools-realtime-feed")
-      .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "tools" },
-        (payload) => {
-          const newTool = payload.new as Tool
-          if (!newTool || !newTool.name) return
+    // Handler when any new tool is discovered or added
+    const handleIncomingNewTool = (newTool: Tool) => {
+      if (!newTool || !newTool.name) return
 
-          setTools((prev) => {
-            const key = newTool.name.toLowerCase().trim()
-            if (prev.some((t) => t.name.toLowerCase().trim() === key)) return prev
-            return [newTool, ...prev]
-          })
+      setTools((prev) => {
+        const key = newTool.name.toLowerCase().trim()
+        if (prev.some((t) => t.name.toLowerCase().trim() === key)) return prev
+        return [newTool, ...prev]
+      })
 
-          setRealtimeTool({
-            name: newTool.name,
-            category: newTool.category,
-            pricing: newTool.pricing,
-            url: newTool.url,
-          })
-        }
-      )
-      .subscribe()
+      setRealtimeTool({
+        name: newTool.name,
+        category: newTool.category,
+        pricing: newTool.pricing,
+        url: newTool.url,
+      })
+    }
+
+    // 1. Initialize Realtime Feed (PostgreSQL inserts + Realtime Broadcasts + Cross-tab messages)
+    const cleanupRealtime = initRealtimeFeed(handleIncomingNewTool)
+
+    // 2. Start continuous 2-minute Auto-Discovery background pipeline
+    const cleanupDiscovery = startAutoDiscoveryDaemon(
+      () => new Set(tools.map((t) => t.name.toLowerCase().trim())),
+      handleIncomingNewTool
+    )
 
     return () => {
-      supabase.removeChannel(channel)
+      cleanupRealtime()
+      cleanupDiscovery?.()
     }
   }, [])
 

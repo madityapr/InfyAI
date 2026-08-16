@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
+import { broadcastNewTool } from "@/lib/autoDiscovery"
 import { tools as fallbackToolsData, CATEGORIES } from "@/data/tools"
 import type { Category } from "@/data/tools"
 
@@ -178,6 +179,7 @@ export default function Admin() {
         if (error) {
           showMessage(`Error adding tool: ${error.message}`, "error")
         } else {
+          broadcastNewTool(toolForm as any)
           showMessage(`"${toolForm.name}" added successfully!`, "success")
           setToolForm(EMPTY_TOOL)
           fetchTools()
