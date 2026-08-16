@@ -1,5 +1,5 @@
 export function generateWelcomeEmailHtml(subscriberEmail: string, originUrl?: string): string {
-  const domain = originUrl || "https://infyai.com"
+  const domain = originUrl || "https://infy-ai.vercel.app"
   
   return `<!DOCTYPE html>
 <html lang="en">

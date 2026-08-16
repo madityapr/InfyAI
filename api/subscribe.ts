@@ -15,7 +15,7 @@ const BREVO_KEY =
   "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"
 
 function generateEmailHtml(subscriberEmail: string, originUrl?: string): string {
-  const domain = originUrl || "https://infyai.com"
+  const domain = originUrl || "https://infy-ai.vercel.app"
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,7 +126,7 @@ export default async function handler(req: Request) {
     // 2. Brevo Email Dispatch
     let emailStatus = { sent: false, note: "" }
     try {
-      const origin = req.headers.get("origin") || "https://infyai.com"
+      const origin = req.headers.get("origin") || "https://infy-ai.vercel.app"
       const htmlContent = generateEmailHtml(email, origin)
 
       const brevoRes = await fetch("https://api.brevo.com/v3/smtp/email", {

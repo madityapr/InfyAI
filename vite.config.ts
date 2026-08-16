@@ -420,7 +420,7 @@ function devApiMiddlewarePlugin(env: Record<string, string>): Plugin {
                       'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                      from: env.RESEND_FROM_EMAIL || 'infyAI <updates@infyai.com>',
+                      from: env.RESEND_FROM_EMAIL || 'infyAI <contact.infyai@gmail.com>',
                       to: [email],
                       subject: 'Welcome to infyAI! 🚀 Your curated AI toolkit',
                       html: emailHtml,
@@ -515,7 +515,7 @@ function devApiMiddlewarePlugin(env: Record<string, string>): Plugin {
                       'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                      from: env.RESEND_FROM_EMAIL || 'infyAI <updates@infyai.com>',
+                      from: env.RESEND_FROM_EMAIL || 'infyAI <contact.infyai@gmail.com>',
                       to: [sub.email],
                       subject,
                       html: htmlContent,

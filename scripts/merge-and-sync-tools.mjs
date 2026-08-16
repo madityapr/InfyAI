@@ -99,7 +99,7 @@ console.log("Updated src/data/tools.ts")
 // 5. Generate formatted text and JSON files for downloads and public
 let textContent = `================================================================================
 infyAI - Complete List of Curated AI Tools (${allTools.length} Tools)
-Website: https://infyai.com
+Website: https://infy-ai.vercel.app
 ================================================================================\n\n`
 
 allCategories.forEach((cat) => {

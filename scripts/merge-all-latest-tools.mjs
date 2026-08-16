@@ -223,7 +223,7 @@ console.log("Updated src/data/tools.ts")
 // 5. Update downloadable text and JSON files
 let textContent = `================================================================================
 InfyAI - Complete List of Curated AI Tools (${finalTools.length} Tools)
-Website: https://infyai.com
+Website: https://infy-ai.vercel.app
 ================================================================================\n\n`
 
 allCategories.forEach((cat) => {

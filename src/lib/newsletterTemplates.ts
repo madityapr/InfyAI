@@ -45,12 +45,12 @@ export const WEEKLY_UPDATE_TEMPLATE_HTML = `<!DOCTYPE html>
               <table role="presentation" cellpadding="0" cellspacing="0">
                 <tr>
                   <td style="padding-right: 12px;">
-                    <a href="https://infyai.com" style="display: inline-block; padding: 14px 28px; background: linear-gradient(135deg, #00d2ff, #2563eb); color: #ffffff; font-size: 14px; font-weight: 800; text-decoration: none; border-radius: 12px; box-shadow: 0 6px 24px rgba(0, 210, 255, 0.4); letter-spacing: 0.3px;">
+                    <a href="https://infy-ai.vercel.app" style="display: inline-block; padding: 14px 28px; background: linear-gradient(135deg, #00d2ff, #2563eb); color: #ffffff; font-size: 14px; font-weight: 800; text-decoration: none; border-radius: 12px; box-shadow: 0 6px 24px rgba(0, 210, 255, 0.4); letter-spacing: 0.3px;">
                       Browse the Index &rsaquo;
                     </a>
                   </td>
                   <td>
-                    <a href="https://infyai.com" style="display: inline-block; padding: 13px 22px; background: #ffffff; color: #000000; font-size: 14px; font-weight: 800; text-decoration: none; border-radius: 12px; box-shadow: 0 4px 18px rgba(255, 255, 255, 0.2);">
+                    <a href="https://infy-ai.vercel.app" style="display: inline-block; padding: 13px 22px; background: #ffffff; color: #000000; font-size: 14px; font-weight: 800; text-decoration: none; border-radius: 12px; box-shadow: 0 4px 18px rgba(255, 255, 255, 0.2);">
                       ✦ Infy Picks &rsaquo;
                     </a>
                   </td>
@@ -154,7 +154,7 @@ export const WEEKLY_UPDATE_TEMPLATE_HTML = `<!DOCTYPE html>
                     <p style="margin: 0 0 18px; font-size: 14px; color: #cbd5e1;">
                       Filter by coding, video, 3D, copywriting, chatbots, and productivity on infyAI.
                     </p>
-                    <a href="https://infyai.com" style="display: inline-block; padding: 14px 34px; background: #ffffff; color: #000000; font-size: 14px; font-weight: 800; text-decoration: none; border-radius: 12px; box-shadow: 0 6px 24px rgba(255, 255, 255, 0.3);">
+                    <a href="https://infy-ai.vercel.app" style="display: inline-block; padding: 14px 34px; background: #ffffff; color: #000000; font-size: 14px; font-weight: 800; text-decoration: none; border-radius: 12px; box-shadow: 0 6px 24px rgba(255, 255, 255, 0.3);">
                       Open Full Directory &rarr;
                     </a>
                   </td>
@@ -192,7 +192,7 @@ export const WEEKLY_UPDATE_TEMPLATE_HTML = `<!DOCTYPE html>
                 © 2026 infyAI &bull; Free AI Tools, Curated for Builders
               </p>
               <p style="margin: 0; font-size: 11px; color: #52525b;">
-                You received this because you subscribed at <a href="https://infyai.com" style="color: #a1a1aa; text-decoration: underline;">infyai.com</a>.
+                You received this because you subscribed at <a href="https://infy-ai.vercel.app" style="color: #a1a1aa; text-decoration: underline;">infy-ai.vercel.app</a>.
               </p>
             </td>
           </tr>
