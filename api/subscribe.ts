@@ -1,15 +1,15 @@
 import { createClient } from "@supabase/supabase-js"
 import { generateWelcomeEmailHtml } from "../src/lib/welcomeEmail"
+import { sendEmail } from "./_email"
 
-const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || ""
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || ""
-const resendApiKey = process.env.RESEND_API_KEY || ""
+const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "https://eemhvfqldhkcdbsbibgo.supabase.co"
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_BNP5lzHiffMGrib-0kkZug_JSWUYMCH"
 
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
+    const body = await req.json().catch(() => ({}))
     const email = (body.email || "").trim().toLowerCase()
 
     if (!email || !email.includes("@")) {
@@ -31,50 +31,35 @@ export async function POST(req: Request) {
           // Already exists in table
           isNewSubscriber = false
         } else {
-          console.error("Supabase insert error:", error)
-          // If error is not duplicate, return error
-          return new Response(JSON.stringify({ error: error.message }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-          })
+          console.warn("Supabase insert warning:", error.message)
         }
       }
     }
 
-    // 2. Send Welcome Email via Resend
+    // 2. Send Welcome Email via Brevo / Resend
     let emailStatus = { sent: false, note: "" }
-    if (resendApiKey) {
-      try {
-        const emailHtml = generateWelcomeEmailHtml(email, req.headers.get("origin") || undefined)
-        
-        const res = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${resendApiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            from: process.env.RESEND_FROM_EMAIL || "infyAI <updates@infyai.com>",
-            to: [email],
-            subject: "Welcome to infyAI! 🚀 Your curated AI toolkit",
-            html: emailHtml,
-          }),
-        })
+    try {
+      const emailHtml = generateWelcomeEmailHtml(email, req.headers.get("origin") || undefined)
+      const sendResult = await sendEmail({
+        to: email,
+        subject: "Welcome to infyAI! 🚀 Your curated AI toolkit",
+        html: emailHtml,
+      })
 
-        const resData = await res.json()
-        if (res.ok) {
-          emailStatus = { sent: true, note: "Welcome email delivered to your inbox!" }
-        } else {
-          console.warn("Resend email response:", resData)
-          emailStatus = { 
-            sent: false, 
-            note: resData.message || "Email could not be delivered (check domain configuration in Resend)." 
-          }
+      if (sendResult.success) {
+        emailStatus = {
+          sent: true,
+          note: `Welcome email delivered via ${sendResult.provider || "email service"}!`,
         }
-      } catch (err: any) {
-        console.error("Resend fetch error:", err)
-        emailStatus = { sent: false, note: err.message || "Failed to send email" }
+      } else {
+        emailStatus = {
+          sent: false,
+          note: sendResult.error || "Email not sent (configure BREVO_API_KEY).",
+        }
       }
+    } catch (err: any) {
+      console.error("Welcome email error:", err)
+      emailStatus = { sent: false, note: err.message || "Failed to dispatch email" }
     }
 
     const message = isNewSubscriber
@@ -96,7 +81,7 @@ export async function POST(req: Request) {
       }
     )
   } catch (err: any) {
-    console.error("Handler error:", err)
+    console.error("Subscribe handler error:", err)
     return new Response(JSON.stringify({ error: err.message || "Internal server error" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

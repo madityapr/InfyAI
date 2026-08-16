@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
+import { sendEmail } from "./_email"
 
 interface SubscriberRecord {
   email: string
@@ -6,7 +7,6 @@ interface SubscriberRecord {
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "https://eemhvfqldhkcdbsbibgo.supabase.co"
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_BNP5lzHiffMGrib-0kkZug_JSWUYMCH"
-const resendApiKey = process.env.RESEND_API_KEY || ""
 
 const supabase = createClient(supabaseUrl, supabaseKey)
 
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     })
   }
 
-  const body = await req.json()
+  const body = await req.json().catch(() => ({}))
   const { subject, htmlContent } = body
 
   if (!subject || !htmlContent) {
@@ -56,13 +56,6 @@ export async function POST(req: Request) {
     )
   }
 
-  if (!resendApiKey) {
-    return new Response(
-      JSON.stringify({ error: "Resend API key is missing. Add RESEND_API_KEY to environment." }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    )
-  }
-
   const emails: string[] = []
   for (let i = 0; i < subscribers.length; i++) {
     const record = subscribers[i]
@@ -76,25 +69,16 @@ export async function POST(req: Request) {
 
   for (const email of emails) {
     try {
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: process.env.RESEND_FROM_EMAIL || "infyAI <updates@infyai.com>",
-          to: [email],
-          subject,
-          html: htmlContent,
-        }),
+      const res = await sendEmail({
+        to: email,
+        subject,
+        html: htmlContent,
       })
 
-      const resData = await res.json()
-      if (res.ok) {
+      if (res.success) {
         sentCount++
       } else {
-        errors.push(`${email}: ${resData.message || "Failed"}`)
+        errors.push(`${email}: ${res.error || "Failed"}`)
       }
     } catch (err: any) {
       errors.push(`${email}: ${err.message}`)
@@ -103,7 +87,7 @@ export async function POST(req: Request) {
 
   return new Response(
     JSON.stringify({
-      message: `Update processed: sent to ${sentCount} of ${emails.length} subscriber(s).`,
+      message: `Update processed: delivered to ${sentCount} of ${emails.length} subscriber(s).`,
       errors: errors.length > 0 ? errors : undefined,
     }),
     { status: 200, headers: { "Content-Type": "application/json" } }

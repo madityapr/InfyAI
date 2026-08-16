@@ -405,11 +405,17 @@ export default function Admin() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: targetEmail }),
       })
-      const data = await res.json()
+      let data: any = {}
+      try {
+        data = await res.json()
+      } catch {
+        const text = await res.text().catch(() => "")
+        data = { message: text || "Server responded" }
+      }
       if (data.emailSent) {
         showMessage(`Welcome email delivered to ${targetEmail}!`, "success")
       } else {
-        showMessage(data.emailNote || data.message || "Email request processed.", data.emailSent ? "success" : "error")
+        showMessage(data.emailNote || data.message || data.error || "Email request processed.", data.emailSent ? "success" : "error")
       }
     } catch (err: any) {
       showMessage(err.message || "Failed to trigger email", "error")
@@ -443,16 +449,23 @@ export default function Admin() {
         }),
       })
 
-      const data = await res.json()
+      let data: any = {}
+      try {
+        data = await res.json()
+      } catch {
+        const text = await res.text().catch(() => "")
+        data = { error: text || "Server returned non-JSON response" }
+      }
+
       if (res.ok) {
-        showMessage(data.message, "success")
+        showMessage(data.message || "Update sent successfully!", "success")
         setEmailSubject("")
         setEmailContent("")
       } else {
         showMessage(data.error || "Failed to send", "error")
       }
-    } catch {
-      showMessage("Network error. Make sure API routes are deployed.", "error")
+    } catch (err: any) {
+      showMessage(err.message || "Network error. Make sure API routes are deployed.", "error")
     }
     setSending(false)
   }
