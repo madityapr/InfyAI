@@ -449,11 +449,11 @@ export default function App() {
       </main>
 
       {/* ── Subscribe Section with Cyan CTA Button ── */}
-      <section className="relative z-10 py-12 px-5 md:px-8">
-        <div className="max-w-4xl mx-auto">
-          <div className="liquid-glass-card rounded-3xl p-8 md:p-12 text-center shadow-2xl">
+      <section className="relative z-10 py-8 px-4 sm:px-6">
+        <div className="max-w-xl mx-auto">
+          <div className="liquid-glass-card rounded-2xl p-6 sm:p-7 md:p-8 text-center shadow-2xl border border-white/10">
             <h2
-              className="text-2xl md:text-3xl font-extrabold mb-3"
+              className="text-2xl sm:text-[26px] font-extrabold mb-1.5 tracking-tight"
               style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
             >
               <span className="text-white">Subscribe to infy</span>
@@ -466,11 +466,11 @@ export default function App() {
                 AI
               </span>
             </h2>
-            <p className="text-zinc-300 text-sm md:text-base mb-6 max-w-md mx-auto">
+            <p className="text-zinc-400 text-xs sm:text-sm mb-5 max-w-sm mx-auto leading-relaxed">
               Free forever. Get the latest AI tools, updates, and weekly curated picks delivered to your inbox.
             </p>
 
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row items-center justify-center gap-2.5 max-w-md mx-auto">
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -478,12 +478,12 @@ export default function App() {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={subscribing}
                 required
-                className="w-full sm:flex-1 liquid-glass-input rounded-xl px-4 py-3.5 text-sm text-white placeholder:text-zinc-400 focus:outline-none disabled:opacity-60"
+                className="w-full sm:flex-1 liquid-glass-input rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none disabled:opacity-60"
               />
               <button
                 type="submit"
                 disabled={subscribing}
-                className="liquid-btn-cyan w-full sm:w-auto px-7 py-3.5 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2"
+                className="liquid-btn-cyan w-full sm:w-auto px-6 py-2.5 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-60 flex items-center justify-center gap-2 shrink-0"
               >
                 {subscribing ? (
                   <span>Subscribing...</span>
@@ -496,28 +496,28 @@ export default function App() {
             </form>
 
             {subscribeMessage && (
-              <div className="mt-4 inline-block px-4 py-2 rounded-xl text-xs font-semibold bg-cyan-400/10 text-cyan-300 border border-cyan-400/25 animate-fade-in">
+              <div className="mt-3.5 inline-block px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-cyan-400/10 text-cyan-300 border border-cyan-400/25 animate-fade-in">
                 {subscribeMessage}
               </div>
             )}
 
             {/* Stats row */}
-            <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mt-8 pt-6 border-t border-white/[0.08]">
+            <div className="grid grid-cols-4 gap-2 mt-5 pt-4 border-t border-white/[0.08]">
               <div className="text-center">
-                <span className="text-xl md:text-2xl font-extrabold text-cyan-400">{tools.length}+</span>
-                <span className="block text-[11px] text-zinc-400 uppercase tracking-widest mt-0.5 font-semibold">Tools</span>
+                <span className="text-lg sm:text-xl font-extrabold text-cyan-400">{tools.length}+</span>
+                <span className="block text-[10px] text-zinc-400 uppercase tracking-wider mt-0.5 font-semibold">Tools</span>
               </div>
               <div className="text-center">
-                <span className="text-xl md:text-2xl font-extrabold text-cyan-400">{CATEGORIES.length}+</span>
-                <span className="block text-[11px] text-zinc-400 uppercase tracking-widest mt-0.5 font-semibold">Categories</span>
+                <span className="text-lg sm:text-xl font-extrabold text-cyan-400">{CATEGORIES.length}+</span>
+                <span className="block text-[10px] text-zinc-400 uppercase tracking-wider mt-0.5 font-semibold">Categories</span>
               </div>
               <div className="text-center">
-                <span className="text-xl md:text-2xl font-extrabold text-cyan-400">Weekly</span>
-                <span className="block text-[11px] text-zinc-400 uppercase tracking-widest mt-0.5 font-semibold">Updates</span>
+                <span className="text-lg sm:text-xl font-extrabold text-cyan-400">Weekly</span>
+                <span className="block text-[10px] text-zinc-400 uppercase tracking-wider mt-0.5 font-semibold">Updates</span>
               </div>
               <div className="text-center">
-                <span className="text-xl md:text-2xl font-extrabold text-cyan-400">Free</span>
-                <span className="block text-[11px] text-zinc-400 uppercase tracking-widest mt-0.5 font-semibold">Forever</span>
+                <span className="text-lg sm:text-xl font-extrabold text-cyan-400">Free</span>
+                <span className="block text-[10px] text-zinc-400 uppercase tracking-wider mt-0.5 font-semibold">Forever</span>
               </div>
             </div>
           </div>
