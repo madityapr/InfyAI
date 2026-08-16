@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js"
-import { generateWelcomeEmailHtml } from "../src/lib/welcomeEmail"
+import { generateWelcomeEmailHtml } from "./_welcomeEmail"
 import { sendEmail } from "./_email"
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "https://eemhvfqldhkcdbsbibgo.supabase.co"
