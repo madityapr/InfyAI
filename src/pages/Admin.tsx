@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
 import { broadcastNewTool, runAutoDiscoveryStep } from "@/lib/autoDiscovery"
 import { tools as fallbackToolsData, CATEGORIES } from "@/data/tools"
+import { WEEKLY_UPDATE_TEMPLATE_SUBJECT, WEEKLY_UPDATE_TEMPLATE_HTML } from "@/lib/newsletterTemplates"
 import type { Category } from "@/data/tools"
 
 type Pricing = "Free" | "Freemium" | "Paid"
@@ -991,58 +992,97 @@ export default function Admin() {
 
         {/* ── Send Update Tab ── */}
         {activeTab === "send-update" && (
-          <div className="max-w-2xl">
+          <div className="max-w-3xl">
             <div className="border border-white/10 rounded-2xl p-6 md:p-8 bg-white/[0.02]">
-              <h3 className="text-sm font-semibold text-white mb-1">Compose Email Update</h3>
-              <p className="text-xs text-zinc-500 mb-6">
-                This will be sent to {subscribers.filter((s) => s.is_active).length} active subscriber(s) via Resend.
-              </p>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div>
+                  <h3 className="text-base font-bold text-white mb-0.5">Compose Email Update</h3>
+                  <p className="text-xs text-zinc-400">
+                    Delivered to <strong className="text-cyan-300">{subscribers.filter((s) => s.is_active).length} active subscriber(s)</strong> via Brevo (300 free/day).
+                  </p>
+                </div>
+
+                {/* Preset Template Loader */}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setEmailSubject(WEEKLY_UPDATE_TEMPLATE_SUBJECT)
+                      setEmailContent(WEEKLY_UPDATE_TEMPLATE_HTML)
+                      showMessage("Loaded '350+ AI Tools. One Place.' template!", "success")
+                    }}
+                    className="px-3 py-1.5 rounded-xl text-xs font-semibold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 hover:bg-emerald-900/80 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+                  >
+                    <span>⚡</span> Load Hero Template
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText(WEEKLY_UPDATE_TEMPLATE_HTML)
+                      showMessage("Copied template HTML to clipboard!", "success")
+                    }}
+                    className="px-2.5 py-1.5 rounded-xl text-xs font-medium text-zinc-400 hover:text-white bg-white/[0.04] hover:bg-white/10 border border-white/10 transition-all cursor-pointer"
+                    title="Copy Raw HTML to clipboard"
+                  >
+                    📋 Copy HTML
+                  </button>
+                </div>
+              </div>
 
               <form onSubmit={handleSendUpdate} className="space-y-4">
                 <div>
-                  <label className="block text-xs text-zinc-400 mb-1.5">Subject</label>
+                  <label className="block text-xs font-semibold text-zinc-300 mb-1.5">Email Subject</label>
                   <input
                     type="text"
-                    placeholder="🚀 New AI Tools This Week"
+                    placeholder="350+ AI Tools. One Place. 🚀 infyAI Weekly Drop"
                     value={emailSubject}
                     onChange={(e) => setEmailSubject(e.target.value)}
                     required
-                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input"
+                    className="w-full bg-white/[0.04] rounded-xl px-3.5 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs text-zinc-400 mb-1.5">
-                    Email Content (HTML supported)
-                  </label>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-xs font-semibold text-zinc-300">
+                      Email Content (HTML supported)
+                    </label>
+                    <span className="text-[11px] text-zinc-500">Full HTML or standard text</span>
+                  </div>
                   <textarea
-                    placeholder={`<h2>New Tools This Week 🛠</h2>\n<p>Check out the latest AI tools we've added to infyAI:</p>\n<ul>\n  <li><strong>ToolName</strong> — Description</li>\n</ul>\n<p>Visit <a href="https://infyai.com">infyAI</a> to explore!</p>`}
+                    placeholder="Paste or write HTML email content..."
                     value={emailContent}
                     onChange={(e) => setEmailContent(e.target.value)}
                     required
-                    rows={12}
-                    className="w-full bg-white/[0.04] rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input resize-none font-mono"
+                    rows={10}
+                    className="w-full bg-white/[0.04] rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-zinc-500 focus:outline-none border border-white/10 subscribe-input resize-none font-mono leading-relaxed"
                   />
                 </div>
 
-                {/* Preview */}
+                {/* Live Preview */}
                 {emailContent && (
                   <div>
-                    <label className="block text-xs text-zinc-400 mb-1.5">Preview</label>
-                    <div
-                      className="rounded-lg p-4 bg-white text-black text-sm"
-                      dangerouslySetInnerHTML={{ __html: emailContent }}
-                    />
+                    <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
+                      Live Preview
+                    </label>
+                    <div className="rounded-xl border border-white/10 overflow-hidden bg-black max-h-[420px] overflow-y-auto custom-tools-scrollbar">
+                      <div
+                        className="p-2"
+                        dangerouslySetInnerHTML={{ __html: emailContent }}
+                      />
+                    </div>
                   </div>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={sending}
-                  className="subscribe-btn w-full px-6 py-3 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50"
-                >
-                  {sending ? "Sending..." : `Send to ${subscribers.filter((s) => s.is_active).length} Subscriber(s) →`}
-                </button>
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="subscribe-btn w-full px-6 py-3 rounded-xl text-sm font-bold cursor-pointer disabled:opacity-50"
+                  >
+                    {sending ? "Sending..." : `Send to ${subscribers.filter((s) => s.is_active).length} Subscriber(s) →`}
+                  </button>
+                </div>
               </form>
             </div>
           </div>
