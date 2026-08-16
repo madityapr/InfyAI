@@ -1,5 +1,7 @@
 import { createClient } from "@supabase/supabase-js"
 
+export const config = { runtime: "edge" }
+
 const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || "https://eemhvfqldhkcdbsbibgo.supabase.co"
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_BNP5lzHiffMGrib-0kkZug_JSWUYMCH"
 const geminiApiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || ""
@@ -51,8 +53,12 @@ function normalizeKey(str: string): string {
 async function fetchRSSItems(): Promise<Array<{ title: string; link: string; description: string }>> {
   const feeds = [
     "https://hnrss.org/newest?q=AI+OR+LLM+OR+GPT+OR+agent",
+    "https://hnrss.org/newest?q=Show+HN+AI",
     "https://www.producthunt.com/feed",
-    "https://techcrunch.com/category/artificial-intelligence/feed/"
+    "https://techcrunch.com/category/artificial-intelligence/feed/",
+    "https://venturebeat.com/category/ai/feed/",
+    "https://www.reddit.com/r/LocalLLaMA/new/.rss",
+    "https://www.reddit.com/r/ArtificialInteligence/new/.rss"
   ]
 
   const items: Array<{ title: string; link: string; description: string }> = []
@@ -60,22 +66,22 @@ async function fetchRSSItems(): Promise<Array<{ title: string; link: string; des
   for (const feed of feeds) {
     try {
       const res = await fetch(feed, {
-        headers: { "User-Agent": "infyAI-Bot/1.0" },
-        signal: AbortSignal.timeout(6000)
+        headers: { "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) infyAI-Bot/2.0" },
+        signal: AbortSignal.timeout(5000)
       })
       if (!res.ok) continue
       const xml = await res.text()
 
       // Basic regex parser for RSS <item> tags
       const itemMatches = xml.match(/<item[\s\S]*?<\/item>/gi) || xml.match(/<entry[\s\S]*?<\/entry>/gi) || []
-      for (const itemXml of itemMatches.slice(0, 8)) {
+      for (const itemXml of itemMatches.slice(0, 15)) {
         const titleMatch = itemXml.match(/<title[^>]*>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/i)
         const linkMatch = itemXml.match(/<link[^>]*>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/link>/i) || itemXml.match(/href="([^"]+)"/i)
         const descMatch = itemXml.match(/<description[^>]*>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/description>/i) || itemXml.match(/<summary[^>]*>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/summary>/i)
 
-        const title = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, "").trim() : ""
+        const title = titleMatch ? titleMatch[1].replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").trim() : ""
         const link = linkMatch ? linkMatch[1].trim() : ""
-        const description = descMatch ? descMatch[1].replace(/<[^>]+>/g, "").trim().slice(0, 300) : ""
+        const description = descMatch ? descMatch[1].replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").trim().slice(0, 300) : ""
 
         if (title && link) {
           items.push({ title, link, description })
@@ -205,6 +211,10 @@ export async function GET() {
 }
 
 export async function POST() {
+  return handleDiscovery()
+}
+
+export default async function handler() {
   return handleDiscovery()
 }
 
