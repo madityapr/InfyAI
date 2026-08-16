@@ -247,8 +247,8 @@ async function handleDiscovery() {
   try {
     // 1. Fetch existing tools from Supabase for deduplication
     const { data: existingDbTools } = await supabase.from("tools").select("name, url")
-    const existingNames = new Set((existingDbTools || []).map((t) => normalizeKey(t.name)))
-    const existingUrls = new Set((existingDbTools || []).map((t) => normalizeKey(t.url || "")))
+    const existingNames = new Set((existingDbTools || []).map((t: any) => normalizeKey(t.name || "")))
+    const existingUrls = new Set((existingDbTools || []).map((t: any) => normalizeKey(t.url || "")))
 
     // 2. Fetch raw feeds
     const rawItems = await fetchRSSItems()
