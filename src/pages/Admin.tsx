@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
 import { broadcastNewTool, runAutoDiscoveryStep } from "@/lib/autoDiscovery"
 import { tools as fallbackToolsData, CATEGORIES } from "@/data/tools"
@@ -28,9 +28,9 @@ interface Subscriber {
 const EMPTY_TOOL = {
   name: "",
   description: "",
-  category: "Research" as Category,
+  category: "Chatbots" as Category,
   pricing: "Free" as Pricing,
-  rating: 4.0,
+  rating: 4.8,
   url: "",
   is_infy_pick: false,
 }
@@ -49,6 +49,13 @@ export default function Admin() {
   // Tool form
   const [editingTool, setEditingTool] = useState<ToolItem | null>(null)
   const [toolForm, setToolForm] = useState(EMPTY_TOOL)
+
+  // Filter & Search states for Admin tool management
+  const [adminSearch, setAdminSearch] = useState("")
+  const [adminCategory, setAdminCategory] = useState<string>("All")
+  const [adminPickFilter, setAdminPickFilter] = useState<"all" | "picks" | "standard">("all")
+  const [adminPricingFilter, setAdminPricingFilter] = useState<"all" | "Free" | "Freemium" | "Paid">("all")
+  const [adminSortBy, setAdminSortBy] = useState<"latest" | "oldest" | "name-asc" | "rating-desc" | "picks-first">("latest")
 
   // Email form
   const [emailSubject, setEmailSubject] = useState("")
@@ -137,6 +144,78 @@ export default function Admin() {
       fetchSubscribers()
     }
   }, [isAuthenticated, fetchTools, fetchSubscribers])
+
+  // ── Filtered & Sorted Tools for Admin ──
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {}
+    tools.forEach((t) => {
+      counts[t.category] = (counts[t.category] || 0) + 1
+    })
+    return counts
+  }, [tools])
+
+  const picksCount = useMemo(() => tools.filter((t) => t.is_infy_pick).length, [tools])
+  const standardCount = useMemo(() => tools.filter((t) => !t.is_infy_pick).length, [tools])
+
+  const isFiltered =
+    adminSearch !== "" ||
+    adminCategory !== "All" ||
+    adminPickFilter !== "all" ||
+    adminPricingFilter !== "all" ||
+    adminSortBy !== "latest"
+
+  const handleClearFilters = () => {
+    setAdminSearch("")
+    setAdminCategory("All")
+    setAdminPickFilter("all")
+    setAdminPricingFilter("all")
+    setAdminSortBy("latest")
+  }
+
+  const filteredTools = useMemo(() => {
+    return tools
+      .filter((tool) => {
+        // Search filter
+        if (adminSearch.trim()) {
+          const q = adminSearch.toLowerCase().trim()
+          const matches =
+            tool.name.toLowerCase().includes(q) ||
+            tool.description.toLowerCase().includes(q) ||
+            tool.category.toLowerCase().includes(q) ||
+            (tool.url && tool.url.toLowerCase().includes(q))
+          if (!matches) return false
+        }
+
+        // Category filter
+        if (adminCategory !== "All" && tool.category !== adminCategory) {
+          return false
+        }
+
+        // Infy Pick filter
+        if (adminPickFilter === "picks" && !tool.is_infy_pick) return false
+        if (adminPickFilter === "standard" && tool.is_infy_pick) return false
+
+        // Pricing filter
+        if (adminPricingFilter !== "all" && tool.pricing !== adminPricingFilter) return false
+
+        return true
+      })
+      .sort((a, b) => {
+        if (adminSortBy === "name-asc") {
+          return a.name.localeCompare(b.name)
+        }
+        if (adminSortBy === "rating-desc") {
+          return (b.rating || 0) - (a.rating || 0)
+        }
+        if (adminSortBy === "picks-first") {
+          return (b.is_infy_pick ? 1 : 0) - (a.is_infy_pick ? 1 : 0)
+        }
+        if (adminSortBy === "oldest") {
+          return 1
+        }
+        return 0
+      })
+  }, [tools, adminSearch, adminCategory, adminPickFilter, adminPricingFilter, adminSortBy])
 
   // ── Add / Update tool ──
   const handleSaveTool = async (e: React.FormEvent) => {
@@ -641,17 +720,119 @@ export default function Admin() {
               </div>
             </div>
 
-            {/* Tools list */}
-            <div className="lg:col-span-2">
-              {tools.length === 0 && !loading ? (
-                <div className="text-center py-16 text-zinc-600 text-sm">
-                  {isSupabaseConfigured
-                    ? "No tools yet. Add your first tool using the form."
-                    : "Connect Supabase to manage tools."}
+            {/* Tools list with Internal Scroller & Advanced Filter Controls */}
+            <div className="lg:col-span-2 flex flex-col min-w-0">
+              {/* Filter & Sort Controls Header */}
+              <div className="mb-4 space-y-3 p-4 rounded-2xl border border-white/10 bg-white/[0.02]">
+                {/* Search input */}
+                <div className="relative">
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500 text-sm">🔍</span>
+                  <input
+                    type="text"
+                    value={adminSearch}
+                    onChange={(e) => setAdminSearch(e.target.value)}
+                    placeholder={`Search ${tools.length} tools by name, description, category...`}
+                    className="w-full bg-white/[0.04] border border-white/10 rounded-xl pl-9 pr-8 py-2 text-sm text-white placeholder:text-zinc-500 focus:outline-none focus:border-cyan-400/50 subscribe-input transition-colors"
+                  />
+                  {adminSearch && (
+                    <button
+                      onClick={() => setAdminSearch("")}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-zinc-400 hover:text-white p-1 rounded-md"
+                      title="Clear search"
+                    >
+                      ✕
+                    </button>
+                  )}
                 </div>
-              ) : (
-                <div className="space-y-2">
-                  {tools.map((tool) => (
+
+                {/* Filter & Sort Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  {/* Category Filter */}
+                  <div>
+                    <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">
+                      Category
+                    </label>
+                    <select
+                      value={adminCategory}
+                      onChange={(e) => setAdminCategory(e.target.value)}
+                      className="w-full bg-zinc-900 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-400/50 cursor-pointer"
+                    >
+                      <option value="All">All Categories ({tools.length})</option>
+                      {CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat} ({categoryCounts[cat] || 0})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Infy Pick Filter */}
+                  <div>
+                    <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">
+                      Picks Filter
+                    </label>
+                    <select
+                      value={adminPickFilter}
+                      onChange={(e) => setAdminPickFilter(e.target.value as any)}
+                      className="w-full bg-zinc-900 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-400/50 cursor-pointer"
+                    >
+                      <option value="all">All Tools ({tools.length})</option>
+                      <option value="picks">✦ Infy Picks Only ({picksCount})</option>
+                      <option value="standard">Standard Tools ({standardCount})</option>
+                    </select>
+                  </div>
+
+                  {/* Sort By */}
+                  <div>
+                    <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-wider mb-1">
+                      Sort By
+                    </label>
+                    <select
+                      value={adminSortBy}
+                      onChange={(e) => setAdminSortBy(e.target.value as any)}
+                      className="w-full bg-zinc-900 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-400/50 cursor-pointer"
+                    >
+                      <option value="latest">⚡ Latest Added / Newest</option>
+                      <option value="oldest">🕒 Oldest First</option>
+                      <option value="name-asc">🔤 Alphabetical (A → Z)</option>
+                      <option value="rating-desc">⭐ Highest Rating (5.0 → 1.0)</option>
+                      <option value="picks-first">✦ Infy Picks First</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Summary & Active Filter Bar */}
+                <div className="flex items-center justify-between gap-2 pt-1 text-xs text-zinc-400 border-t border-white/5">
+                  <span className="font-medium">
+                    Showing <strong className="text-cyan-300">{filteredTools.length}</strong> of {tools.length} tools
+                  </span>
+                  {isFiltered && (
+                    <button
+                      onClick={handleClearFilters}
+                      className="text-[11px] text-zinc-400 hover:text-cyan-300 underline cursor-pointer flex items-center gap-1"
+                    >
+                      ✕ Reset all filters
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Internal Scrollable Tools List */}
+              <div className="max-h-[580px] overflow-y-auto custom-tools-scrollbar overscroll-contain pr-1.5 space-y-2">
+                {filteredTools.length === 0 ? (
+                  <div className="text-center py-16 text-zinc-500 text-sm border border-dashed border-white/10 rounded-2xl p-8 bg-white/[0.01]">
+                    <p className="mb-2 text-zinc-400">No tools match the selected filters or search query.</p>
+                    {isFiltered && (
+                      <button
+                        onClick={handleClearFilters}
+                        className="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-white/10 text-white hover:bg-white/20 transition-all cursor-pointer"
+                      >
+                        Clear Filters
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  filteredTools.map((tool) => (
                     <div
                       key={tool.id}
                       className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/[0.06] hover:border-white/15 bg-white/[0.01] hover:bg-white/[0.02] transition-all"
@@ -672,6 +853,9 @@ export default function Admin() {
                             tool.pricing === "Freemium" ? "text-zinc-300 bg-white/5 border border-white/10" :
                             "text-zinc-400 bg-white/[0.02] border border-white/[0.08]"
                           }`}>{tool.pricing}</span>
+                          {tool.rating && (
+                            <span className="text-[11px] text-amber-300/80 font-medium">★ {tool.rating}</span>
+                          )}
                         </div>
                         <p className="text-xs text-zinc-400 truncate mt-0.5">{tool.description}</p>
                       </div>
@@ -701,9 +885,9 @@ export default function Admin() {
                         </button>
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
+                  ))
+                )}
+              </div>
             </div>
           </div>
         )}
