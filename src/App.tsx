@@ -234,7 +234,7 @@ export default function App() {
                   className="text-lg md:text-xl font-extrabold tracking-tight whitespace-nowrap"
                   style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
                 >
-                  <span className="text-white">infy</span>
+                  <span className="text-white">Infy</span>
                   <span
                     className="bg-clip-text text-transparent"
                     style={{
