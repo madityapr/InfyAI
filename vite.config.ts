@@ -18,6 +18,22 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: emitSourcemaps ? 'inline' : false,
       minify: !emitSourcemaps,
+      chunkSizeWarningLimit: 1200,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+              return 'vendor'
+            }
+            if (id.includes('node_modules/@supabase')) {
+              return 'supabase'
+            }
+            if (id.includes('node_modules/lucide-react')) {
+              return 'icons'
+            }
+          },
+        },
+      },
     },
     plugins: [
       react(),
