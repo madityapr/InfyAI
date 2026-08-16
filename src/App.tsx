@@ -3,6 +3,7 @@ import { tools as fallbackTools, CATEGORIES, PRICING_OPTIONS } from "@/data/tool
 import type { Tool, Category, PricingFilter } from "@/data/tools"
 import FilterPill from "@/components/FilterPill"
 import ToolRow from "@/components/ToolRow"
+import RealtimeToast from "@/components/RealtimeToast"
 import { supabase, isSupabaseConfigured } from "@/lib/supabase"
 import navLogo from "@/imports/nav-logo.png"
 import heroVideo from "@/imports/hero-video.mp4"
@@ -34,6 +35,12 @@ export default function App() {
   const [subscribeMessage, setSubscribeMessage] = useState("")
   const [tools, setTools] = useState<Tool[]>(fallbackTools)
   const [showNavBrand, setShowNavBrand] = useState(false)
+  const [realtimeTool, setRealtimeTool] = useState<{
+    name: string
+    category?: string
+    pricing?: string
+    url?: string
+  } | null>(null)
   const bgVideoRef = useRef<HTMLDivElement>(null)
   const heroTitleRef = useRef<HTMLHeadingElement>(null)
 
@@ -61,6 +68,36 @@ export default function App() {
           setTools(Array.from(map.values()))
         }
       })
+
+    // Supabase Realtime channel listener for instant INSERT notifications
+    const channel = supabase
+      .channel("tools-realtime-feed")
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "tools" },
+        (payload) => {
+          const newTool = payload.new as Tool
+          if (!newTool || !newTool.name) return
+
+          setTools((prev) => {
+            const key = newTool.name.toLowerCase().trim()
+            if (prev.some((t) => t.name.toLowerCase().trim() === key)) return prev
+            return [newTool, ...prev]
+          })
+
+          setRealtimeTool({
+            name: newTool.name,
+            category: newTool.category,
+            pricing: newTool.pricing,
+            url: newTool.url,
+          })
+        }
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
   }, [])
 
   // Smooth scroll-driven fade
@@ -516,6 +553,14 @@ export default function App() {
           </p>
         </div>
       </footer>
+
+      {/* ── Realtime Live Insert Notification Toast ── */}
+      {realtimeTool && (
+        <RealtimeToast
+          tool={realtimeTool}
+          onClose={() => setRealtimeTool(null)}
+        />
+      )}
     </div>
   )
 }

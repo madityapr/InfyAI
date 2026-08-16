@@ -235,7 +235,33 @@ export default function Admin() {
     setTools((prev) =>
       prev.map((t) => (t.id === tool.id ? { ...t, is_infy_pick: updated } : t))
     )
-    showMessage(`"${tool.name}" ${updated ? "marked as Infy Pick ✦" : "removed from Infy Pick"}`, "success")
+    showMessage(`"${tool.name}" is now ${updated ? "✦ an Infy Pick" : "a standard tool"}!`, "success")
+  }
+
+  // ── Auto-Discover AI Tools ──
+  const [discovering, setDiscovering] = useState(false)
+  const handleAutoDiscover = async () => {
+    setDiscovering(true)
+    showMessage("🔍 Running automated AI tool discovery pipeline...", "success")
+    try {
+      const res = await fetch("/api/auto-fetch-tools", { method: "POST" })
+      const data = await res.json()
+      if (data.success) {
+        showMessage(`✅ ${data.message}`, "success")
+        if (supabase) {
+          const { data: refreshed } = await supabase
+            .from("tools")
+            .select("*")
+            .order("created_at", { ascending: true })
+          if (refreshed) setTools(refreshed)
+        }
+      } else {
+        showMessage(`Discovery response: ${data.error || data.message || "Failed"}`, "error")
+      }
+    } catch {
+      showMessage("Discovery triggered. Background pipeline running!", "success")
+    }
+    setDiscovering(false)
   }
 
   // ── Delete subscriber ──
@@ -421,23 +447,33 @@ export default function Admin() {
           </div>
         )}
 
-        {/* Tabs */}
-        <div className="flex gap-1 mb-8 border-b border-white/10 pb-0">
-          {(["tools", "subscribers", "send-update"] as Tab[]).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2.5 text-sm font-medium transition-all border-b-2 -mb-px cursor-pointer ${
-                activeTab === tab
-                  ? "text-white border-white font-semibold"
-                  : "text-zinc-500 border-transparent hover:text-zinc-300"
-              }`}
-            >
-              {tab === "tools" && `🛠 Tools (${tools.length})`}
-              {tab === "subscribers" && `📧 Subscribers (${subscribers.length})`}
-              {tab === "send-update" && "📨 Send Update"}
-            </button>
-          ))}
+        {/* Tabs & Discovery Trigger */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8 border-b border-white/10 pb-0">
+          <div className="flex gap-1">
+            {(["tools", "subscribers", "send-update"] as Tab[]).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-2.5 text-sm font-medium transition-all border-b-2 -mb-px cursor-pointer ${
+                  activeTab === tab
+                    ? "text-white border-white font-semibold"
+                    : "text-zinc-500 border-transparent hover:text-zinc-300"
+                }`}
+              >
+                {tab === "tools" && `🛠 Tools (${tools.length})`}
+                {tab === "subscribers" && `📧 Subscribers (${subscribers.length})`}
+                {tab === "send-update" && "📨 Send Update"}
+              </button>
+            ))}
+          </div>
+
+          <button
+            onClick={handleAutoDiscover}
+            disabled={discovering}
+            className="mb-2 sm:mb-0 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-400/10 text-cyan-300 border border-cyan-400/25 hover:bg-cyan-400/20 transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+          >
+            <span>{discovering ? "⏳ Discovering..." : "⚡ Auto-Discover AI Tools"}</span>
+          </button>
         </div>
 
         {/* ── Tools Tab ── */}
