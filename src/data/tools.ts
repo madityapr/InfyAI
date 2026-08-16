@@ -14,6 +14,14 @@ export type Category =
   | "3D & Animation"
   | "Customer Support"
   | "Sales"
+  | "Gaming"
+  | "Legal"
+  | "HR & Recruiting"
+  | "Finance"
+  | "Healthcare"
+  | "Education"
+  | "Music"
+  | "E-commerce"
 
 export interface Tool {
   name: string
@@ -40,6 +48,14 @@ export const CATEGORIES: Array<Category> = [
   "3D & Animation",
   "Customer Support",
   "Sales",
+  "Gaming",
+  "Legal",
+  "HR & Recruiting",
+  "Finance",
+  "Healthcare",
+  "Education",
+  "Music",
+  "E-commerce",
 ]
 
 export const PRICING_OPTIONS = ["All", "Free", "Freemium", "Paid"] as const
@@ -953,6 +969,1041 @@ export const tools: Tool[] = [
     "pricing": "Paid",
     "rating": 4.9,
     "description": "Premium revenue intelligence and sales conversation analytics",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Windsurf",
+    "url": "https://windsurf.com",
+    "category": "Coding",
+    "pricing": "Freemium",
+    "rating": 4.7,
+    "description": "Agentic AI code editor (formerly Codeium) with deep multi-file context",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Replit Agent",
+    "url": "https://replit.com",
+    "category": "Coding",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "Build and deploy full apps from a prompt inside Replit's cloud IDE",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Cody",
+    "url": "https://sourcegraph.com/cody",
+    "category": "Coding",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "Sourcegraph's AI coding assistant with codebase-wide context search",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Amazon Q Developer",
+    "url": "https://aws.amazon.com/q/developer",
+    "category": "Coding",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "AWS's AI assistant for coding, debugging, and cloud app development",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Supermaven",
+    "url": "https://supermaven.com",
+    "category": "Coding",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "Extremely fast AI autocomplete with a 1M-token context window",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Cline",
+    "url": "https://cline.bot",
+    "category": "Coding",
+    "pricing": "Free",
+    "rating": 4.7,
+    "description": "Open-source autonomous coding agent that runs inside VS Code",
+    "is_infy_pick": true
+  },
+  {
+    "name": "CodeRabbit",
+    "url": "https://coderabbit.ai",
+    "category": "Coding",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "AI code review bot that leaves contextual PR comments automatically",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Qodo",
+    "url": "https://qodo.ai",
+    "category": "Coding",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI agent for test generation, code review, and code integrity",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Zed",
+    "url": "https://zed.dev",
+    "category": "Coding",
+    "pricing": "Free",
+    "rating": 4.6,
+    "description": "High-performance collaborative code editor with built-in AI assistant",
+    "is_infy_pick": true
+  },
+  {
+    "name": "Warp",
+    "url": "https://warp.dev",
+    "category": "Coding",
+    "pricing": "Freemium",
+    "rating": 4.7,
+    "description": "AI-powered terminal that turns natural language into shell commands",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Create.xyz",
+    "url": "https://create.xyz",
+    "category": "Building",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "Prompt-to-app builder for internal tools, dashboards, and web apps",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Base44",
+    "url": "https://base44.com",
+    "category": "Building",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "All-in-one AI app builder that generates full-stack apps with backend included",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Same.new",
+    "url": "https://same.new",
+    "category": "Building",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI agent that clones and rebuilds websites and web apps from a URL or prompt",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Databutton",
+    "url": "https://databutton.com",
+    "category": "Building",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "AI agent workspace for building internal tools and data apps",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Firebase Studio",
+    "url": "https://firebase.studio",
+    "category": "Building",
+    "pricing": "Free",
+    "rating": 4.5,
+    "description": "Google's cloud-based agentic workspace for full-stack AI app development",
+    "is_infy_pick": true
+  },
+  {
+    "name": "Wordware",
+    "url": "https://wordware.ai",
+    "category": "Building",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "Natural-language IDE for building and deploying AI agents and workflows",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Ideogram",
+    "url": "https://ideogram.ai",
+    "category": "Design",
+    "pricing": "Freemium",
+    "rating": 4.8,
+    "description": "AI image generator known for accurate text rendering and typography",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Flux",
+    "url": "https://blackforestlabs.ai",
+    "category": "Design",
+    "pricing": "Freemium",
+    "rating": 4.7,
+    "description": "State-of-the-art open image generation models from Black Forest Labs",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Freepik AI Suite",
+    "url": "https://freepik.com/ai",
+    "category": "Design",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI image, icon, and mockup generation built into the Freepik library",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Clipdrop",
+    "url": "https://clipdrop.co",
+    "category": "Design",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI toolkit for background removal, relighting, and image cleanup",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Uizard",
+    "url": "https://uizard.io",
+    "category": "Design",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "Turns sketches and text prompts into editable UI mockups",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Galileo AI",
+    "url": "https://usegalileo.ai",
+    "category": "Design",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "AI copilot that generates polished, editable UI designs from text prompts",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Vectorizer.ai",
+    "url": "https://vectorizer.ai",
+    "category": "Design",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "Converts raster images into clean, scalable vector graphics with AI",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Hedra",
+    "url": "https://hedra.com",
+    "category": "Video & Audio",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "AI character video generator that animates photos with speech and emotion",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Viggle AI",
+    "url": "https://viggle.ai",
+    "category": "Video & Audio",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "AI motion tool that maps realistic movement onto any character",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Topaz Video AI",
+    "url": "https://topazlabs.com/topaz-video-ai",
+    "category": "Video & Audio",
+    "pricing": "Paid",
+    "rating": 4.6,
+    "description": "AI video upscaling, frame interpolation, and stabilization for pros",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Adobe Podcast",
+    "url": "https://podcast.adobe.com",
+    "category": "Video & Audio",
+    "pricing": "Freemium",
+    "rating": 4.7,
+    "description": "AI-powered audio enhancement that removes noise and studio-fies recordings",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Play.ht",
+    "url": "https://play.ht",
+    "category": "Video & Audio",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "Ultra-realistic AI text-to-speech and voice cloning for creators",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Veed.io",
+    "url": "https://veed.io",
+    "category": "Video & Audio",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "Browser-based AI video editor with subtitles, avatars, and translation",
+    "is_infy_pick": false
+  },
+  {
+    "name": "InVideo AI",
+    "url": "https://invideo.io",
+    "category": "Video & Audio",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "Generates full narrated videos from a single text prompt",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Argil AI",
+    "url": "https://argil.ai",
+    "category": "Video & Audio",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "Creates realistic AI avatar videos of yourself for social content",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Reclaim.ai",
+    "url": "https://reclaim.ai",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "rating": 4.7,
+    "description": "AI scheduling assistant that auto-defends time for habits and deep work",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Clockwise",
+    "url": "https://getclockwise.com",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "AI calendar optimizer that creates focus time across your team",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Krisp",
+    "url": "https://krisp.ai",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "rating": 4.7,
+    "description": "AI noise cancellation and meeting transcription for any call app",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Shortwave",
+    "url": "https://shortwave.com",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "AI email client that triages, drafts replies, and summarizes threads",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Mindgrasp",
+    "url": "https://mindgrasp.ai",
+    "category": "Productivity",
+    "pricing": "Freemium",
+    "rating": 4.3,
+    "description": "AI note-taker that turns lectures and videos into study guides",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Elicit",
+    "url": "https://elicit.com",
+    "category": "Research",
+    "pricing": "Freemium",
+    "rating": 4.7,
+    "description": "AI research assistant that automates literature review and paper screening",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Consensus",
+    "url": "https://consensus.app",
+    "category": "Research",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "AI search engine that answers questions using evidence from scientific papers",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Exa",
+    "url": "https://exa.ai",
+    "category": "Research",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "Neural search API built for AI agents to find high-quality web results",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Tavily",
+    "url": "https://tavily.com",
+    "category": "Research",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "Search API purpose-built for grounding AI agents with real-time web data",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Kagi",
+    "url": "https://kagi.com",
+    "category": "Research",
+    "pricing": "Paid",
+    "rating": 4.8,
+    "description": "Premium ad-free search engine with AI-powered summaries and Assistant",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Humata",
+    "url": "https://humata.ai",
+    "category": "Research",
+    "pricing": "Freemium",
+    "rating": 4.3,
+    "description": "Ask questions and get cited answers from large document sets",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Research Rabbit",
+    "url": "https://researchrabbit.ai",
+    "category": "Research",
+    "pricing": "Free",
+    "rating": 4.5,
+    "description": "AI-driven citation mapping tool for discovering related academic papers",
+    "is_infy_pick": true
+  },
+  {
+    "name": "Scite",
+    "url": "https://scite.ai",
+    "category": "Research",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "Smart citations that show whether a paper supports or contradicts a claim",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Wolfram Alpha",
+    "url": "https://wolframalpha.com",
+    "category": "Research",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "Computational knowledge engine for math, science, and data queries",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Genspark",
+    "url": "https://genspark.ai",
+    "category": "Research",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "AI search engine that generates custom multi-source answer pages",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Phind",
+    "url": "https://phind.com",
+    "category": "Research",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI search engine tuned for developers and technical questions",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Grammarly",
+    "url": "https://grammarly.com",
+    "category": "Research",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI writing assistant for grammar, tone, and clarity across the web",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Manus",
+    "url": "https://manus.im",
+    "category": "Agents",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "General-purpose AI agent that autonomously completes complex multi-step tasks",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Lindy",
+    "url": "https://lindy.ai",
+    "category": "Agents",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "No-code platform for building AI agents that automate business workflows",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Relevance AI",
+    "url": "https://relevanceai.com",
+    "category": "Agents",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "Build and deploy a team of AI agents for internal workflows",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Browser Use",
+    "url": "https://browser-use.com",
+    "category": "Agents",
+    "pricing": "Free",
+    "rating": 4.5,
+    "description": "Open-source framework that lets AI agents control a real web browser",
+    "is_infy_pick": true
+  },
+  {
+    "name": "Adept",
+    "url": "https://adept.ai",
+    "category": "Agents",
+    "pricing": "Paid",
+    "rating": 4.3,
+    "description": "AI agent platform that acts directly inside enterprise software UIs",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Ocoya",
+    "url": "https://ocoya.com",
+    "category": "Marketing",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI social media content creation and scheduling in one platform",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Buffer AI Assistant",
+    "url": "https://buffer.com",
+    "category": "Marketing",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI caption and content ideas built into Buffer's scheduling tool",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Marpipe",
+    "url": "https://marpipe.com",
+    "category": "Marketing",
+    "pricing": "Paid",
+    "rating": 4.4,
+    "description": "AI-driven ad creative testing and performance analytics platform",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Postwise",
+    "url": "https://postwise.ai",
+    "category": "Marketing",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "AI tool for writing and scheduling viral tweets and threads",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Wordtune",
+    "url": "https://wordtune.com",
+    "category": "Writing",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI rewriting tool that rephrases sentences for clarity and tone",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Novelcrafter",
+    "url": "https://novelcrafter.com",
+    "category": "Writing",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI-assisted novel writing workspace with codex and world-building tools",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Squibler",
+    "url": "https://squibler.io",
+    "category": "Writing",
+    "pricing": "Freemium",
+    "rating": 4.3,
+    "description": "AI story and screenplay writing software for authors and screenwriters",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Hex",
+    "url": "https://hex.tech",
+    "category": "Data Analysis",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "AI-powered collaborative notebook for data science and analytics",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Obviously AI",
+    "url": "https://obviously.ai",
+    "category": "Data Analysis",
+    "pricing": "Freemium",
+    "rating": 4.3,
+    "description": "No-code platform that builds predictive machine learning models from spreadsheets",
+    "is_infy_pick": false
+  },
+  {
+    "name": "ThoughtSpot",
+    "url": "https://thoughtspot.com",
+    "category": "Data Analysis",
+    "pricing": "Paid",
+    "rating": 4.3,
+    "description": "AI-powered natural language search for enterprise business analytics",
+    "is_infy_pick": false
+  },
+  {
+    "name": "DataRobot",
+    "url": "https://datarobot.com",
+    "category": "Data Analysis",
+    "pricing": "Paid",
+    "rating": 4.3,
+    "description": "Enterprise AI platform for automated machine learning and MLOps",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Decktopus",
+    "url": "https://decktopus.com",
+    "category": "Presentations",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI presentation generator with built-in design guidance and analytics",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Plus AI",
+    "url": "https://plusai.com",
+    "category": "Presentations",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI slide generator that builds decks directly inside Google Slides",
+    "is_infy_pick": false
+  },
+  {
+    "name": "SlidesAI",
+    "url": "https://slidesai.io",
+    "category": "Presentations",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "Converts text into fully designed Google Slides presentations",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Spline AI",
+    "url": "https://spline.design",
+    "category": "3D & Animation",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "AI-assisted 3D design tool for the web with real-time collaboration",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Kaedim",
+    "url": "https://kaedim3d.com",
+    "category": "3D & Animation",
+    "pricing": "Paid",
+    "rating": 4.3,
+    "description": "Converts 2D concept art into game-ready 3D models using AI",
+    "is_infy_pick": false
+  },
+  {
+    "name": "CSM AI",
+    "url": "https://csm.ai",
+    "category": "3D & Animation",
+    "pricing": "Freemium",
+    "rating": 4.3,
+    "description": "Generates 3D assets and scenes from images or text in seconds",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Hyper3D Rodin",
+    "url": "https://hyper3d.ai",
+    "category": "3D & Animation",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "High-fidelity AI text-to-3D and image-to-3D generation engine",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Ada",
+    "url": "https://ada.cx",
+    "category": "Customer Support",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "Enterprise AI customer service agent that resolves tickets automatically",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Decagon",
+    "url": "https://decagon.ai",
+    "category": "Customer Support",
+    "pricing": "Paid",
+    "rating": 4.6,
+    "description": "AI concierge agents that handle complex customer support conversations",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Forethought",
+    "url": "https://forethought.ai",
+    "category": "Customer Support",
+    "pricing": "Paid",
+    "rating": 4.4,
+    "description": "Generative AI for support ticket triage, deflection, and agent assist",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Zendesk AI",
+    "url": "https://zendesk.com/ai",
+    "category": "Customer Support",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "Built-in AI agents and copilots across the Zendesk support suite",
+    "is_infy_pick": false
+  },
+  {
+    "name": "11x",
+    "url": "https://11x.ai",
+    "category": "Sales",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "Fully autonomous AI sales development reps that prospect and book meetings",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Instantly",
+    "url": "https://instantly.ai",
+    "category": "Sales",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "AI-assisted cold email outreach and deliverability platform",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Warmly",
+    "url": "https://warmly.ai",
+    "category": "Sales",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "AI platform that identifies and engages website visitors in real time",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Regie.ai",
+    "url": "https://regie.ai",
+    "category": "Sales",
+    "pricing": "Paid",
+    "rating": 4.4,
+    "description": "AI content and sequence generator for outbound sales teams",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Inworld AI",
+    "url": "https://inworld.ai",
+    "category": "Gaming",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "AI engine that gives game NPCs dynamic, memory-aware conversations",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Scenario",
+    "url": "https://scenario.com",
+    "category": "Gaming",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "Train custom AI models to generate game-ready art assets in your style",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Rosebud AI",
+    "url": "https://rosebud.ai",
+    "category": "Gaming",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "Browser-based AI tool that builds playable games from a text prompt",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Ludo.ai",
+    "url": "https://ludo.ai",
+    "category": "Gaming",
+    "pricing": "Freemium",
+    "rating": 4.3,
+    "description": "AI game design copilot for ideation, market research, and concept art",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Latitude",
+    "url": "https://latitude.io",
+    "category": "Gaming",
+    "pricing": "Freemium",
+    "rating": 4.3,
+    "description": "AI-powered platform for building branching, text-based interactive games",
+    "is_infy_pick": false
+  },
+  {
+    "name": "AI Dungeon",
+    "url": "https://aidungeon.com",
+    "category": "Gaming",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "Open-ended AI text adventure game with infinite generated storylines",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Charisma.ai",
+    "url": "https://charisma.ai",
+    "category": "Gaming",
+    "pricing": "Freemium",
+    "rating": 4.2,
+    "description": "No-code tool for creating emotionally responsive AI game characters",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Harvey",
+    "url": "https://harvey.ai",
+    "category": "Legal",
+    "pricing": "Paid",
+    "rating": 4.7,
+    "description": "AI platform built for law firms to draft, review, and research legal work",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Spellbook",
+    "url": "https://spellbook.legal",
+    "category": "Legal",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI contract drafting and review assistant that lives inside Word",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Casetext CoCounsel",
+    "url": "https://casetext.com",
+    "category": "Legal",
+    "pricing": "Paid",
+    "rating": 4.6,
+    "description": "AI legal assistant for document review, research, and deposition prep",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Ironclad AI",
+    "url": "https://ironcladapp.com",
+    "category": "Legal",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "AI-powered contract lifecycle management and clause negotiation",
+    "is_infy_pick": false
+  },
+  {
+    "name": "DoNotPay",
+    "url": "https://donotpay.com",
+    "category": "Legal",
+    "pricing": "Paid",
+    "rating": 4.1,
+    "description": "Consumer AI assistant for disputing bills, fines, and simple legal tasks",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Paradox",
+    "url": "https://paradox.ai",
+    "category": "HR & Recruiting",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "Conversational AI recruiter that screens and schedules candidates",
+    "is_infy_pick": false
+  },
+  {
+    "name": "HireVue",
+    "url": "https://hirevue.com",
+    "category": "HR & Recruiting",
+    "pricing": "Paid",
+    "rating": 4.3,
+    "description": "AI-powered video interviewing and candidate assessment platform",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Textio",
+    "url": "https://textio.com",
+    "category": "HR & Recruiting",
+    "pricing": "Paid",
+    "rating": 4.4,
+    "description": "AI writing tool that removes bias from job posts and performance reviews",
+    "is_infy_pick": false
+  },
+  {
+    "name": "SeekOut",
+    "url": "https://seekout.com",
+    "category": "HR & Recruiting",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "AI-powered talent sourcing and candidate matching search engine",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Fetcher",
+    "url": "https://fetcher.ai",
+    "category": "HR & Recruiting",
+    "pricing": "Paid",
+    "rating": 4.4,
+    "description": "AI recruiting tool that automates candidate sourcing and outreach",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Rogo",
+    "url": "https://rogo.ai",
+    "category": "Finance",
+    "pricing": "Paid",
+    "rating": 4.6,
+    "description": "AI research copilot built for investment banking and equity research",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Ramp AI",
+    "url": "https://ramp.com",
+    "category": "Finance",
+    "pricing": "Freemium",
+    "rating": 4.6,
+    "description": "AI-powered corporate card and spend management with automated bookkeeping",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Vic.ai",
+    "url": "https://vic.ai",
+    "category": "Finance",
+    "pricing": "Paid",
+    "rating": 4.4,
+    "description": "Autonomous AI for accounts payable invoice processing",
+    "is_infy_pick": false
+  },
+  {
+    "name": "FinChat",
+    "url": "https://finchat.io",
+    "category": "Finance",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI financial research assistant for stock analysis and modeling",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Abridge",
+    "url": "https://abridge.com",
+    "category": "Healthcare",
+    "pricing": "Paid",
+    "rating": 4.6,
+    "description": "AI medical scribe that turns patient conversations into clinical notes",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Nabla",
+    "url": "https://nabla.com",
+    "category": "Healthcare",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "Ambient AI copilot that documents clinical visits in real time",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Suki AI",
+    "url": "https://suki.ai",
+    "category": "Healthcare",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "Voice AI assistant that automates clinical documentation for doctors",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Glass Health",
+    "url": "https://glass.health",
+    "category": "Healthcare",
+    "pricing": "Freemium",
+    "rating": 4.3,
+    "description": "AI clinical decision support for building differential diagnoses and plans",
+    "is_infy_pick": false
+  },
+  {
+    "name": "MagicSchool AI",
+    "url": "https://magicschool.ai",
+    "category": "Education",
+    "pricing": "Freemium",
+    "rating": 4.7,
+    "description": "AI toolkit that helps teachers plan lessons, grade, and create materials",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Khanmigo",
+    "url": "https://khanacademy.org/khan-labs",
+    "category": "Education",
+    "pricing": "Paid",
+    "rating": 4.6,
+    "description": "Khan Academy's AI tutor that guides students through problems Socratically",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Curipod",
+    "url": "https://curipod.com",
+    "category": "Education",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI tool that generates interactive, standards-aligned classroom lessons",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Diffit",
+    "url": "https://diffit.me",
+    "category": "Education",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "AI tool that differentiates reading materials to student level instantly",
+    "is_infy_pick": false
+  },
+  {
+    "name": "AIVA",
+    "url": "https://aiva.ai",
+    "category": "Music",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI composer that creates original orchestral and cinematic music scores",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Boomy",
+    "url": "https://boomy.com",
+    "category": "Music",
+    "pricing": "Freemium",
+    "rating": 4.3,
+    "description": "Generate original songs instantly with AI, no music skills required",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Soundraw",
+    "url": "https://soundraw.io",
+    "category": "Music",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "AI music generator for royalty-free background tracks by mood and genre",
+    "is_infy_pick": false
+  },
+  {
+    "name": "LANDR",
+    "url": "https://landr.com",
+    "category": "Music",
+    "pricing": "Freemium",
+    "rating": 4.5,
+    "description": "AI-powered audio mastering and distribution for independent musicians",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Rebuy",
+    "url": "https://rebuyengine.com",
+    "category": "E-commerce",
+    "pricing": "Paid",
+    "rating": 4.5,
+    "description": "AI personalization engine for product recommendations and upsells",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Octane AI",
+    "url": "https://octaneai.com",
+    "category": "E-commerce",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "AI quiz and product recommendation builder for Shopify stores",
+    "is_infy_pick": false
+  },
+  {
+    "name": "Shopify Sidekick",
+    "url": "https://shopify.com/sidekick",
+    "category": "E-commerce",
+    "pricing": "Freemium",
+    "rating": 4.4,
+    "description": "Shopify's built-in AI commerce assistant for store management tasks",
     "is_infy_pick": false
   }
 ]
