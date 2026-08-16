@@ -87,14 +87,27 @@ export default function Admin() {
       .order("created_at", { ascending: true })
     if (error) {
       showMessage(`Error fetching tools: ${error.message}`, "error")
-      // Still show fallback on error
       const local = fallbackToolsData.map((t, i) => ({
         ...t,
         id: `local-${i}`,
       })) as ToolItem[]
       setTools(local)
     } else {
-      setTools(data && data.length > 0 ? data : fallbackToolsData.map((t, i) => ({ ...t, id: `local-${i}` })) as ToolItem[])
+      if (data && data.length > 0) {
+        // Deduplicate by name
+        const seen = new Set<string>()
+        const uniqueTools: ToolItem[] = []
+        for (const item of data) {
+          const key = item.name.toLowerCase().trim()
+          if (!seen.has(key)) {
+            seen.add(key)
+            uniqueTools.push(item)
+          }
+        }
+        setTools(uniqueTools)
+      } else {
+        setTools(fallbackToolsData.map((t, i) => ({ ...t, id: `local-${i}` })) as ToolItem[])
+      }
     }
     setLoading(false)
   }, [])

@@ -35,7 +35,7 @@ export default function App() {
   const [tools, setTools] = useState<Tool[]>(fallbackTools)
   const bgVideoRef = useRef<HTMLDivElement>(null)
 
-  // Fetch tools from Supabase (falls back to hardcoded data)
+  // Fetch tools from Supabase and deduplicate
   useEffect(() => {
     if (!isSupabaseConfigured || !supabase) return
     supabase
@@ -43,7 +43,19 @@ export default function App() {
       .select("*")
       .order("created_at", { ascending: true })
       .then(({ data }) => {
-        if (data && data.length > 0) setTools(data as Tool[])
+        if (data && data.length > 0) {
+          const map = new Map<string, Tool>()
+          fallbackTools.forEach((t) => map.set(t.name.toLowerCase().trim(), t))
+          data.forEach((d) => {
+            const key = d.name.toLowerCase().trim()
+            const existing = map.get(key)
+            map.set(key, {
+              ...d,
+              category: existing?.category || d.category,
+            })
+          })
+          setTools(Array.from(map.values()))
+        }
       })
   }, [])
 
