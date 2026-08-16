@@ -438,13 +438,19 @@ export default function App() {
         </div>
       </section>
 
-      {/* ── Ticker bar (Monochrome Glass) ── */}
-      <div className="relative z-10 overflow-hidden py-3 bg-black/50 backdrop-blur-md border-y border-white/[0.08]">
+      {/* ── Ticker bar (Vibrant Blue/Cyan Gradient) ── */}
+      <div
+        className="relative z-10 overflow-hidden py-2.5 shadow-lg"
+        style={{
+          background: "linear-gradient(90deg, #0284c7 0%, #0ea5e9 25%, #22d3ee 50%, #38bdf8 75%, #0284c7 100%)",
+          backgroundSize: "200% 100%",
+        }}
+      >
         <div className="ticker-track">
           {TICKER_ITEMS.map((item, i) => (
             <span
               key={i}
-              className="text-xs tracking-wider uppercase font-semibold text-zinc-400 whitespace-nowrap px-8"
+              className="text-xs tracking-wider uppercase font-extrabold text-black/90 whitespace-nowrap px-8"
               style={{ fontFamily: "'Outfit', sans-serif" }}
             >
               {item}
@@ -459,13 +465,9 @@ export default function App() {
           <p className="text-zinc-500 text-xs">
             © {new Date().getFullYear()} infyAI. All rights reserved.
           </p>
-          <div className="flex items-center gap-3 text-xs text-zinc-500">
-            <span>Updated weekly · Curated for builders</span>
-            <span className="text-zinc-700">·</span>
-            <a href="/admin" className="hover:text-cyan-400 transition-colors">
-              Admin Portal
-            </a>
-          </div>
+          <p className="text-zinc-500 text-xs">
+            Updated weekly · Curated for builders
+          </p>
         </div>
       </footer>
     </div>
