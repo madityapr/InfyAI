@@ -288,10 +288,19 @@ export default function Admin() {
         <div className="w-full max-w-sm">
           <div className="border border-white/10 rounded-2xl p-8 bg-white/[0.02] shadow-2xl">
             <h1
-              className="text-2xl font-bold text-center mb-1 text-white"
+              className="text-2xl font-bold text-center mb-1"
               style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
             >
-              infyAI Admin
+              <span className="text-white">infy</span>
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: "linear-gradient(130deg, #2ee5a9 0%, #1fd1f9 38%, #2498f7 72%, #1e6bf0 100%)",
+                }}
+              >
+                AI
+              </span>
+              <span className="text-zinc-400 text-base font-normal ml-2">Admin</span>
             </h1>
             <p className="text-zinc-500 text-sm text-center mb-6">Enter your admin password</p>
 
@@ -330,10 +339,18 @@ export default function Admin() {
           <div className="flex items-center gap-3">
             <a
               href="/"
-              className="text-base font-extrabold tracking-tight text-white"
+              className="text-base font-extrabold tracking-tight"
               style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
             >
-              infyAI
+              <span className="text-white">infy</span>
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: "linear-gradient(130deg, #2ee5a9 0%, #1fd1f9 38%, #2498f7 72%, #1e6bf0 100%)",
+                }}
+              >
+                AI
+              </span>
             </a>
             <span className="text-zinc-700 text-xs">·</span>
             <span className="text-zinc-400 text-xs font-medium">Admin Panel</span>

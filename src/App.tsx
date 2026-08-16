@@ -187,11 +187,18 @@ export default function App() {
                 className="h-8 w-auto object-contain drop-shadow-[0_0_12px_rgba(34,211,238,0.45)] group-hover:scale-105 transition-transform"
               />
               <span
-                className="text-base font-extrabold tracking-tight text-white flex items-center gap-1.5"
+                className="text-base font-extrabold tracking-tight"
                 style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
               >
-                <span>infy</span>
-                <span className="bg-gradient-to-r from-cyan-400 to-sky-400 bg-clip-text text-transparent">AI</span>
+                <span className="text-white">infy</span>
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage: "linear-gradient(130deg, #2ee5a9 0%, #1fd1f9 38%, #2498f7 72%, #1e6bf0 100%)",
+                  }}
+                >
+                  AI
+                </span>
               </span>
             </a>
             <span className="hidden sm:block text-zinc-700 text-xs">·</span>
@@ -212,16 +219,23 @@ export default function App() {
         {/* ── Hero header ── */}
         <header className="pt-16 pb-10 md:pt-24 md:pb-12">
           <div className="flex flex-col items-start gap-4">
-            {/* Wordmark with subtle specular sheen */}
+            {/* Wordmark matching exact reference: Solid White 'infy' + Turquoise-to-Blue Gradient 'AI' */}
             <h1
-              className="text-[clamp(52px,11vw,104px)] font-extrabold leading-none tracking-[-0.04em] text-white flex items-center"
+              className="text-[clamp(52px,11vw,104px)] font-extrabold leading-none tracking-[-0.04em]"
               style={{
                 fontFamily: "'Bricolage Grotesque', sans-serif",
                 textShadow: "0 4px 30px rgba(0,0,0,0.8)",
               }}
             >
-              <span>infy</span>
-              <span className="bg-gradient-to-br from-cyan-300 via-cyan-400 to-sky-500 bg-clip-text text-transparent">AI</span>
+              <span className="text-white">infy</span>
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: "linear-gradient(130deg, #2ee5a9 0%, #1fd1f9 38%, #2498f7 72%, #1e6bf0 100%)",
+                }}
+              >
+                AI
+              </span>
             </h1>
 
             {/* Tagline */}
@@ -354,10 +368,18 @@ export default function App() {
         <div className="max-w-4xl mx-auto">
           <div className="liquid-glass-card rounded-3xl p-8 md:p-12 text-center shadow-2xl">
             <h2
-              className="text-2xl md:text-3xl font-extrabold mb-3 text-white"
+              className="text-2xl md:text-3xl font-extrabold mb-3"
               style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
             >
-              Subscribe to infyAI
+              <span className="text-white">Subscribe to infy</span>
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: "linear-gradient(130deg, #2ee5a9 0%, #1fd1f9 38%, #2498f7 72%, #1e6bf0 100%)",
+                }}
+              >
+                AI
+              </span>
             </h2>
             <p className="text-zinc-300 text-sm md:text-base mb-6 max-w-md mx-auto">
               Free forever. Get the latest AI tools, updates, and weekly curated picks delivered to your inbox.
