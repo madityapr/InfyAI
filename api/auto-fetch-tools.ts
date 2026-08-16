@@ -4,7 +4,10 @@ export const config = { runtime: "edge" }
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || "https://eemhvfqldhkcdbsbibgo.supabase.co"
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_BNP5lzHiffMGrib-0kkZug_JSWUYMCH"
-const geminiApiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || ""
+const geminiApiKey =
+  process.env.GEMINI_API_KEY ||
+  process.env.VITE_GEMINI_API_KEY ||
+  "AQ.Ab8RN6JSHvcMYEPfnt0t-Z24SAJpf5et87qHVAOOWKLRS4dlDw"
 const groqApiKey = process.env.GROQ_API_KEY || ""
 
 const supabase = createClient(supabaseUrl, supabaseKey)
@@ -120,7 +123,7 @@ ${rawText}
 Respond ONLY with valid JSON.`
 
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`, {
+    let res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${geminiApiKey}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -128,6 +131,17 @@ Respond ONLY with valid JSON.`
         generationConfig: { responseMimeType: "application/json", temperature: 0.2 }
       })
     })
+
+    if (!res.ok) {
+      res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${geminiApiKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { responseMimeType: "application/json", temperature: 0.2 }
+        })
+      })
+    }
 
     const data = await res.json()
     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "[]"
