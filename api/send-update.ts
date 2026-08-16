@@ -1,10 +1,14 @@
 import { createClient } from "@supabase/supabase-js"
 
-const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || ""
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || ""
+interface SubscriberRecord {
+  email: string
+}
+
+const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || "https://eemhvfqldhkcdbsbibgo.supabase.co"
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_BNP5lzHiffMGrib-0kkZug_JSWUYMCH"
 const resendApiKey = process.env.RESEND_API_KEY || ""
 
-const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null
+const supabase = createClient(supabaseUrl, supabaseKey)
 
 function isAdmin(req: Request): boolean {
   const auth = req.headers.get("authorization")
@@ -30,15 +34,8 @@ export async function POST(req: Request) {
     )
   }
 
-  if (!supabase) {
-    return new Response(
-      JSON.stringify({ error: "Database is not configured" }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    )
-  }
-
   // Fetch all active subscribers
-  const { data: subscribers, error: fetchError } = await supabase
+  const { data, error: fetchError } = await supabase
     .from("subscribers")
     .select("email")
     .eq("is_active", true)
@@ -50,7 +47,9 @@ export async function POST(req: Request) {
     })
   }
 
-  if (!subscribers || subscribers.length === 0) {
+  const subscribers = (data || []) as SubscriberRecord[]
+
+  if (subscribers.length === 0) {
     return new Response(
       JSON.stringify({ error: "No active subscribers found" }),
       { status: 400, headers: { "Content-Type": "application/json" } }
@@ -64,7 +63,14 @@ export async function POST(req: Request) {
     )
   }
 
-  const emails = (subscribers as Array<{ email: string }>).map((s: { email: string }) => s.email)
+  const emails: string[] = []
+  for (let i = 0; i < subscribers.length; i++) {
+    const record = subscribers[i]
+    if (record && record.email) {
+      emails.push(record.email)
+    }
+  }
+
   let sentCount = 0
   const errors: string[] = []
 
