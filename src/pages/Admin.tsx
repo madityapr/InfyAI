@@ -100,23 +100,43 @@ export default function Admin() {
       const local = fallbackToolsData.map((t, i) => ({
         ...t,
         id: `local-${i}`,
+        is_infy_pick: Boolean(t.is_infy_pick),
       })) as ToolItem[]
       setTools(local)
     } else {
       if (data && data.length > 0) {
-        // Deduplicate by name
-        const seen = new Set<string>()
-        const uniqueTools: ToolItem[] = []
-        for (const item of data) {
-          const key = item.name.toLowerCase().trim()
-          if (!seen.has(key)) {
-            seen.add(key)
-            uniqueTools.push(item)
-          }
-        }
-        setTools(uniqueTools)
+        const map = new Map<string, ToolItem>()
+        fallbackToolsData.forEach((t, i) => {
+          map.set(t.name.toLowerCase().trim(), {
+            ...t,
+            id: `local-${i}`,
+            is_infy_pick: Boolean(t.is_infy_pick),
+          } as ToolItem)
+        })
+
+        data.forEach((d) => {
+          const key = d.name.toLowerCase().trim()
+          const existing = map.get(key)
+          map.set(key, {
+            ...existing,
+            ...d,
+            category: existing?.category || d.category,
+            is_infy_pick:
+              d.is_infy_pick !== undefined && d.is_infy_pick !== null
+                ? Boolean(d.is_infy_pick)
+                : existing?.is_infy_pick || false,
+          } as ToolItem)
+        })
+
+        setTools(Array.from(map.values()))
       } else {
-        setTools(fallbackToolsData.map((t, i) => ({ ...t, id: `local-${i}` })) as ToolItem[])
+        setTools(
+          fallbackToolsData.map((t, i) => ({
+            ...t,
+            id: `local-${i}`,
+            is_infy_pick: Boolean(t.is_infy_pick),
+          })) as ToolItem[]
+        )
       }
     }
     setLoading(false)
