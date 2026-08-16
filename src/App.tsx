@@ -384,7 +384,7 @@ export default function App() {
           </div>
 
           {filtered.length > 0 ? (
-            <div className="divide-y divide-white/[0.04]">
+            <div className="max-h-[600px] overflow-y-auto pr-1 sm:pr-2 divide-y divide-white/[0.04] custom-tools-scrollbar overscroll-contain">
               {filtered.map((tool) => (
                 <ToolRow key={tool.name} tool={tool} />
               ))}
