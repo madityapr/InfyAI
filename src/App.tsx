@@ -50,8 +50,10 @@ export default function App() {
             const key = d.name.toLowerCase().trim()
             const existing = map.get(key)
             map.set(key, {
+              ...existing,
               ...d,
               category: existing?.category || d.category,
+              is_infy_pick: d.is_infy_pick !== undefined ? Boolean(d.is_infy_pick) : existing?.is_infy_pick,
             })
           })
           setTools(Array.from(map.values()))

@@ -28,16 +28,25 @@ export default function ToolRow({ tool }: { tool: Tool }) {
       className="group block"
     >
       <div className="flex items-center gap-3 md:gap-4 py-3.5 px-3.5 rounded-xl border border-transparent hover:border-white/[0.08] hover:bg-white/[0.04] backdrop-blur-md transition-all duration-200">
-        {/* Left: name + description */}
+        {/* Left: name + Infy Pick badge + description */}
         <div className="flex-1 min-w-0">
-          <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-3">
-            <span
-              className="font-semibold text-white group-hover:text-cyan-300 text-sm md:text-[15px] leading-snug transition-colors whitespace-nowrap flex items-center gap-1"
-              style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
-            >
-              {tool.name}
-              <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-xs text-cyan-400">↗</span>
-            </span>
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-2.5">
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <span
+                className="font-semibold text-white group-hover:text-cyan-300 text-sm md:text-[15px] leading-snug transition-colors whitespace-nowrap flex items-center gap-1"
+                style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
+              >
+                {tool.name}
+                <span className="opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-xs text-cyan-400">↗</span>
+              </span>
+
+              {tool.is_infy_pick && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] md:text-[11px] font-semibold text-teal-300 bg-teal-950/70 border border-teal-500/30 shadow-[0_0_10px_rgba(20,184,166,0.2)] tracking-tight whitespace-nowrap">
+                  <span className="text-[9px] text-teal-300">✦</span> Infy Pick
+                </span>
+              )}
+            </div>
+
             <span className="text-zinc-400 text-xs md:text-sm truncate mt-0.5 sm:mt-0 font-normal">
               {tool.description}
             </span>

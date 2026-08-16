@@ -14,6 +14,7 @@ interface ToolItem {
   pricing: Pricing
   rating: number
   url: string
+  is_infy_pick?: boolean
 }
 
 interface Subscriber {
@@ -30,6 +31,7 @@ const EMPTY_TOOL = {
   pricing: "Free" as Pricing,
   rating: 4.0,
   url: "",
+  is_infy_pick: false,
 }
 
 export default function Admin() {
@@ -213,7 +215,27 @@ export default function Admin() {
       pricing: tool.pricing,
       rating: tool.rating,
       url: tool.url,
+      is_infy_pick: tool.is_infy_pick || false,
     })
+  }
+
+  // ── Toggle Infy Pick ──
+  const handleToggleInfyPick = async (tool: ToolItem) => {
+    const updated = !tool.is_infy_pick
+    if (isSupabaseConfigured && supabase && !tool.id.startsWith("local-")) {
+      const { error } = await supabase
+        .from("tools")
+        .update({ is_infy_pick: updated })
+        .eq("id", tool.id)
+      if (error) {
+        showMessage(`Error updating: ${error.message}`, "error")
+        return
+      }
+    }
+    setTools((prev) =>
+      prev.map((t) => (t.id === tool.id ? { ...t, is_infy_pick: updated } : t))
+    )
+    showMessage(`"${tool.name}" ${updated ? "marked as Infy Pick ✦" : "removed from Infy Pick"}`, "success")
   }
 
   // ── Delete subscriber ──
@@ -506,6 +528,20 @@ export default function Admin() {
                     </div>
                   </div>
 
+                  <div className="pt-1">
+                    <label className="flex items-center gap-2 cursor-pointer select-none p-2 rounded-lg bg-teal-950/30 border border-teal-500/20 hover:border-teal-500/40 transition-colors">
+                      <input
+                        type="checkbox"
+                        checked={toolForm.is_infy_pick || false}
+                        onChange={(e) => setToolForm({ ...toolForm, is_infy_pick: e.target.checked })}
+                        className="w-4 h-4 rounded border-white/20 bg-zinc-900 text-teal-400 focus:ring-teal-400/40 accent-teal-400 cursor-pointer"
+                      />
+                      <span className="text-xs font-semibold text-teal-300 flex items-center gap-1">
+                        <span>✦</span> Mark as Infy Pick (Popular Free Tool)
+                      </span>
+                    </label>
+                  </div>
+
                   <div className="flex gap-2 pt-2">
                     <button
                       type="submit"
@@ -547,10 +583,15 @@ export default function Admin() {
                       className="flex items-center gap-3 px-4 py-3 rounded-xl border border-white/[0.06] hover:border-white/15 bg-white/[0.01] hover:bg-white/[0.02] transition-all"
                     >
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-baseline gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <span className="text-sm font-semibold text-white" style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}>
                             {tool.name}
                           </span>
+                          {tool.is_infy_pick && (
+                            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-semibold text-teal-300 bg-teal-950/70 border border-teal-500/30">
+                              ✦ Infy Pick
+                            </span>
+                          )}
                           <span className="text-[11px] text-zinc-500">{tool.category}</span>
                           <span className={`text-[11px] px-2 py-0.5 rounded-full ${
                             tool.pricing === "Free" ? "text-white bg-white/10 border border-white/20" :
@@ -560,7 +601,18 @@ export default function Admin() {
                         </div>
                         <p className="text-xs text-zinc-400 truncate mt-0.5">{tool.description}</p>
                       </div>
-                      <div className="flex gap-1 flex-shrink-0">
+                      <div className="flex items-center gap-1.5 flex-shrink-0">
+                        <button
+                          onClick={() => handleToggleInfyPick(tool)}
+                          title={tool.is_infy_pick ? "Remove Infy Pick" : "Mark as Infy Pick"}
+                          className={`px-2 py-1 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                            tool.is_infy_pick
+                              ? "text-teal-300 bg-teal-950/80 border border-teal-500/40"
+                              : "text-zinc-500 hover:text-zinc-300 hover:bg-white/5 border border-white/5"
+                          }`}
+                        >
+                          ✦ Pick
+                        </button>
                         <button
                           onClick={() => handleEditTool(tool)}
                           className="px-2.5 py-1.5 rounded-lg text-xs text-zinc-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"

@@ -22,6 +22,7 @@ export interface Tool {
   pricing: Pricing
   rating: number
   url: string
+  is_infy_pick?: boolean
 }
 
 export const CATEGORIES: Array<Category> = [
@@ -51,7 +52,8 @@ export const tools: Tool[] = [
     "category": "Coding",
     "pricing": "Free",
     "rating": 4.9,
-    "url": "https://aider.chat"
+    "url": "https://aider.chat",
+    "is_infy_pick": true
   },
   {
     "name": "Cursor",
@@ -59,7 +61,8 @@ export const tools: Tool[] = [
     "category": "Coding",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://cursor.com"
+    "url": "https://cursor.com",
+    "is_infy_pick": false
   },
   {
     "name": "Codeium",
@@ -67,7 +70,8 @@ export const tools: Tool[] = [
     "category": "Coding",
     "pricing": "Free",
     "rating": 4.7,
-    "url": "https://codeium.com"
+    "url": "https://codeium.com",
+    "is_infy_pick": true
   },
   {
     "name": "Continue",
@@ -75,7 +79,8 @@ export const tools: Tool[] = [
     "category": "Coding",
     "pricing": "Free",
     "rating": 4.8,
-    "url": "https://continue.dev"
+    "url": "https://continue.dev",
+    "is_infy_pick": true
   },
   {
     "name": "Bolt.new",
@@ -83,7 +88,8 @@ export const tools: Tool[] = [
     "category": "Building",
     "pricing": "Freemium",
     "rating": 4.9,
-    "url": "https://bolt.new"
+    "url": "https://bolt.new",
+    "is_infy_pick": false
   },
   {
     "name": "Lovable",
@@ -91,7 +97,8 @@ export const tools: Tool[] = [
     "category": "Building",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://lovable.dev"
+    "url": "https://lovable.dev",
+    "is_infy_pick": false
   },
   {
     "name": "v0",
@@ -99,7 +106,8 @@ export const tools: Tool[] = [
     "category": "Building",
     "pricing": "Freemium",
     "rating": 4.9,
-    "url": "https://v0.dev"
+    "url": "https://v0.dev",
+    "is_infy_pick": false
   },
   {
     "name": "Relume",
@@ -107,7 +115,8 @@ export const tools: Tool[] = [
     "category": "Building",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://relume.io"
+    "url": "https://relume.io",
+    "is_infy_pick": false
   },
   {
     "name": "Framer AI",
@@ -115,7 +124,8 @@ export const tools: Tool[] = [
     "category": "Building",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://framer.com"
+    "url": "https://framer.com",
+    "is_infy_pick": false
   },
   {
     "name": "Dora",
@@ -123,7 +133,8 @@ export const tools: Tool[] = [
     "category": "Building",
     "pricing": "Freemium",
     "rating": 4.5,
-    "url": "https://dora.run"
+    "url": "https://dora.run",
+    "is_infy_pick": false
   },
   {
     "name": "Webflow AI",
@@ -131,7 +142,8 @@ export const tools: Tool[] = [
     "category": "Building",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://webflow.com"
+    "url": "https://webflow.com",
+    "is_infy_pick": false
   },
   {
     "name": "Midjourney",
@@ -139,7 +151,8 @@ export const tools: Tool[] = [
     "category": "Design",
     "pricing": "Paid",
     "rating": 4.9,
-    "url": "https://midjourney.com"
+    "url": "https://midjourney.com",
+    "is_infy_pick": false
   },
   {
     "name": "Leonardo.ai",
@@ -147,7 +160,8 @@ export const tools: Tool[] = [
     "category": "Design",
     "pricing": "Freemium",
     "rating": 4.7,
-    "url": "https://leonardo.ai"
+    "url": "https://leonardo.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Krea",
@@ -155,7 +169,8 @@ export const tools: Tool[] = [
     "category": "Design",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://krea.ai"
+    "url": "https://krea.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Magnific",
@@ -163,7 +178,8 @@ export const tools: Tool[] = [
     "category": "Design",
     "pricing": "Paid",
     "rating": 4.7,
-    "url": "https://magnific.ai"
+    "url": "https://magnific.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Recraft",
@@ -171,7 +187,8 @@ export const tools: Tool[] = [
     "category": "Design",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://recraft.ai"
+    "url": "https://recraft.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Photoroom",
@@ -179,7 +196,8 @@ export const tools: Tool[] = [
     "category": "Design",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://photoroom.com"
+    "url": "https://photoroom.com",
+    "is_infy_pick": false
   },
   {
     "name": "Canva Magic Studio",
@@ -187,7 +205,8 @@ export const tools: Tool[] = [
     "category": "Design",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://canva.com"
+    "url": "https://canva.com",
+    "is_infy_pick": false
   },
   {
     "name": "Runway",
@@ -195,7 +214,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.7,
-    "url": "https://runwayml.com"
+    "url": "https://runwayml.com",
+    "is_infy_pick": false
   },
   {
     "name": "Pika",
@@ -203,7 +223,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://pika.art"
+    "url": "https://pika.art",
+    "is_infy_pick": false
   },
   {
     "name": "Luma Dream Machine",
@@ -211,7 +232,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://lumalabs.ai/dream-machine"
+    "url": "https://lumalabs.ai/dream-machine",
+    "is_infy_pick": false
   },
   {
     "name": "Kling AI",
@@ -219,7 +241,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://klingai.com"
+    "url": "https://klingai.com",
+    "is_infy_pick": false
   },
   {
     "name": "ElevenLabs",
@@ -227,7 +250,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.9,
-    "url": "https://elevenlabs.io"
+    "url": "https://elevenlabs.io",
+    "is_infy_pick": false
   },
   {
     "name": "Suno",
@@ -235,7 +259,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://suno.com"
+    "url": "https://suno.com",
+    "is_infy_pick": false
   },
   {
     "name": "Udio",
@@ -243,7 +268,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://udio.com"
+    "url": "https://udio.com",
+    "is_infy_pick": false
   },
   {
     "name": "HeyGen",
@@ -251,7 +277,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.7,
-    "url": "https://heygen.com"
+    "url": "https://heygen.com",
+    "is_infy_pick": false
   },
   {
     "name": "Descript",
@@ -259,7 +286,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://descript.com"
+    "url": "https://descript.com",
+    "is_infy_pick": false
   },
   {
     "name": "Opus Clip",
@@ -267,7 +295,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.7,
-    "url": "https://opus.pro"
+    "url": "https://opus.pro",
+    "is_infy_pick": false
   },
   {
     "name": "Notion AI",
@@ -275,7 +304,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Freemium",
     "rating": 4.7,
-    "url": "https://notion.so"
+    "url": "https://notion.so",
+    "is_infy_pick": false
   },
   {
     "name": "Taskade",
@@ -283,7 +313,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://taskade.com"
+    "url": "https://taskade.com",
+    "is_infy_pick": false
   },
   {
     "name": "Otter.ai",
@@ -291,7 +322,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://otter.ai"
+    "url": "https://otter.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Fireflies.ai",
@@ -299,7 +331,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Freemium",
     "rating": 4.7,
-    "url": "https://fireflies.ai"
+    "url": "https://fireflies.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Fathom",
@@ -307,7 +340,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Free",
     "rating": 4.8,
-    "url": "https://fathom.video"
+    "url": "https://fathom.video",
+    "is_infy_pick": true
   },
   {
     "name": "Superhuman AI",
@@ -315,7 +349,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Paid",
     "rating": 4.7,
-    "url": "https://superhuman.com"
+    "url": "https://superhuman.com",
+    "is_infy_pick": false
   },
   {
     "name": "Raycast AI",
@@ -323,7 +358,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Freemium",
     "rating": 4.9,
-    "url": "https://raycast.com"
+    "url": "https://raycast.com",
+    "is_infy_pick": false
   },
   {
     "name": "Mem.ai",
@@ -331,7 +367,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Freemium",
     "rating": 4.4,
-    "url": "https://mem.ai"
+    "url": "https://mem.ai",
+    "is_infy_pick": false
   },
   {
     "name": "SciSpace",
@@ -339,7 +376,8 @@ export const tools: Tool[] = [
     "category": "Research",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://typeset.io"
+    "url": "https://typeset.io",
+    "is_infy_pick": false
   },
   {
     "name": "ChatPDF",
@@ -347,7 +385,8 @@ export const tools: Tool[] = [
     "category": "Research",
     "pricing": "Free",
     "rating": 4.6,
-    "url": "https://chatpdf.com"
+    "url": "https://chatpdf.com",
+    "is_infy_pick": true
   },
   {
     "name": "NotebookLM",
@@ -355,7 +394,8 @@ export const tools: Tool[] = [
     "category": "Research",
     "pricing": "Free",
     "rating": 4.9,
-    "url": "https://notebooklm.google.com"
+    "url": "https://notebooklm.google.com",
+    "is_infy_pick": true
   },
   {
     "name": "Arc Search",
@@ -363,7 +403,8 @@ export const tools: Tool[] = [
     "category": "Research",
     "pricing": "Free",
     "rating": 4.8,
-    "url": "https://arc.net"
+    "url": "https://arc.net",
+    "is_infy_pick": true
   },
   {
     "name": "AutoGPT",
@@ -371,7 +412,8 @@ export const tools: Tool[] = [
     "category": "Agents",
     "pricing": "Free",
     "rating": 4.5,
-    "url": "https://autogpt.net"
+    "url": "https://autogpt.net",
+    "is_infy_pick": true
   },
   {
     "name": "CrewAI",
@@ -379,7 +421,8 @@ export const tools: Tool[] = [
     "category": "Agents",
     "pricing": "Free",
     "rating": 4.8,
-    "url": "https://crewai.com"
+    "url": "https://crewai.com",
+    "is_infy_pick": true
   },
   {
     "name": "Multion",
@@ -387,7 +430,8 @@ export const tools: Tool[] = [
     "category": "Agents",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://multion.ai"
+    "url": "https://multion.ai",
+    "is_infy_pick": false
   },
   {
     "name": "AgentGPT",
@@ -395,7 +439,8 @@ export const tools: Tool[] = [
     "category": "Agents",
     "pricing": "Freemium",
     "rating": 4.5,
-    "url": "https://agentgpt.reworkd.ai"
+    "url": "https://agentgpt.reworkd.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Devin",
@@ -403,7 +448,8 @@ export const tools: Tool[] = [
     "category": "Agents",
     "pricing": "Paid",
     "rating": 4.9,
-    "url": "https://cognition.ai"
+    "url": "https://cognition.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Mutiny",
@@ -411,7 +457,8 @@ export const tools: Tool[] = [
     "category": "Marketing",
     "pricing": "Paid",
     "rating": 4.6,
-    "url": "https://mutinyhq.com"
+    "url": "https://mutinyhq.com",
+    "is_infy_pick": false
   },
   {
     "name": "Surfer SEO",
@@ -419,7 +466,8 @@ export const tools: Tool[] = [
     "category": "Marketing",
     "pricing": "Paid",
     "rating": 4.7,
-    "url": "https://surferseo.com"
+    "url": "https://surferseo.com",
+    "is_infy_pick": false
   },
   {
     "name": "Anyword",
@@ -427,7 +475,8 @@ export const tools: Tool[] = [
     "category": "Marketing",
     "pricing": "Freemium",
     "rating": 4.5,
-    "url": "https://anyword.com"
+    "url": "https://anyword.com",
+    "is_infy_pick": false
   },
   {
     "name": "Taplio",
@@ -435,7 +484,8 @@ export const tools: Tool[] = [
     "category": "Marketing",
     "pricing": "Paid",
     "rating": 4.6,
-    "url": "https://taplio.com"
+    "url": "https://taplio.com",
+    "is_infy_pick": false
   },
   {
     "name": "Jasper",
@@ -443,7 +493,8 @@ export const tools: Tool[] = [
     "category": "Writing",
     "pricing": "Paid",
     "rating": 4.5,
-    "url": "https://jasper.ai"
+    "url": "https://jasper.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Copy.ai",
@@ -451,7 +502,8 @@ export const tools: Tool[] = [
     "category": "Writing",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://copy.ai"
+    "url": "https://copy.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Writesonic",
@@ -459,7 +511,8 @@ export const tools: Tool[] = [
     "category": "Writing",
     "pricing": "Freemium",
     "rating": 4.5,
-    "url": "https://writesonic.com"
+    "url": "https://writesonic.com",
+    "is_infy_pick": false
   },
   {
     "name": "Sudowrite",
@@ -467,7 +520,8 @@ export const tools: Tool[] = [
     "category": "Writing",
     "pricing": "Paid",
     "rating": 4.8,
-    "url": "https://sudowrite.com"
+    "url": "https://sudowrite.com",
+    "is_infy_pick": false
   },
   {
     "name": "QuillBot",
@@ -475,7 +529,8 @@ export const tools: Tool[] = [
     "category": "Writing",
     "pricing": "Freemium",
     "rating": 4.7,
-    "url": "https://quillbot.com"
+    "url": "https://quillbot.com",
+    "is_infy_pick": false
   },
   {
     "name": "Lex",
@@ -483,7 +538,8 @@ export const tools: Tool[] = [
     "category": "Writing",
     "pricing": "Freemium",
     "rating": 4.7,
-    "url": "https://lex.page"
+    "url": "https://lex.page",
+    "is_infy_pick": false
   },
   {
     "name": "Julius AI",
@@ -491,7 +547,8 @@ export const tools: Tool[] = [
     "category": "Data Analysis",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://julius.ai"
+    "url": "https://julius.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Rose AI",
@@ -499,7 +556,8 @@ export const tools: Tool[] = [
     "category": "Data Analysis",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://rose.ai"
+    "url": "https://rose.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Akkio",
@@ -507,7 +565,8 @@ export const tools: Tool[] = [
     "category": "Data Analysis",
     "pricing": "Paid",
     "rating": 4.5,
-    "url": "https://akkio.com"
+    "url": "https://akkio.com",
+    "is_infy_pick": false
   },
   {
     "name": "Polymer",
@@ -515,7 +574,8 @@ export const tools: Tool[] = [
     "category": "Data Analysis",
     "pricing": "Freemium",
     "rating": 4.5,
-    "url": "https://polymersearch.com"
+    "url": "https://polymersearch.com",
+    "is_infy_pick": false
   },
   {
     "name": "Tome",
@@ -523,7 +583,8 @@ export const tools: Tool[] = [
     "category": "Presentations",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://tome.app"
+    "url": "https://tome.app",
+    "is_infy_pick": false
   },
   {
     "name": "Gamma",
@@ -531,7 +592,8 @@ export const tools: Tool[] = [
     "category": "Presentations",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://gamma.app"
+    "url": "https://gamma.app",
+    "is_infy_pick": false
   },
   {
     "name": "Beautiful.ai",
@@ -539,7 +601,8 @@ export const tools: Tool[] = [
     "category": "Presentations",
     "pricing": "Paid",
     "rating": 4.7,
-    "url": "https://beautiful.ai"
+    "url": "https://beautiful.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Pitch",
@@ -547,7 +610,8 @@ export const tools: Tool[] = [
     "category": "Presentations",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://pitch.com"
+    "url": "https://pitch.com",
+    "is_infy_pick": false
   },
   {
     "name": "Luma Genie",
@@ -555,7 +619,8 @@ export const tools: Tool[] = [
     "category": "3D & Animation",
     "pricing": "Free",
     "rating": 4.7,
-    "url": "https://lumalabs.ai/genie"
+    "url": "https://lumalabs.ai/genie",
+    "is_infy_pick": true
   },
   {
     "name": "Meshy",
@@ -563,7 +628,8 @@ export const tools: Tool[] = [
     "category": "3D & Animation",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://meshy.ai"
+    "url": "https://meshy.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Tripo3D",
@@ -571,7 +637,8 @@ export const tools: Tool[] = [
     "category": "3D & Animation",
     "pricing": "Freemium",
     "rating": 4.5,
-    "url": "https://tripo3d.ai"
+    "url": "https://tripo3d.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Chatbase",
@@ -579,7 +646,8 @@ export const tools: Tool[] = [
     "category": "Customer Support",
     "pricing": "Freemium",
     "rating": 4.7,
-    "url": "https://chatbase.co"
+    "url": "https://chatbase.co",
+    "is_infy_pick": false
   },
   {
     "name": "Dante AI",
@@ -587,7 +655,8 @@ export const tools: Tool[] = [
     "category": "Customer Support",
     "pricing": "Freemium",
     "rating": 4.6,
-    "url": "https://dante-ai.com"
+    "url": "https://dante-ai.com",
+    "is_infy_pick": false
   },
   {
     "name": "Clay",
@@ -595,7 +664,8 @@ export const tools: Tool[] = [
     "category": "Sales",
     "pricing": "Freemium",
     "rating": 4.9,
-    "url": "https://clay.com"
+    "url": "https://clay.com",
+    "is_infy_pick": false
   },
   {
     "name": "Lavender",
@@ -603,7 +673,8 @@ export const tools: Tool[] = [
     "category": "Sales",
     "pricing": "Freemium",
     "rating": 4.8,
-    "url": "https://lavender.ai"
+    "url": "https://lavender.ai",
+    "is_infy_pick": false
   },
   {
     "name": "Reply.io",
@@ -611,7 +682,8 @@ export const tools: Tool[] = [
     "category": "Sales",
     "pricing": "Freemium",
     "rating": 4.5,
-    "url": "https://reply.io"
+    "url": "https://reply.io",
+    "is_infy_pick": false
   },
   {
     "name": "OpenHands",
@@ -619,7 +691,8 @@ export const tools: Tool[] = [
     "category": "Coding",
     "pricing": "Free",
     "rating": 4.8,
-    "description": "Open-source AI software engineer and coding agent"
+    "description": "Open-source AI software engineer and coding agent",
+    "is_infy_pick": true
   },
   {
     "name": "Tabnine",
@@ -627,7 +700,8 @@ export const tools: Tool[] = [
     "category": "Coding",
     "pricing": "Freemium",
     "rating": 4.6,
-    "description": "AI assistant for software developers with strong privacy"
+    "description": "AI assistant for software developers with strong privacy",
+    "is_infy_pick": false
   },
   {
     "name": "GitHub Copilot",
@@ -635,7 +709,8 @@ export const tools: Tool[] = [
     "category": "Coding",
     "pricing": "Paid",
     "rating": 4.9,
-    "description": "Enterprise-grade AI pair programmer inside your IDE"
+    "description": "Enterprise-grade AI pair programmer inside your IDE",
+    "is_infy_pick": false
   },
   {
     "name": "Streamlit",
@@ -643,7 +718,8 @@ export const tools: Tool[] = [
     "category": "Building",
     "pricing": "Free",
     "rating": 4.7,
-    "description": "Turn Python scripts into interactive web apps instantly"
+    "description": "Turn Python scripts into interactive web apps instantly",
+    "is_infy_pick": true
   },
   {
     "name": "Softr",
@@ -651,7 +727,8 @@ export const tools: Tool[] = [
     "category": "Building",
     "pricing": "Freemium",
     "rating": 4.8,
-    "description": "Build client portals and internal tools without code"
+    "description": "Build client portals and internal tools without code",
+    "is_infy_pick": false
   },
   {
     "name": "Draftbit",
@@ -659,7 +736,8 @@ export const tools: Tool[] = [
     "category": "Building",
     "pricing": "Paid",
     "rating": 4.6,
-    "description": "Pro-code React Native app builder with AI assistance"
+    "description": "Pro-code React Native app builder with AI assistance",
+    "is_infy_pick": false
   },
   {
     "name": "Playground AI",
@@ -667,7 +745,8 @@ export const tools: Tool[] = [
     "category": "Design",
     "pricing": "Free",
     "rating": 4.7,
-    "description": "Free online AI image creator and prompt-based editor"
+    "description": "Free online AI image creator and prompt-based editor",
+    "is_infy_pick": true
   },
   {
     "name": "Adobe Firefly",
@@ -675,7 +754,8 @@ export const tools: Tool[] = [
     "category": "Design",
     "pricing": "Freemium",
     "rating": 4.8,
-    "description": "Generative AI seamlessly integrated for professional creatives"
+    "description": "Generative AI seamlessly integrated for professional creatives",
+    "is_infy_pick": false
   },
   {
     "name": "Looka",
@@ -683,7 +763,8 @@ export const tools: Tool[] = [
     "category": "Design",
     "pricing": "Paid",
     "rating": 4.6,
-    "description": "AI-powered brand identity and beautiful logo maker"
+    "description": "AI-powered brand identity and beautiful logo maker",
+    "is_infy_pick": false
   },
   {
     "name": "CapCut AI",
@@ -691,7 +772,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Free",
     "rating": 4.8,
-    "description": "Free, highly accessible video editor with strong AI magic tools"
+    "description": "Free, highly accessible video editor with strong AI magic tools",
+    "is_infy_pick": true
   },
   {
     "name": "Murf.ai",
@@ -699,7 +781,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Freemium",
     "rating": 4.7,
-    "description": "Versatile AI voice generator with realistic human voices"
+    "description": "Versatile AI voice generator with realistic human voices",
+    "is_infy_pick": false
   },
   {
     "name": "Synthesia",
@@ -707,7 +790,8 @@ export const tools: Tool[] = [
     "category": "Video & Audio",
     "pricing": "Paid",
     "rating": 4.8,
-    "description": "Professional AI video generation using highly realistic avatars"
+    "description": "Professional AI video generation using highly realistic avatars",
+    "is_infy_pick": false
   },
   {
     "name": "Goblin.tools",
@@ -715,7 +799,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Free",
     "rating": 4.9,
-    "description": "A collection of simple AI tools designed for neurodivergent folks"
+    "description": "A collection of simple AI tools designed for neurodivergent folks",
+    "is_infy_pick": true
   },
   {
     "name": "Routine",
@@ -723,7 +808,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Freemium",
     "rating": 4.6,
-    "description": "Calendar and task management supercharged with AI"
+    "description": "Calendar and task management supercharged with AI",
+    "is_infy_pick": false
   },
   {
     "name": "Motion",
@@ -731,7 +817,8 @@ export const tools: Tool[] = [
     "category": "Productivity",
     "pricing": "Paid",
     "rating": 4.7,
-    "description": "AI executive assistant that automatically schedules your workload"
+    "description": "AI executive assistant that automatically schedules your workload",
+    "is_infy_pick": false
   },
   {
     "name": "Semantic Scholar",
@@ -739,7 +826,8 @@ export const tools: Tool[] = [
     "category": "Research",
     "pricing": "Free",
     "rating": 4.7,
-    "description": "Free academic search engine powered by AI"
+    "description": "Free academic search engine powered by AI",
+    "is_infy_pick": true
   },
   {
     "name": "Perplexity AI",
@@ -747,7 +835,8 @@ export const tools: Tool[] = [
     "category": "Research",
     "pricing": "Freemium",
     "rating": 4.9,
-    "description": "The ultimate conversational AI search engine for verified answers"
+    "description": "The ultimate conversational AI search engine for verified answers",
+    "is_infy_pick": false
   },
   {
     "name": "AlphaSense",
@@ -755,7 +844,8 @@ export const tools: Tool[] = [
     "category": "Research",
     "pricing": "Paid",
     "rating": 4.8,
-    "description": "Premium market intelligence and search platform for professionals"
+    "description": "Premium market intelligence and search platform for professionals",
+    "is_infy_pick": false
   },
   {
     "name": "HubSpot Content Assistant",
@@ -763,7 +853,8 @@ export const tools: Tool[] = [
     "category": "Marketing",
     "pricing": "Free",
     "rating": 4.7,
-    "description": "Free generative AI tools baked into the HubSpot ecosystem"
+    "description": "Free generative AI tools baked into the HubSpot ecosystem",
+    "is_infy_pick": false
   },
   {
     "name": "Predis.ai",
@@ -771,7 +862,8 @@ export const tools: Tool[] = [
     "category": "Marketing",
     "pricing": "Freemium",
     "rating": 4.7,
-    "description": "AI social media post and short-form video generator"
+    "description": "AI social media post and short-form video generator",
+    "is_infy_pick": false
   },
   {
     "name": "AdCreative.ai",
@@ -779,7 +871,8 @@ export const tools: Tool[] = [
     "category": "Marketing",
     "pricing": "Paid",
     "rating": 4.6,
-    "description": "Generate highly converting ad creatives and social media posts"
+    "description": "Generate highly converting ad creatives and social media posts",
+    "is_infy_pick": false
   },
   {
     "name": "DeepL Write",
@@ -787,7 +880,8 @@ export const tools: Tool[] = [
     "category": "Writing",
     "pricing": "Free",
     "rating": 4.8,
-    "description": "Incredibly accurate AI-powered writing and phrasing companion"
+    "description": "Incredibly accurate AI-powered writing and phrasing companion",
+    "is_infy_pick": true
   },
   {
     "name": "Rytr",
@@ -795,7 +889,8 @@ export const tools: Tool[] = [
     "category": "Writing",
     "pricing": "Freemium",
     "rating": 4.6,
-    "description": "Lightning-fast AI writing assistant for content creators"
+    "description": "Lightning-fast AI writing assistant for content creators",
+    "is_infy_pick": false
   },
   {
     "name": "ProWritingAid",
@@ -803,7 +898,8 @@ export const tools: Tool[] = [
     "category": "Writing",
     "pricing": "Paid",
     "rating": 4.7,
-    "description": "Premium, in-depth grammar and style checker for serious writers"
+    "description": "Premium, in-depth grammar and style checker for serious writers",
+    "is_infy_pick": false
   },
   {
     "name": "Tidio AI",
@@ -811,7 +907,8 @@ export const tools: Tool[] = [
     "category": "Customer Support",
     "pricing": "Free",
     "rating": 4.6,
-    "description": "Customer support chatbot with a robust, permanently free AI tier"
+    "description": "Customer support chatbot with a robust, permanently free AI tier",
+    "is_infy_pick": true
   },
   {
     "name": "Crisp MagicReply",
@@ -819,7 +916,8 @@ export const tools: Tool[] = [
     "category": "Customer Support",
     "pricing": "Freemium",
     "rating": 4.7,
-    "description": "AI customer service inbox and automated ticketing system"
+    "description": "AI customer service inbox and automated ticketing system",
+    "is_infy_pick": false
   },
   {
     "name": "Intercom Fin",
@@ -827,7 +925,8 @@ export const tools: Tool[] = [
     "category": "Customer Support",
     "pricing": "Paid",
     "rating": 4.8,
-    "description": "Premium, highly accurate AI bot for professional support teams"
+    "description": "Premium, highly accurate AI bot for professional support teams",
+    "is_infy_pick": false
   },
   {
     "name": "Apollo.io",
@@ -835,7 +934,8 @@ export const tools: Tool[] = [
     "category": "Sales",
     "pricing": "Free",
     "rating": 4.8,
-    "description": "Massive B2B database with a free tier featuring AI email sequencing"
+    "description": "Massive B2B database with a free tier featuring AI email sequencing",
+    "is_infy_pick": true
   },
   {
     "name": "Seamless.ai",
@@ -843,7 +943,8 @@ export const tools: Tool[] = [
     "category": "Sales",
     "pricing": "Freemium",
     "rating": 4.6,
-    "description": "Real-time B2B sales lead search engine and prospect builder"
+    "description": "Real-time B2B sales lead search engine and prospect builder",
+    "is_infy_pick": false
   },
   {
     "name": "Gong.io",
@@ -851,6 +952,7 @@ export const tools: Tool[] = [
     "category": "Sales",
     "pricing": "Paid",
     "rating": 4.9,
-    "description": "Premium revenue intelligence and sales conversation analytics"
+    "description": "Premium revenue intelligence and sales conversation analytics",
+    "is_infy_pick": false
   }
 ]
