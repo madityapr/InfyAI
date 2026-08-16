@@ -194,26 +194,12 @@ export default function App() {
       <nav className="nav-glow sticky top-0 z-20">
         <div className="max-w-4xl mx-auto px-5 md:px-8 h-16 md:h-18 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3.5 min-w-0">
-            <a href="/" className="flex items-center gap-3 group">
+            <a href="/" className="flex items-center group">
               <img
                 src={navLogo}
                 alt="infyAI"
                 className="h-9 md:h-10 w-auto object-contain drop-shadow-[0_0_14px_rgba(34,211,238,0.5)] group-hover:scale-105 transition-transform"
               />
-              <span
-                className="text-lg md:text-xl font-extrabold tracking-tight"
-                style={{ fontFamily: "'Bricolage Grotesque', sans-serif" }}
-              >
-                <span className="text-white">infy</span>
-                <span
-                  className="bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage: "linear-gradient(125deg, #00F5D4 0%, #00EBFF 42%, #00B4D8 75%, #0284C7 100%)",
-                  }}
-                >
-                  AI
-                </span>
-              </span>
             </a>
             <span className="hidden sm:block text-zinc-700 text-sm">·</span>
             <span className="hidden sm:block text-zinc-400 text-xs md:text-sm tracking-wide truncate">
