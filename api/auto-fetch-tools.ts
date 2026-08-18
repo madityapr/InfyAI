@@ -52,13 +52,11 @@ function normalizeKey(str: string): string {
 // Helper: Fetch raw text from RSS feeds
 async function fetchRSSItems(): Promise<Array<{ title: string; link: string; description: string }>> {
   const feeds = [
-    "https://hnrss.org/newest?q=AI+OR+LLM+OR+GPT+OR+agent",
-    "https://hnrss.org/newest?q=Show+HN+AI",
     "https://www.producthunt.com/feed",
+    "https://hnrss.org/newest?q=Show+HN+AI",
+    "https://hnrss.org/newest?q=AI+OR+LLM+OR+GPT+OR+agent",
     "https://techcrunch.com/category/artificial-intelligence/feed/",
-    "https://venturebeat.com/category/ai/feed/",
-    "https://www.reddit.com/r/LocalLLaMA/new/.rss",
-    "https://www.reddit.com/r/ArtificialInteligence/new/.rss"
+    "https://venturebeat.com/category/ai/feed/"
   ]
 
   const items: Array<{ title: string; link: string; description: string }> = []
@@ -269,6 +267,13 @@ async function handleDiscovery() {
 
     for (const tool of candidates) {
       if (!tool.name || !tool.url) continue
+
+      // Disallow social media, forum discussions, and meme links
+      const blockedDomains = ["reddit.com", "twitter.com", "x.com", "facebook.com", "instagram.com", "tiktok.com", "youtube.com", "imgur.com", "threads.net"]
+      if (blockedDomains.some((d) => tool.url.toLowerCase().includes(d))) {
+        continue
+      }
+
       const nameKey = normalizeKey(tool.name)
       const urlKey = normalizeKey(tool.url)
 
