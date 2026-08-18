@@ -4,10 +4,7 @@ export const config = { runtime: "edge" }
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || "https://eemhvfqldhkcdbsbibgo.supabase.co"
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || "sb_publishable_BNP5lzHiffMGrib-0kkZug_JSWUYMCH"
-const geminiApiKey =
-  process.env.GEMINI_API_KEY ||
-  process.env.VITE_GEMINI_API_KEY ||
-  "AQ.Ab8RN6JSHvcMYEPfnt0t-Z24SAJpf5et87qHVAOOWKLRS4dlDw"
+const geminiApiKey = process.env.GEMINI_API_KEY || process.env.VITE_GEMINI_API_KEY || ""
 const groqApiKey = process.env.GROQ_API_KEY || ""
 
 const supabase = createClient(supabaseUrl, supabaseKey)

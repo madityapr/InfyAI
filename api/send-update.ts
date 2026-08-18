@@ -14,9 +14,7 @@ const SUPABASE_KEY =
   process.env.VITE_SUPABASE_ANON_KEY ||
   "sb_publishable_BNP5lzHiffMGrib-0kkZug_JSWUYMCH"
 
-const BREVO_KEY =
-  process.env.BREVO_API_KEY ||
-  "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"
+const BREVO_KEY = process.env.BREVO_API_KEY || ""
 
 function isAdmin(req: Request): boolean {
   const auth = req.headers.get("authorization") || ""

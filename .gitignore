@@ -11,14 +11,20 @@ logs/
 *.log
 .claude-replay.*
 .tmp-*
-*.txt
 *.env*
 .env
 .env.*
 
-# Platform-managed agentplat state, not project source. In the
-# client-initiated single-repo workspace layout (make's `Path: "."` spec) the
-# repo root IS the workspace root, so these land inside this repo rather than
-# beside it.
+# Sensitive credentials — never commit these
+PROJECT_CREDENTIALS_AND_RESOURCES.md
+PROJECT_CREDENTIALS_AND_RESOURCES.txt
+*CREDENTIALS*
+*credentials*
+*secrets*
+*SECRETS*
+*.txt
+spbsdbpw.txt
+
+# Platform-managed agentplat state, not project source.
 /.plugins/
 /.opencode-skills/

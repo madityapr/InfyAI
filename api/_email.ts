@@ -25,9 +25,7 @@ export async function sendEmail({
   senderName = "infyAI",
   senderEmail = process.env.SENDER_EMAIL || process.env.RESEND_FROM_EMAIL || "contact.infyai@gmail.com",
 }: SendEmailParams): Promise<SendEmailResult> {
-  const brevoKey =
-    process.env.BREVO_API_KEY ||
-    "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"
+  const brevoKey = process.env.BREVO_API_KEY || ""
   const resendKey = process.env.RESEND_API_KEY || ""
 
   // Clean sender email format
